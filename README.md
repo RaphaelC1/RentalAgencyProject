@@ -14,3 +14,4 @@
 * in the **HTML** file : 
 
 ### Installation
+You need a web browser to read HTML files. (Chrome, Edge, Firefox...)
