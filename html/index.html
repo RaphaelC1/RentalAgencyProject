@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/indexStyle.css">
     <title>Welcome</title>
 </head>
 
@@ -19,7 +20,33 @@
                 </li>
             </ul>
         </nav>
-        <h1>Welcome to the home page</h1>
+    </header>
+
+    <h1>Welcome to the home page</h1>
+
+    <div class="appartmentForm">
+        <form action="search.php" method="GET">
+            <label for="city">City:</label>
+            <select>
+                <option value="city">Paris</option>
+                <option value="city">Grigny</option>
+            </select>
+
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" name="start-date" required>
+
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" name="end-date" required>
+
+            <label for="rent">Rent:</label>
+            <input type="number" id="rent" name="rent" required>
+
+            <button type="submit">Search</button>
+        </form>
+
+    </div>
+
+
 </body>
 
 </html>
