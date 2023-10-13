@@ -1,0 +1,36 @@
+nav {
+    background-color: coral;
+    overflow: hidden;
+    align-items: center;
+}
+
+
+nav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+    transition: 0.5s;
+}
+
+.appartmentForm {
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+h1 {
+    text-align: center;
+}
