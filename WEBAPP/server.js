@@ -1,48 +1,5 @@
-/*
-nvm list available
-nvm install 18.17.1
-nvm use 18.17.1
-nvm version
-    1.1.11
-node -v
-    v18.17.1
-npm -v
-    9.6.7
-
-CD WEBAPP
-mkdir controllers models views
-npm init -y
-npm install mariadb express express-session body-parser passport dotenv ejs mysql2 cors
-node server.js 
-*/
-
-/*
-const mariadb = require("mariadb");
-const pool = mariadb.createPool({
-    host: "localhost", user: "root", password: "", database: "carsdb"
-});
-pool.getConnection().then(function(conn){
-    conn.query("SELECT * FROM users").then(function(rows){ delete rows.meta; console.log(rows); });
-    conn.query("SELECT * FROM cars").then(function(rows){ delete rows.meta; console.log(rows); process.exit(); });
-});
-return;
-*/
-
-/*
-const mysql = require('mysql2/promise');
-const conn = mysql.createConnection({
-    host:'localhost', user: 'root', database: 'carsdb', password: '', debug: false
-});
-conn.then(function(conn) {
-    conn.execute('SELECT * FROM users').then(function(result){ const [rows, fields]=result; console.log(rows); });
-    conn.execute('SELECT * FROM cars').then(function(result){ const [rows, fields]=result; console.log(rows); process.exit(); });
-});    
-return;
-*/
-
 const dotenv = require('dotenv');
 dotenv.config();
-
 const express = require('express');
 const app = express();
 app.set("view engine", "ejs");
