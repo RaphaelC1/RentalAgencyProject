@@ -19,5 +19,5 @@ app.get('/', (request, response) => { // 'GET' as a HTTP VERB, not as a 'getter'
 // app.use(callback1, callback2, callback3)
 
 // app.use(routeBase, callback);
-app.use("/static", express.static(__dirname + '/static'));
+app.use("/css", express.static(__dirname + '/css'));
 app.use("/hello", require("./controllers/hello.route"));
