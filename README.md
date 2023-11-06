@@ -18,4 +18,7 @@ You need a web browser to read HTML files. (Chrome, Edge, Firefox...)
 
 ### Sitemap
 * The main page (http://localhost:9000/hello) has the highest priority over the other
-* We have 4 pages : hello ; hello/contact; hello/about and hello/world
+* hello/
+    contact/
+    about/
+    world/
