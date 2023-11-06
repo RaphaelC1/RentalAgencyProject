@@ -17,3 +17,7 @@ You need a web browser to read HTML files. (Chrome, Edge, Firefox...)
 
 
 ### Sitemap
+example : 
+http://localhost:9000/hello
+http://localhost:9000/hello/contact
+http://localhost:9000/hello/about
