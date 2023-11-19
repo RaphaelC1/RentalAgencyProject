@@ -1,4 +1,4 @@
-// controllers/hello.route.js
+// controllers/home.route.js
 const express = require('express');
 const router = express.Router();
 
@@ -9,22 +9,34 @@ async function mynameAction(request, response) {
 }
 
 
-// http://localhost:9000/hello
+
+
+
+// http://localhost:9000/home
 router.get('/', (req, res) => {
     //res.send('Hello, from controller...');
-    res.render('hello_view', { favourites: [] });
+    res.render('home_view', { favourites: [] });
 });
 
-// http://localhost:9000/hello/contact
+
+
+
+// http://localhost:9000/home
+router.get('/', (req, res) => {
+    //res.send('Hello, from controller...');
+    res.render('home_view', { favourites: [] });
+});
+
+// http://localhost:9000/home/contact
 router.get('/contact', (req, res) => {
     //res.send('Hello, from controller...');
-    res.render('hello_contact', { favourites: [] });
+    res.render('home_contact', { favourites: [] });
 });
 
-// http://localhost:9000/hello/about
+// http://localhost:9000/home/about
 router.get('/about', (req, res) => {
     //res.send('Hello, from controller...');
-    res.render('hello_about', { favourites: [] });
+    res.render('home_about', { favourites: [] });
 });
 
 

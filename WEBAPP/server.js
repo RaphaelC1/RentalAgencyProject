@@ -20,4 +20,5 @@ app.get('/', (request, response) => { // 'GET' as a HTTP VERB, not as a 'getter'
 
 // app.use(routeBase, callback);
 app.use("/css", express.static(__dirname + '/css'));
-app.use("/hello", require("./controllers/hello.route"));
+app.use("/home", require("./controllers/home.route"));
+app.use("/admin", require("./controllers/admin.route"));

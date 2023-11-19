@@ -1,0 +1,60 @@
+<!-- views/admin_view.ejs -->
+<!-- partial view + simple view code to DISPLAY DATA -->
+<!-- view does NOT depend on the controller!!! -->
+<!-- PHP: smarty, twig ... C#: razor ... Java: JSP -->
+<!-- receives: array with the name 'favourites', objects with category+thing -->
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/home.css">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="">Dashboard</a>
+                    <a href="admin/landlords">Manage Owners</a>
+                    <a href="admin/apartments">Manage Apartments</a>
+                    <a href="admin/tenants">Manage Tenants</a>
+                    <button onclick="location.href='/home'">Logout</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="panel">
+        <h1>Welcome to the Admin Dashboard</h1>
+
+        <div class="container">
+            <section id="manage-landlords">
+                <h2>Manage Landlords</h2>
+                <button onclick="location.href='admin/landlords/add'">Add</button>
+                <button onclick="location.href='admin/landlords/edit'">Edit</button>
+                <button onclick="location.href='admin/landlords/delete'">Delete</button>
+            </section>
+
+            <section id="manage-apartments">
+                <h2>Manage Apartments</h2>
+                <button onclick="location.href='admin/apartments/add'">Add </button>
+                <button onclick="location.href='admin/apartments/edit'">Edit </button>
+                <button onclick="location.href='admin/apartments/delete'">Delete</button>
+            </section>
+
+            <section id="manage-tenants">
+                <h2>Manage Tenants</h2>
+                <button onclick="location.href='admin/tenants/add'">Add</button>
+                <button onclick="location.href='admin/tenants/edit'">Edit</button>
+                <button onclick="location.href='admin/tenants/delete'">Delete</button>
+            </section>
+        </div>
+    </div>
+
+</body>
+
+</html>
