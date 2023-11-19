@@ -1,0 +1,41 @@
+<!-- views/admin_view.ejs -->
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/admin/tenant.css">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="../admin">Dashboard</a>
+                    <a href="../admin/landlord">Landlords</a>
+                    <a href="../admin/apartment">Apartments</a>
+                    <a href="">Tenants</a>
+                    <button onclick="location.href='/home'">Logout</button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="panel">
+        <h1>Tenants</h1>
+
+
+        <div id="tenant-buttons">
+            <button class="action-button add-button" onclick="location.href='../admin/tenant/add'">Add</button>
+            <button class="action-button edit-button" onclick="location.href='../admin/tenant/edit'">Edit</button>
+            <button class="action-button delete-button" onclick="location.href='../admin/tenant/delete'">Delete</button>
+        </div>
+    </div>
+
+</body>
+
+</html>
