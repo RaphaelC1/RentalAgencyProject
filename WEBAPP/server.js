@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -17,6 +18,10 @@ app.get('/', (request, response) => { // 'GET' as a HTTP VERB, not as a 'getter'
 
 // MIDDLEWARE REGISTRATIONS
 // app.use(callback1, callback2, callback3)
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 
 // app.use(routeBase, callback);
 app.use("/css", express.static(__dirname + '/css'));

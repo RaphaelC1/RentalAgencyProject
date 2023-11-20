@@ -15,10 +15,10 @@
         <nav>
             <ul>
                 <li>
-                    <a href="">Dashboard</a>
-                    <a href="admin/landlord">Landlords</a>
-                    <a href="admin/apartment">Apartments</a>
-                    <a href="admin/tenant">Tenants</a>
+                    <a href="/admin">Dashboard</a>
+                    <a href="../landlord">Landlords</a>
+                    <a href="../apartment">Apartments</a>
+                    <a href="../tenant">Tenants</a>
                     <button onclick="location.href='/home'">Logout</button>
                 </li>
             </ul>
@@ -27,7 +27,7 @@
 
     <div class="container">
         <h2>Tenant Information</h2>
-        <form action="/submit_tenant" method="POST">
+        <form action="/admin/tenant/create" method="post">
             <label for="firstName">First Name:</label>
             <input type="text" id="firstName" name="firstName" required>
 
@@ -38,10 +38,10 @@
             <input type="email" id="email" name="email" required>
 
             <label for="phoneNumber">Phone Number:</label>
-            <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="e.g. 0776274319"
+            <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="e.g. 0689274315"
                 required>
 
-            <button type="submit">Add</button>
+            <button type="submit" value="SEND">Add</button>
         </form>
     </div>
 </body>
