@@ -1,5 +1,5 @@
 // utils/cars.repository.js
-pool = require("../utils/db.js");
+pool = require("./db.js");
 // JS include = relative to CONTROLLERS 
 // VIEW include = relative to VIEWS
 module.exports = {
@@ -67,20 +67,28 @@ module.exports = {
             throw err;
         }
     },
-    async addOneCar(brandId) {
+    async addOneProperty(propertyData) {
         try {
             let conn = await pool.getConnection();
-            let sql = "INSERT INTO cars (car_id, car_brand) VALUES (NULL, ?) ";
-            const [okPacket, fields] = await conn.execute(sql, [brandId]); // affectedRows, insertId
+            let sql = "INSERT INTO Properties (Address, City, ZipCode, NumberOfBedrooms, NumberOfBathrooms, Rent, id_Landlords) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            const [okPacket, fields] = await conn.execute(sql, [
+                propertyData.Address,
+                propertyData.City,
+                propertyData.ZipCode,
+                propertyData.NumberOfBedrooms,
+                propertyData.NumberOfBathrooms,
+                propertyData.Rent,
+                propertyData.id_Landlords
+            ]);
             conn.release();
             console.log("INSERT " + JSON.stringify(okPacket));
             return okPacket.insertId;
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err);
             throw err;
         }
     },
+
     async editOneCar(carId, carBrand, carName, carBaseprice, carIsfancy, carRealprice) {
         try {
             let conn = await pool.getConnection();

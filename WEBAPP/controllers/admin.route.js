@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const tenantRepo = require('../utils/tenant.repository');
 const landlordRepo = require('../utils/landlord.repository');
-const apartmentRepo = require('../utils/apartment.repository');
+const propertyRepo = require('../utils/property.repository');
 
 router.get('/my/:name', mynameAction);
 router.get('/myy', mynameAction);
@@ -18,6 +18,10 @@ router.post('/tenant/create', adminTenantCreateAction);
 // ADD LANDLORD
 router.get('/landlord/add', adminLandlordAddAction);
 router.post('/landlord/create', adminLandlordCreateAction);
+
+// ADD PROPERTY
+router.get('/property/add', adminPropertyAddAction);
+router.post('/property/create', adminPropertyCreateAction);
 
 
 // FUNCTIONS ADD TENANT
@@ -54,6 +58,25 @@ async function adminLandlordCreateAction(request, response) {
     response.redirect("/admin");
 }
 
+// FUNCTIONS ADD PROPERTY
+async function adminPropertyAddAction(request, response) {
+    response.render("add_property", { /* Additional data if needed */ });
+}
+
+async function adminPropertyCreateAction(request, response) {
+    var propertyData = {
+        Address: request.body.Address || null,
+        City: request.body.City || null,
+        ZipCode: request.body.ZipCode || null,
+        NumberOfBedrooms: request.body.NumberOfBedrooms || null,
+        NumberOfBathrooms: request.body.NumberOfBathrooms || null,
+        Rent: request.body.Rent || null,
+        id_Landlords: request.body.LandlordId || null,
+    };
+
+    var propertyId = await propertyRepo.addOneProperty(propertyData);
+    response.redirect("/admin");
+}
 
 // http://localhost:9000/admin
 router.get('/', (req, res) => {
@@ -75,18 +98,10 @@ router.get('/landlord', (req, res) => {
     res.render('admin_landlord', { favourites: [] });
 });
 
-// http://localhost:9000/admin/apartment
-router.get('/apartment', (req, res) => {
+// http://localhost:9000/admin/property
+router.get('/property', (req, res) => {
     //res.send('Hello, from controller...');
-    res.render('admin_apartment', { favourites: [] });
+    res.render('admin_property', { favourites: [] });
 });
-
-// http://localhost:9000/admin/apartment/add
-router.get('/apartment/add', (req, res) => {
-    //res.send('Hello, from controller...');
-    res.render('add_apartment', { favourites: [] });
-});
-
-
 
 module.exports = router;
