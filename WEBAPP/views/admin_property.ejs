@@ -6,7 +6,6 @@
             <h1>Properties</h1>
             <div id="tenant-buttons">
                 <button class="action-button add-button" onclick="location.href='../admin/property/add'">Add</button>
-                <button class="action-button edit-button" onclick="location.href='../admin/property/edit'">Edit</button>
                 <!-- No need for a separate delete button here -->
             </div>
         </div>
@@ -54,10 +53,14 @@
                                 <%= properties[i].id_Landlords %>
                             </td>
                             <td>
-                                <!-- Form for the delete button -->
-                                <form method="post" action="/admin/property/delete">
+                                <form method="post" action="/admin/property/delete"
+                                    onsubmit="return confirmDelete('<%= properties[i].id %>');">
+                                    <button type="button"
+                                        onclick="location.href='/admin/property/edit?id=<%= properties[i].id %>'"
+                                        class="btn btn-primary">Edit</button>
                                     <input type="hidden" name="id" value="<%= properties[i].id %>">
                                     <button type="submit" class="btn btn-danger">Delete</button>
+
                                 </form>
                             </td>
                         </tr>
@@ -65,3 +68,12 @@
                 </tbody>
             </table>
         </div>
+
+        <script>
+            function confirmDelete(propertyId) {
+                var confirmResult = confirm("Are you sure you want to delete this property?");
+
+                // If user clicks "OK", continue with form submission
+                return confirmResult;
+            }
+        </script>

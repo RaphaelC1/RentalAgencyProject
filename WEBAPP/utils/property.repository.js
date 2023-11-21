@@ -67,6 +67,23 @@ module.exports = {
             throw err;
         }
     },
+    async getPropertiesByLandlordId(landlordId) {
+        try {
+            let conn = await pool.getConnection();
+            let sql = "SELECT * FROM Properties WHERE id_Landlords = ?";
+            const [rows, fields] = await conn.query(sql, [landlordId]);
+            conn.release();
+            return rows;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
+
+
+
+
     async addOneProperty(propertyData) {
         try {
             let conn = await pool.getConnection();

@@ -18,6 +18,11 @@ router.post('/tenant/create', adminTenantCreateAction);
 // ADD LANDLORD
 router.get('/landlord/add', adminLandlordAddAction);
 router.post('/landlord/create', adminLandlordCreateAction);
+// List all landlords
+router.get('/landlord', adminLandlordListAction);
+// Delete one landlord
+router.post('/landlord/delete', adminLandlordDeleteAction);
+
 
 // ADD PROPERTY
 router.get('/property/add', adminPropertyAddAction);
@@ -26,6 +31,11 @@ router.post('/property/create', adminPropertyCreateAction);
 router.get('/property', adminPropertyListAction);
 // Delete one property
 router.post('/property/delete', adminPropertyDeleteAction);
+
+// List all tenants
+router.get('/tenant', adminTenantListAction);
+
+
 
 // FUNCTIONS ADD TENANT
 async function adminTenantAddAction(request, response) {
@@ -60,7 +70,29 @@ async function adminLandlordCreateAction(request, response) {
     var landlordId = await landlordRepo.addOneLandlord(landlordData);
     response.redirect("/admin");
 }
+// FUNCTIONS LIST ALL LANDLORDS
+async function adminLandlordListAction(request, response) {
+    var landlords = await landlordRepo.getAllLandlords();
+    console.log(landlords);
+    response.render("admin_landlord", { landlords: landlords });
+}
+// FUNCTIONS DELETE ONE LANDLORD
+async function adminLandlordDeleteAction(request, response) {
+    var landlordId = request.body.id;
 
+    // Get all properties associated with the landlord
+    var properties = await propertyRepo.getPropertiesByLandlordId(landlordId);
+
+    // Delete each property
+    for (let i = 0; i < properties.length; i++) {
+        await propertyRepo.delOneProperty(properties[i].id);
+    }
+
+    // Delete the landlord
+    var numRows = await landlordRepo.delOneLandlord(landlordId);
+
+    response.redirect("/admin/landlord");
+}
 // FUNCTIONS ADD PROPERTY
 async function adminPropertyAddAction(request, response) {
     response.render("add_property", { /* Additional data if needed */ });
@@ -96,6 +128,21 @@ async function adminPropertyDeleteAction(request, response) {
 
     response.redirect("/admin/property");
 }
+
+
+
+
+//FUNCTIONS LIST ALL TENANTS
+async function adminTenantListAction(request, response) {
+    var tenants = await tenantRepo.getAllTenants();
+    console.log(tenants);
+    response.render("admin_tenant", { tenants: tenants });
+}
+
+
+
+
+
 
 // http://localhost:9000/admin
 router.get('/', (req, res) => {

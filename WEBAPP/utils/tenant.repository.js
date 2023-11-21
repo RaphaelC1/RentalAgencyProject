@@ -3,10 +3,10 @@ pool = require("./db.js");
 // JS include = relative to CONTROLLERS 
 // VIEW include = relative to VIEWS
 module.exports = {
-    async getAllApartments() { // TODO? move to brands.repository.js
+    async getAllTenants() { // TODO? move to brands.repository.js
         try {
             let conn = await pool.getConnection();
-            let sql = "SELECT * FROM brands";
+            let sql = "SELECT * FROM Tenants";
             const [rows, fields] = await conn.execute(sql);
             conn.release();
             return rows;

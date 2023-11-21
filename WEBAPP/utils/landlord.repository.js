@@ -3,10 +3,10 @@ pool = require("./db.js");
 // JS include = relative to CONTROLLERS 
 // VIEW include = relative to VIEWS
 module.exports = {
-    async getAllApartments() { // TODO? move to brands.repository.js
+    async getAllLandlords() { // TODO? move to brands.repository.js
         try {
             let conn = await pool.getConnection();
-            let sql = "SELECT * FROM brands";
+            let sql = "SELECT * FROM Landlords";
             const [rows, fields] = await conn.execute(sql);
             conn.release();
             return rows;
@@ -53,16 +53,16 @@ module.exports = {
             throw err;
         }
     },
-    async delOneCar(carId) {
+    async delOneLandlord(id) {
         try {
             let conn = await pool.getConnection();
-            let sql = "DELETE FROM cars WHERE car_id = ?";
-            const [okPacket, fields] = await conn.execute(sql, [carId]);  // affectedRows, insertId
+            console.log(id);
+            let sql = "DELETE FROM Landlords WHERE id = ?";
+            const [okPacket, fields] = await conn.execute(sql, [id]);
             conn.release();
             console.log("DELETE " + JSON.stringify(okPacket));
-            return okPacket.affectedRows;
-        }
-        catch (err) {
+
+        } catch (err) {
             console.log(err);
             throw err;
         }

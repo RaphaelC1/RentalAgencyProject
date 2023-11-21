@@ -1,42 +1,67 @@
-<!-- views/admin_view.ejs -->
+<!-- views/admin_property.ejs -->
+<% const title='Properties' ; %>
+    <%- include('header_admin.ejs', { title: title}) %>
 
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/admin/landlord.css">
-    <title>Admin Dashboard</title>
-</head>
-
-<body>
-
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="../admin">Dashboard</a>
-                    <a href="">Landlords</a>
-                    <a href="../admin/property">Properties</a>
-                    <a href="../admin/tenant">Tenants</a>
-                    <button onclick="location.href='/home'">Logout</button>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <div id="panel">
-        <h1>Landlords</h1>
-
-
-        <div id="tenant-buttons">
-            <button class="action-button add-button" onclick="location.href='../admin/landlord/add'">Add</button>
-            <button class="action-button edit-button" onclick="location.href='../admin/landlord/edit'">Edit</button>
-            <button class="action-button delete-button"
-                onclick="location.href='../admin/landlord/delete'">Delete</button>
+        <div id="panel">
+            <h1>Landlords</h1>
+            <div id="tenant-buttons">
+                <button class="action-button add-button" onclick="location.href='../admin/landlord/add'">Add</button>
+                <!-- No need for a separate delete button here -->
+            </div>
         </div>
-    </div>
 
-</body>
+        <div class="container">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Action</th> <!-- New column for the delete button -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i=0; i < landlords.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%= landlords[i].id %>
+                            </td>
+                            <td>
+                                <%= landlords[i].FirstName %>
+                            </td>
+                            <td>
+                                <%= landlords[i].LastName %>
+                            </td>
+                            <td>
+                                <%= landlords[i].Email%>
+                            </td>
+                            <td>
+                                <%= landlords[i].PhoneNumber %>
+                            </td>
+                            <td>
+                                <form method="post" action="/admin/landlord/delete"
+                                    onsubmit="return confirmDelete('<%= landlords[i].id %>');">
+                                    <button type="button"
+                                        onclick="location.href='/admin/landlord/edit?id=<%= landlords[i].id %>'"
+                                        class="btn btn-primary">Edit</button>
+                                    <input type="hidden" name="id" value="<%= landlords[i].id %>">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
 
-</html>
+                                </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            function confirmDelete(landlordId) {
+                var confirmResult = confirm("Are you sure you want to delete this landlord ? It will also delete all the properties associated with this landlord.");
+
+                // If user clicks "OK", continue with form submission
+                return confirmResult;
+            }
+        </script>
