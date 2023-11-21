@@ -39,7 +39,7 @@ body {
 
 
 /* Style the form container */
-.container {
+.login-container {
     max-width: 600px;
     margin: 20px auto;
     background-color: #fff;
