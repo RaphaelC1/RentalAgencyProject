@@ -1,68 +1,48 @@
-<!-- views/admin_view.ejs -->
+<!-- views/admin_property.ejs -->
+<% const title='Properties' ; %>
+    <%- include('header_admin.ejs', { title: title}) %>
 
-<html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/admin/add_page.css">
-    <title>Add Property</title>
-</head>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h1 class="mb-4">Property Information</h1>
+                    <form action="/admin/property/create" method="post">
+                        <div class="mb-3">
+                            <input type="text" id="Address" name="Address" class="form-control" placeholder="Adress"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" id="City" name="City" class="form-control" placeholder="City" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="ZipCode" name="ZipCode" class="form-control" placeholder="ZipCode"
+                                required min="0">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="NumberOfBedrooms" name="NumberOfBedrooms" class="form-control"
+                                placeholder="NumberOfBedrooms" required min="0">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="NumberOfBathrooms" name="NumberOfBathrooms" class="form-control"
+                                placeholder="NumberOfBathrooms" required min="0">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="Rent" name="Rent" class="form-control" placeholder="Rent" required
+                                min="0">
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="LandlordId" name="LandlordId" class="form-control"
+                                placeholder="Landlord ID" required min="0">
+                        </div>
 
-<body>
-
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="/admin">Dashboard</a>
-                    <a href="../landlord">Landlords</a>
-                    <a href="../property">Properties</a>
-                    <a href="../tenant">Tenants</a>
-                    <button type="button" class="btn btn-outline-primary"
-                        onclick="location.href='/home'">Logout</button>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <h1 class="mb-4">Property Information</h1>
-                <form action="/admin/property/create" method="post">
-                    <div class="mb-3">
-                        <input type="text" id="Address" name="Address" class="form-control" placeholder="Adress"
-                            required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="text" id="City" name="City" class="form-control" placeholder="City" required>
-                    </div>
-                    <div class="mb-3">
-                        <input type="number" id="ZipCode" name="ZipCode" class="form-control" placeholder="ZipCode"
-                            required min="0">
-                    </div>
-                    <div class="mb-3">
-                        <input type="number" id="NumberOfBedrooms" name="NumberOfBedrooms" class="form-control"
-                            placeholder="NumberOfBedrooms" required min="0">
-                    </div>
-                    <div class="mb-3">
-                        <input type="number" id="NumberOfBathrooms" name="NumberOfBathrooms" class="form-control"
-                            placeholder="NumberOfBathrooms" required min="0">
-                    </div>
-                    <div class="mb-3">
-                        <input type="number" id="Rent" name="Rent" class="form-control" placeholder="Rent" required
-                            min="0">
-                    </div>
-                    <div class="mb-3">
-                        <input type="number" id="LandlordId" name="LandlordId" class="form-control"
-                            placeholder="LandlordId" required min="0">
-
-                        <button type="submit" class="btn btn-primary">Add</button>
-                </form>
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-success btn-lg">Add</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+        </body>
 
-</html>
+        </html>
