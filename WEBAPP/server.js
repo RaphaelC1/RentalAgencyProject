@@ -18,7 +18,6 @@ app.get('/', (request, response) => { // 'GET' as a HTTP VERB, not as a 'getter'
 
 // MIDDLEWARE REGISTRATIONS
 // app.use(callback1, callback2, callback3)
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 

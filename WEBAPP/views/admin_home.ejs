@@ -1,60 +1,33 @@
-<!-- views/admin_view.ejs -->
-<!-- partial view + simple view code to DISPLAY DATA -->
-<!-- view does NOT depend on the controller!!! -->
-<!-- PHP: smarty, twig ... C#: razor ... Java: JSP -->
-<!-- receives: array with the name 'favourites', objects with category+thing -->
-<html>
+<% const title='Admin Dashboard' ; %>
+    <%- include('header_admin.ejs', { title: title}) %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/admin/home.css">
-    <title>Admin Dashboard</title>
-</head>
+        <div id="panel">
+            <h1>Welcome to the Admin Dashboard</h1>
 
-<body>
+            <div class="container">
+                <section id="manage-landlords">
+                    <h2>Manage Landlords</h2>
+                    <button onclick="location.href='admin/landlord/add'">Add</button>
+                    <button onclick="location.href='admin/landlord/edit'">Edit</button>
+                    <button onclick="location.href='admin/landlord/delete'">Delete</button>
+                </section>
 
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="">Dashboard</a>
-                    <a href="admin/landlord">Landlords</a>
-                    <a href="admin/property">Properties</a>
-                    <a href="admin/tenant">Tenants</a>
-                    <button onclick="location.href='/home'">Logout</button>
-                </li>
-            </ul>
-        </nav>
-    </header>
+                <section id="manage-properties">
+                    <h2>Manage Properties</h2>
+                    <button onclick="location.href='admin/property/add'">Add </button>
+                    <button onclick="location.href='admin/property/edit'">Edit </button>
+                    <button onclick="location.href='admin/property/delete'">Delete</button>
+                </section>
 
-    <div id="panel">
-        <h1>Welcome to the Admin Dashboard</h1>
-
-        <div class="container">
-            <section id="manage-landlords">
-                <h2>Manage Landlords</h2>
-                <button onclick="location.href='admin/landlord/add'">Add</button>
-                <button onclick="location.href='admin/landlord/edit'">Edit</button>
-                <button onclick="location.href='admin/landlord/delete'">Delete</button>
-            </section>
-
-            <section id="manage-properties">
-                <h2>Manage Properties</h2>
-                <button onclick="location.href='admin/property/add'">Add </button>
-                <button onclick="location.href='admin/property/edit'">Edit </button>
-                <button onclick="location.href='admin/property/delete'">Delete</button>
-            </section>
-
-            <section id="manage-tenants">
-                <h2>Manage Tenants</h2>
-                <button onclick="location.href='admin/tenant/add'">Add</button>
-                <button onclick="location.href='admin/tenant/edit'">Edit</button>
-                <button onclick="location.href='admin/tenant/delete'">Delete</button>
-            </section>
+                <section id="manage-tenants">
+                    <h2>Manage Tenants</h2>
+                    <button onclick="location.href='admin/tenant/add'">Add</button>
+                    <button onclick="location.href='admin/tenant/edit'">Edit</button>
+                    <button onclick="location.href='admin/tenant/delete'">Delete</button>
+                </section>
+            </div>
         </div>
-    </div>
 
-</body>
+        </body>
 
-</html>
+        </html>
