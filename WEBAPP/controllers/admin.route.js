@@ -22,7 +22,10 @@ router.post('/landlord/create', adminLandlordCreateAction);
 // ADD PROPERTY
 router.get('/property/add', adminPropertyAddAction);
 router.post('/property/create', adminPropertyCreateAction);
-
+// List all properties
+router.get('/property', adminPropertyListAction);
+// Delete one property
+router.post('/property/delete', adminPropertyDeleteAction);
 
 // FUNCTIONS ADD TENANT
 async function adminTenantAddAction(request, response) {
@@ -76,6 +79,22 @@ async function adminPropertyCreateAction(request, response) {
 
     var propertyId = await propertyRepo.addOneProperty(propertyData);
     response.redirect("/admin");
+}
+
+
+// FUNCTIONS LIST ALL PROPERTIES
+async function adminPropertyListAction(request, response) {
+    var properties = await propertyRepo.getAllProperties();
+    console.log(properties);
+    response.render("admin_property", { properties: properties });
+}
+// FUNCTIONS DELETE ONE PROPERTY
+async function adminPropertyDeleteAction(request, response) {
+    var propertyId = request.body.id;
+    console.log("DELETE " + propertyId);
+    var numRows = await propertyRepo.delOneProperty(propertyId);
+
+    response.redirect("/admin/property");
 }
 
 // http://localhost:9000/admin
