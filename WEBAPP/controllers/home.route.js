@@ -42,7 +42,7 @@ router.get('/about', (req, res) => {
 // http://localhost:9000/home/Login
 router.get('/login', (req, res) => {
     //res.send('Hello, from controller...');
-    res.render('home_about', { favourites: [] });
+    res.render('home_login', { favourites: [] });
 });
 
 
