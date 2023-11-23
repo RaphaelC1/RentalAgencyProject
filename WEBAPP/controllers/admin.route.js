@@ -158,11 +158,7 @@ router.get('/tenant', (req, res) => {
 });
 
 
-// http://localhost:9000/admin/landlord
-router.get('/landlord', (req, res) => {
-    //res.send('Hello, from controller...');
-    res.render('admin_landlord', { favourites: [] });
-});
+
 
 // http://localhost:9000/admin/property
 router.get('/property', (req, res) => {
