@@ -1,33 +1,51 @@
-<% const title='Admin Dashboard' ; %>
+<!-- views/admin_property.ejs -->
+<% const title='Dashboard' ; %>
     <%- include('header_admin.ejs', { title: title}) %>
+        <div id="panel" class="container mt-5">
+            <h1 class="text-center mb-5">Welcome to the Admin Dashboard</h1>
 
-        <div id="panel">
-            <h1>Welcome to the Admin Dashboard</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title">Manage Landlords</h2>
+                            <button class="btn btn-primary" onclick="location.href='admin/landlord/add'">Add</button>
+                            <button class="btn btn-secondary"
+                                onclick="location.href='admin/landlord/edit'">Edit</button>
+                            <button class="btn btn-danger"
+                                onclick="location.href='admin/landlord/delete'">Delete</button>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="container">
-                <section id="manage-landlords">
-                    <h2>Manage Landlords</h2>
-                    <button onclick="location.href='admin/landlord/add'">Add</button>
-                    <button onclick="location.href='admin/landlord/edit'">Edit</button>
-                    <button onclick="location.href='admin/landlord/delete'">Delete</button>
-                </section>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title">Manage Properties</h2>
+                            <button class="btn btn-primary" onclick="location.href='admin/property/add'">Add</button>
+                            <button class="btn btn-secondary"
+                                onclick="location.href='admin/property/edit'">Edit</button>
+                            <button class="btn btn-danger"
+                                onclick="location.href='admin/property/delete'">Delete</button>
+                        </div>
+                    </div>
+                </div>
 
-                <section id="manage-properties">
-                    <h2>Manage Properties</h2>
-                    <button onclick="location.href='admin/property/add'">Add </button>
-                    <button onclick="location.href='admin/property/edit'">Edit </button>
-                    <button onclick="location.href='admin/property/delete'">Delete</button>
-                </section>
-
-                <section id="manage-tenants">
-                    <h2>Manage Tenants</h2>
-                    <button onclick="location.href='admin/tenant/add'">Add</button>
-                    <button onclick="location.href='admin/tenant/edit'">Edit</button>
-                    <button onclick="location.href='admin/tenant/delete'">Delete</button>
-                </section>
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h2 class="card-title">Manage Tenants</h2>
+                            <button class="btn btn-primary" onclick="location.href='admin/tenant/add'">Add</button>
+                            <button class="btn btn-secondary" onclick="location.href='admin/tenant/edit'">Edit</button>
+                            <button class="btn btn-danger" onclick="location.href='admin/tenant/delete'">Delete</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         </body>
 
         </html>

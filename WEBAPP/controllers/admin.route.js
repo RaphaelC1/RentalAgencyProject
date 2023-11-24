@@ -35,6 +35,8 @@ router.post('/property/delete', adminPropertyDeleteAction);
 // List all tenants
 router.get('/tenant', adminTenantListAction);
 
+// Delete one tenant
+router.post('/tenant/delete', adminTenantDeleteAction);
 
 
 // FUNCTIONS ADD TENANT
@@ -138,7 +140,14 @@ async function adminTenantListAction(request, response) {
     console.log(tenants);
     response.render("admin_tenant", { tenants: tenants });
 }
+// DELETE ONE TENANT
+async function adminTenantDeleteAction(request, response) {
+    var tenantId = request.body.id;
+    console.log("DELETE " + tenantId);
+    var numRows = await tenantRepo.delOneTenant(tenantId);
 
+    response.redirect("/admin/tenant");
+}
 
 
 

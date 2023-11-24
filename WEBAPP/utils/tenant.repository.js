@@ -53,16 +53,16 @@ module.exports = {
             throw err;
         }
     },
-    async delOneCar(carId) {
+    async delOneTenant(id) {
         try {
             let conn = await pool.getConnection();
-            let sql = "DELETE FROM cars WHERE car_id = ?";
-            const [okPacket, fields] = await conn.execute(sql, [carId]);  // affectedRows, insertId
+            console.log(id);
+            let sql = "DELETE FROM Tenants WHERE id = ?";
+            const [okPacket, fields] = await conn.execute(sql, [id]);
             conn.release();
             console.log("DELETE " + JSON.stringify(okPacket));
-            return okPacket.affectedRows;
-        }
-        catch (err) {
+
+        } catch (err) {
             console.log(err);
             throw err;
         }
