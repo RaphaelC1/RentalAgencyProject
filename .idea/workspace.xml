@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6b35e115-7d97-44a0-a686-10dfe63d957d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/webapp_clientside/build/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/webapp_clientside/build/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp_clientside/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/webapp_clientside/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp_clientside/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/webapp_clientside/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp_clientside/src/assets/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/webapp_clientside/src/assets/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp_clientside/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp_clientside/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/webapp_clientside/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webapp_clientside/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/webapp_clientside/src/router/index.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2YcxmsXquU1he8BG0nq9QQEbAcy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6b35e115-7d97-44a0-a686-10dfe63d957d" name="Changes" comment="" />
+      <created>1700838836558</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1700838836558</updated>
+      <workItem from="1700838838018" duration="239000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
