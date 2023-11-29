@@ -1,3 +1,13 @@
 <template>
-<h1> fdrtfhyju</h1>
+  
 </template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>

@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import Registration from '@/components/Registration'
 import Properties from '@/components/Properties'
 import Terms_conditions from '@/components/Terms_conditions'
+import Contact from '@/components/Contact'
 
 Vue.use(Router)
 
@@ -40,6 +41,11 @@ export default new Router({
       path: '/Terms_conditions',
       name: 'Terms_conditions',
       component: Terms_conditions
+    },
+    {
+      path: '/Contact',
+      name: 'Contact',
+      component: Contact
     },
 
 
