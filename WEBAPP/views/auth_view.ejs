@@ -1,0 +1,19 @@
+<!-- views/auth_view.ejs -->
+<% const title='Login' ; %>
+    <%- include('header_user.ejs', { title: title}) %>
+
+    <h1>Please Log In </h1>
+    <form method="post" action="/auth/login">
+        <input name="username" type="username" class="form-control" id="username" placeholder="Username" required>
+        <input name="userpass" type="password" class="form-control" id="password" placeholder="Password" required>
+        <button type="submit" class="btn btn-dark btn-block">Login</button>
+    </form>
+    <a href="/auth/logout">LOG OUT</a> <br/>
+    <a href="/auth/user">USERS ONLY</a> <br/>
+    <a href="/auth/admin">ADMINS ONLY</a> <br/>
+    <a href="/auth/protected">USER LEVEL DEPENDENT AUTO REDIRECT</a> <br/>
+    
+    <%= extraContent %>
+
+    </body>
+</html>

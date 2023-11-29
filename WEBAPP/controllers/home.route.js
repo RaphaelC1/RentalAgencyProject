@@ -18,9 +18,6 @@ router.get('/', (req, res) => {
     res.render('home_view', { favourites: [] });
 });
 
-
-
-
 // http://localhost:9000/home
 router.get('/', (req, res) => {
     //res.send('Hello, from controller...');
