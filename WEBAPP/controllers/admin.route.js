@@ -22,6 +22,9 @@ router.post('/landlord/create', adminLandlordCreateAction);
 router.get('/landlord', adminLandlordListAction);
 // Delete one landlord
 router.post('/landlord/delete', adminLandlordDeleteAction);
+// Edit one landlord
+router.get('/landlord/edit/:landlordId', landlordEditAction);
+router.post('/landlord/update/:landlordId', landlordUpdateAction);
 
 
 // ADD PROPERTY
@@ -75,7 +78,6 @@ async function adminLandlordCreateAction(request, response) {
 // FUNCTIONS LIST ALL LANDLORDS
 async function adminLandlordListAction(request, response) {
     var landlords = await landlordRepo.getAllLandlords();
-    console.log(landlords);
     response.render("admin_landlord", { landlords: landlords });
 }
 // FUNCTIONS DELETE ONE LANDLORD
@@ -95,6 +97,31 @@ async function adminLandlordDeleteAction(request, response) {
 
     response.redirect("/admin/landlord");
 }
+// EDIT A LANDLORD
+async function landlordEditAction(request, response) {
+    // response.send("EDIT ACTION");
+    var landlordId = request.params.landlordId;
+    var landlord = await landlordRepo.getOneLandlord(landlordId);
+    response.render("edit_landlord", { landlord: landlord[0] });
+}
+
+async function landlordUpdateAction(request, response) {
+    var landlordId = request.params.landlordId;
+    var landlordData = {
+        FirstName: request.body.firstName,
+        LastName: request.body.lastName || null,
+        Email: request.body.email || null,
+        PhoneNumber: request.body.phoneNumber || null,
+    };
+    console.log("hey landlordData in function landlordUpdateAction:", landlordData);
+    console.log("hey landlordId in function landlordUpdateAction:", landlordId);
+    var numRows = await landlordRepo.editOneLandlord(landlordData, landlordId);
+    response.redirect("/admin/landlord");
+}
+
+
+
+
 // FUNCTIONS ADD PROPERTY
 async function adminPropertyAddAction(request, response) {
     response.render("add_property", { /* Additional data if needed */ });
