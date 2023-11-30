@@ -1,16 +1,15 @@
 <!-- views/admin_property.ejs -->
-<% const title='Properties' ; %>
+<% const title='Landlords' ; %>
     <%- include('header_admin.ejs', { title: title}) %>
 
         <div id="panel">
-            <h1>Landlords</h1>
-            <div id="tenant-buttons">
-                <button class="action-button add-button" onclick="location.href='../admin/landlord/add'">Add</button>
-                <!-- No need for a separate delete button here -->
+            <h1 class="text-center mb-4">Landlords</h1>
+            <div id="tenant-buttons" class="text-center mt-5 mb-3"> <!-- Ajoutez la classe mb-3 pour la marge en bas -->
+                <button class="btn btn-primary" onclick="location.href='../admin/landlord/add'">Add</button>
             </div>
         </div>
 
-        <div class="container">
+        <div class="container mb-4">
             <table class="table table-striped table-bordered">
                 <thead class="thead-dark">
                     <tr>
@@ -43,9 +42,9 @@
                             <td>
                                 <form method="post" action="/admin/landlord/delete"
                                     onsubmit="return confirmDelete('<%= landlords[i].id %>');">
-                                    <button type="button"
-                                        onclick="location.href='/admin/landlord/edit?id=<%= landlords[i].id %>'"
+                                    <button type="button" onclick="location.href='/admin/landlord/edit/<%= landlords[i].id %>'"
                                         class="btn btn-primary">Edit</button>
+
                                     <input type="hidden" name="id" value="<%= landlords[i].id %>">
                                     <button type="submit" class="btn btn-danger">Delete</button>
 
