@@ -30,6 +30,7 @@ CREATE TABLE Properties(
    NumberOfBathrooms INT,
    Rent DECIMAL(10,2),
    id_Landlords INT NOT NULL,
+   Image VARCHAR(255),
    PRIMARY KEY(id),
    FOREIGN KEY(id_Landlords) REFERENCES Landlords(id)
 );
