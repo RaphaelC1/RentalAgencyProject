@@ -43,7 +43,7 @@
                                 <form method="post" action="/admin/tenant/delete"
                                     onsubmit="return confirmDelete('<%= tenants[i].id %>');">
                                     <button type="button"
-                                        onclick="location.href='/admin/tenant/edit?id=<%= tenants[i].id %>'"
+                                        onclick="location.href='/admin/tenant/edit/<%= tenants[i].id %>'"
                                         class="btn btn-primary">Edit</button>
                                     <input type="hidden" name="id" value="<%= tenants[i].id %>">
                                     <button type="submit" class="btn btn-danger">Delete</button>

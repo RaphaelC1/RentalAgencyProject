@@ -32,18 +32,21 @@ module.exports = {
             throw err;
         }
     },
-    async getOneApartment(carId) {
+    async getOneTenant(tenantId) {
         try {
             let conn = await pool.getConnection();
+            console.log(tenantId);
+
             // sql = "SELECT * FROM cars INNER JOIN brands ON car_brand=brand_id WHERE car_id = "+carId; 
             // SQL INJECTION => !!!!ALWAYS!!!! sanitize user input!
             // escape input (not very good) OR prepared statements (good) OR use orm (GOOD!)
-            let sql = "SELECT * FROM cars INNER JOIN brands ON car_brand=brand_id WHERE car_id = ?";
-            const [rows, fields] = await conn.execute(sql, [carId]);
+            let sql = "SELECT * FROM Tenants WHERE id = ?";
+            const [rows, fields] = await conn.execute(sql, [tenantId]);
+            console.log(tenantId);
             conn.release();
-            console.log("CARS FETCHED: " + rows.length);
-            if (rows.length == 1) {
-                return rows[0];
+            console.log(rows);
+            if (rows != null) {
+                return rows;
             } else {
                 return false;
             }
@@ -86,15 +89,24 @@ module.exports = {
         }
     },
 
-    async editOneCar(carId, carBrand, carName, carBaseprice, carIsfancy, carRealprice) {
+    async editOneTenant(tenantData, tenantId) {
         try {
             let conn = await pool.getConnection();
-            let sql = "UPDATE cars SET car_brand=?, car_name=?, car_baseprice=?, car_isfancy=?, car_realprice=? WHERE car_id=? "; // TODO: named parameters? :something
-            const [okPacket, fields] = await conn.execute(sql,
-                [carBrand, carName, carBaseprice, carIsfancy, carRealprice, carId]);
+            // Construct the SQL query with named placeholders for animeData
+            const placeholders = Object.keys(tenantData).map(key => `${key} = ?`).join(', ');
+            const sql = `UPDATE Tenants SET ${placeholders} WHERE id = ?`;
+
+
+            // Combine values from animeData and animeId
+            const values = [...Object.values(tenantData), tenantId];
+
+            // Execute the query
+            const result = await conn.execute(sql, values);
+
+
             conn.release();
-            console.log("UPDATE " + JSON.stringify(okPacket));
-            return okPacket.affectedRows;
+
+            return result;
         }
         catch (err) {
             console.log(err);

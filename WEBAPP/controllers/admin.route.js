@@ -14,6 +14,14 @@ async function mynameAction(request, response) {
 // ADD TENANT
 router.get('/tenant/add', adminTenantAddAction);
 router.post('/tenant/create', adminTenantCreateAction);
+// List all tenants
+router.get('/tenant', adminTenantListAction);
+
+// Delete one tenant
+router.post('/tenant/delete', adminTenantDeleteAction);
+// Edit one tenant
+router.get('/tenant/edit/:tenantId', tenantEditAction);
+router.post('/tenant/update/:tenantId', tenantUpdateAction);
 
 // ADD LANDLORD
 router.get('/landlord/add', adminLandlordAddAction);
@@ -35,11 +43,6 @@ router.get('/property', adminPropertyListAction);
 // Delete one property
 router.post('/property/delete', adminPropertyDeleteAction);
 
-// List all tenants
-router.get('/tenant', adminTenantListAction);
-
-// Delete one tenant
-router.post('/tenant/delete', adminTenantDeleteAction);
 
 
 // FUNCTIONS ADD TENANT
@@ -56,7 +59,7 @@ async function adminTenantCreateAction(request, response) {
     };
 
     var tenantId = await tenantRepo.addOneTenant(tenantData);
-    response.redirect("/admin");
+    response.redirect("/admin/tenant");
 }
 
 // FUNCTIONS ADD LANDLORD
@@ -73,7 +76,7 @@ async function adminLandlordCreateAction(request, response) {
     };
 
     var landlordId = await landlordRepo.addOneLandlord(landlordData);
-    response.redirect("/admin");
+    response.redirect("/admin/landlord");
 }
 // FUNCTIONS LIST ALL LANDLORDS
 async function adminLandlordListAction(request, response) {
@@ -119,6 +122,25 @@ async function landlordUpdateAction(request, response) {
     response.redirect("/admin/landlord");
 }
 
+//EDIT A TENANT
+async function tenantEditAction(request, response) {
+    // response.send("EDIT ACTION");
+    var tenantId = request.params.tenantId;
+    var tenant = await tenantRepo.getOneTenant(tenantId);
+    response.render("edit_tenant", { tenant: tenant[0] });
+}
+
+async function tenantUpdateAction(request, response) {
+    var tenantId = request.params.tenantId;
+    var tenantData = {
+        FirstName: request.body.firstName,
+        LastName: request.body.lastName || null,
+        Email: request.body.email || null,
+        PhoneNumber: request.body.phoneNumber || null,
+    };
+    var numRows = await tenantRepo.editOneTenant(tenantData, tenantId);
+    response.redirect("/admin/tenant");
+}
 
 
 
@@ -139,7 +161,7 @@ async function adminPropertyCreateAction(request, response) {
     };
 
     var propertyId = await propertyRepo.addOneProperty(propertyData);
-    response.redirect("/admin");
+    response.redirect("/admin/property");
 }
 
 
