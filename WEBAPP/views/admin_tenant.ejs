@@ -1,40 +1,66 @@
-<!-- views/admin_view.ejs -->
+<!-- views/admin_property.ejs -->
+<% const title='Tenants' ; %>
+    <%- include('header_admin.ejs', { title: title}) %>
 
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/admin/tenant.css">
-    <title>Tenants</title>
-</head>
-
-<body>
-
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="../admin">Dashboard</a>
-                    <a href="../admin/landlord">Landlords</a>
-                    <a href="../admin/property">Properties</a>
-                    <a href="">Tenants</a>
-                    <button onclick="location.href='/home'">Logout</button>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
-    <div id="panel">
-        <h1>Tenants</h1>
-
-
-        <div id="tenant-buttons">
-            <button class="action-button add-button" onclick="location.href='../admin/tenant/add'">Add</button>
-            <button class="action-button edit-button" onclick="location.href='../admin/tenant/edit'">Edit</button>
-            <button class="action-button delete-button" onclick="location.href='../admin/tenant/delete'">Delete</button>
+        <div id="panel">
+            <h1 class="text-center mb-4">Tenants</h1>
+            <div id="tenant-buttons" class="text-center mt-5 mb-3"> <!-- Ajoutez la classe mb-3 pour la marge en bas -->
+                <button class="btn btn-primary" onclick="location.href='../admin/tenant/add'">Add</button>
+            </div>
         </div>
-    </div>
-</body>
 
-</html>
+        <div class="container mb-4">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Action</th> <!-- New column for the delete button -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i=0; i < tenants.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%= tenants[i].id %>
+                            </td>
+                            <td>
+                                <%= tenants[i].FirstName %>
+                            </td>
+                            <td>
+                                <%= tenants[i].LastName %>
+                            </td>
+                            <td>
+                                <%= tenants[i].Email%>
+                            </td>
+                            <td>
+                                <%= tenants[i].PhoneNumber %>
+                            </td>
+                            <td>
+                                <form method="post" action="/admin/tenant/delete"
+                                    onsubmit="return confirmDelete('<%= tenants[i].id %>');">
+                                    <button type="button"
+                                        onclick="location.href='/admin/tenant/edit/<%= tenants[i].id %>'"
+                                        class="btn btn-primary">Edit</button>
+                                    <input type="hidden" name="id" value="<%= tenants[i].id %>">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+
+                                </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
+
+        <script>
+            function confirmDelete(tenantId) {
+                var confirmResult = confirm("Are you sure you want to delete this tenant ?");
+
+                // If user clicks "OK", continue with form submission
+                return confirmResult;
+            }
+        </script>

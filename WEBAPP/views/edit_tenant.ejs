@@ -1,29 +1,29 @@
-<% const title='Add tenant' ; %>
+<% const title='Edit tenant' ; %>
     <%- include('header_admin.ejs', { title: title}) %>
 
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <h1 class="mb-4">Tenant Information</h1>
-                    <form action="/admin/tenant/create" method="post">
+                    <h1 class="mb-4">Tenant Edit</h1>
+                    <form action="/admin/tenant/update/<%= tenant.id %>" method="post">
                         <div class="mb-3">
                             <input type="text" id="firstName" name="firstName" class="form-control"
-                                placeholder="First Name" required>
+                                 value="<%= tenant.FirstName %>" />
                         </div>
                         <div class="mb-3">
                             <input type="text" id="lastName" name="lastName" class="form-control"
-                                placeholder="Last Name" required>
+                                 value='<%= tenant.LastName %>' />
                         </div>
                         <div class="mb-3">
-                            <input type="email" id="email" name="email" class="form-control" placeholder="Email"
-                                required>
+                            <input type="email" id="email" name="email" class="form-control"  
+                            value='<%= tenant.Email %>' />
                         </div>
                         <div class="mb-3">
                             <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control"
-                                pattern="[0-9]{10}" placeholder="e.g. 0689274315" required>
+                                pattern="[0-9]{9}" value='<%= tenant.PhoneNumber %>' />
                         </div>
                         <div class="mb-3 text-center">
-                            <button type="submit" class="btn btn-success btn-lg">Add</button>
+                            <button type="submit" class="btn btn-success btn-lg">Modify</button>
                         </div>
                     </form>
                 </div>

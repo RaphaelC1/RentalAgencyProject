@@ -1,24 +1,33 @@
 <% const title='Add landlord' ; %>
     <%- include('header_admin.ejs', { title: title}) %>
 
-        <div class="container">
-            <h2>Landlord Information</h2>
-            <form action="/admin/landlord/create" method="post">
-                <label for="firstName">First Name:</label>
-                <input type="text" id="firstName" name="firstName" required>
-
-                <label for="lastName">Last Name:</label>
-                <input type="text" id="lastName" name="lastName" required>
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="phoneNumber">Phone Number:</label>
-                <input type="tel" id="phoneNumber" name="phoneNumber" pattern="[0-9]{10}" placeholder="e.g. 0689274315"
-                    required>
-
-                <button type="submit" value="SEND">Add</button>
-            </form>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h1 class="mb-4">Landlord Information</h1>
+                    <form action="/admin/landlord/create" method="post">
+                        <div class="mb-3">
+                            <input type="text" id="firstName" name="firstName" class="form-control"
+                                placeholder="First Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" id="lastName" name="lastName" class="form-control"
+                                placeholder="Last Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Email"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control"
+                                pattern="[0-9]{10}" placeholder="e.g. 0689274315" required>
+                        </div>
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-success btn-lg">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         </body>
 
