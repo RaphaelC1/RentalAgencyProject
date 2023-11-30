@@ -56,7 +56,7 @@
                                 <form method="post" action="/admin/property/delete"
                                     onsubmit="return confirmDelete('<%= properties[i].id %>');">
                                     <button type="button"
-                                        onclick="location.href='/admin/property/edit?id=<%= properties[i].id %>'"
+                                        onclick="location.href='/admin/property/edit/<%= properties[i].id %>'"
                                         class="btn btn-primary">Edit</button>
                                     <input type="hidden" name="id" value="<%= properties[i].id %>">
                                     <button type="submit" class="btn btn-danger">Delete</button>

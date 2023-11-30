@@ -42,25 +42,10 @@ router.post('/property/create', adminPropertyCreateAction);
 router.get('/property', adminPropertyListAction);
 // Delete one property
 router.post('/property/delete', adminPropertyDeleteAction);
+// Edit one property
+router.get('/property/edit/:propertyId', propertyEditAction);
+router.post('/property/update/:propertyId', propertyUpdateAction);
 
-
-
-// FUNCTIONS ADD TENANT
-async function adminTenantAddAction(request, response) {
-    response.render("add_tenant", { /* Additional data if needed */ });
-}
-
-async function adminTenantCreateAction(request, response) {
-    var tenantData = {
-        FirstName: request.body.firstName,
-        LastName: request.body.lastName || null,
-        Email: request.body.email || null,
-        PhoneNumber: request.body.phoneNumber || null,
-    };
-
-    var tenantId = await tenantRepo.addOneTenant(tenantData);
-    response.redirect("/admin/tenant");
-}
 
 // FUNCTIONS ADD LANDLORD
 async function adminLandlordAddAction(request, response) {
@@ -122,6 +107,23 @@ async function landlordUpdateAction(request, response) {
     response.redirect("/admin/landlord");
 }
 
+// FUNCTIONS ADD TENANT
+async function adminTenantAddAction(request, response) {
+    response.render("add_tenant", { /* Additional data if needed */ });
+}
+
+async function adminTenantCreateAction(request, response) {
+    var tenantData = {
+        FirstName: request.body.firstName,
+        LastName: request.body.lastName || null,
+        Email: request.body.email || null,
+        PhoneNumber: request.body.phoneNumber || null,
+    };
+
+    var tenantId = await tenantRepo.addOneTenant(tenantData);
+    response.redirect("/admin/tenant");
+}
+
 //EDIT A TENANT
 async function tenantEditAction(request, response) {
     // response.send("EDIT ACTION");
@@ -142,6 +144,20 @@ async function tenantUpdateAction(request, response) {
     response.redirect("/admin/tenant");
 }
 
+//FUNCTIONS LIST ALL TENANTS
+async function adminTenantListAction(request, response) {
+    var tenants = await tenantRepo.getAllTenants();
+    console.log(tenants);
+    response.render("admin_tenant", { tenants: tenants });
+}
+// DELETE ONE TENANT
+async function adminTenantDeleteAction(request, response) {
+    var tenantId = request.body.id;
+    console.log("DELETE " + tenantId);
+    var numRows = await tenantRepo.delOneTenant(tenantId);
+
+    response.redirect("/admin/tenant");
+}
 
 
 // FUNCTIONS ADD PROPERTY
@@ -179,26 +195,28 @@ async function adminPropertyDeleteAction(request, response) {
 
     response.redirect("/admin/property");
 }
-
-
-
-
-//FUNCTIONS LIST ALL TENANTS
-async function adminTenantListAction(request, response) {
-    var tenants = await tenantRepo.getAllTenants();
-    console.log(tenants);
-    response.render("admin_tenant", { tenants: tenants });
+// FUNCTIONS EDIT ONE PROPERTY
+async function propertyEditAction(request, response) {
+    // response.send("EDIT ACTION");
+    var propertyId = request.params.propertyId;
+    var property = await propertyRepo.getOneProperty(propertyId);
+    response.render("edit_property", { property: property[0] });
 }
-// DELETE ONE TENANT
-async function adminTenantDeleteAction(request, response) {
-    var tenantId = request.body.id;
-    console.log("DELETE " + tenantId);
-    var numRows = await tenantRepo.delOneTenant(tenantId);
+async function propertyUpdateAction(request, response) {
+    var propertyId = request.params.propertyId;
+    var propertyData = {
+        Address: request.body.Address || null,
+        City: request.body.City || null,
+        ZipCode: request.body.ZipCode || null,
+        NumberOfBedrooms: request.body.NumberOfBedrooms || null,
+        NumberOfBathrooms: request.body.NumberOfBathrooms || null,
+        Rent: request.body.Rent || null,
+        id_Landlords: request.body.LandlordId || null,
+    };
+    var numRows = await propertyRepo.editOneProperty(propertyData, propertyId);
+    response.redirect("/admin/property");
 
-    response.redirect("/admin/tenant");
 }
-
-
 
 
 
