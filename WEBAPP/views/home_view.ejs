@@ -4,24 +4,14 @@
 <!-- PHP: smarty, twig ... C#: razor ... Java: JSP -->
 <!-- receives: array with the name 'favourites', objects with category+thing -->
 <% const title='Home_user' ; %>
-    <%- include('header_user.ejs', { title: title}) %>
-
-
-<html lang="">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/indexStyle.css">
-    <title>Welcome</title>
-</head>
-
-<body>
-
-    <header>
-        
-    </header>
-
+    
+<%- include('header_user.ejs', { title: title}) %>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/css/homeStyle.css">
+        <title>Welcome</title>
+    </head>
     <h1>Welcome to the home page</h1>
 
     <div class="first div"></div>
@@ -48,7 +38,11 @@
 
     </div>
 
-
-</body>
+    </body>
 
 </html>
+
+
+<style>
+    
+</style>

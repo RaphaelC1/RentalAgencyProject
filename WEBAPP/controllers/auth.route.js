@@ -12,10 +12,11 @@ router.get("/protected", protectedGetAction);
 router.post("/login", loginPostAction);
 router.get("/logout", logoutAction);
 
+// Retrieves user data and renders a view with the user's JSON data.
 async function userAction(request, response) {
     let userData = await userRepo.getOneUser(request.user.user_name);
     let userJson = JSON.stringify(userData); // if  userData.user_role ...
-    response.render("auth_view", { "extraContent": userJson });
+    response.render("profile_user", { "extraContent": userJson });
 }
 
 async function protectedGetAction(request, response) {
