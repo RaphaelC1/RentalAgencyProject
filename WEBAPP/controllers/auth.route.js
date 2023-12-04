@@ -7,10 +7,10 @@ const userRepo = require("../utils/users.repository");
 // http://localhost:9000/auth
 router.get('/', (req, res) => res.render('auth_view', { extraContent: "" }));
 router.get("/user", auth.checkAuthentication("USER"), userAction);
-router.get("/admin", auth.checkAuthentication("ADMIN"), userAction);
+router.get("/admin", auth.checkAuthentication("ADMIN"), adminAction);
 router.get("/protected", protectedGetAction);
 router.post("/login", loginPostAction);
-router.get("/logout", logoutAction);
+router.get("/auth", logoutAction);
 
 // Retrieves user data and renders a view with the user's JSON data.
 async function userAction(request, response) {
@@ -19,12 +19,18 @@ async function userAction(request, response) {
     response.render("profile_user", { "extraContent": userJson });
 }
 
+async function adminAction(request, response) {
+    let userData = await userRepo.getOneUser(request.user.user_name);
+    let userJson = JSON.stringify(userData); // if  userData.user_role ...
+    response.render("admin_home", { "extraContent": userJson });
+}
+
 async function protectedGetAction(request, response) {
     if (request.isAuthenticated()) {
         if (request.user.user_role === "ADMIN") {
-            response.redirect("/auth/admin");
+            response.redirect("/admin");
         } else {
-            response.redirect("/auth/user");
+            response.redirect("/home");
         }
     } else {
         response.redirect("/auth");
@@ -40,9 +46,9 @@ async function loginPostAction(request, response) {
             if (err) { console.log("ERROR"); console.log(err); return next(err); }
 
             if (request.user.user_role === "ADMIN") {
-                return response.redirect("/auth/admin");
+                return response.redirect("/admin");
             } else {
-                return response.redirect("/auth/user");
+                return response.redirect("/home");
             }
         });
     } else {

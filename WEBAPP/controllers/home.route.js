@@ -30,7 +30,12 @@ router.get('/about', (req, res) => {
     res.render('home_about', { favourites: [] });
 });
 
-
+//not definitive
+// http://localhost:9000/home/profile
+router.get('/profile', (req, res) => {
+    //res.send('Hello, from controller...');
+    res.render('profile_user', { favourites: [] });
+});
 
 
 module.exports = router;

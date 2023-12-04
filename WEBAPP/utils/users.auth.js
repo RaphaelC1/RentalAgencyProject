@@ -31,5 +31,8 @@ module.exports = {
         // response.redirect("/auth"); // not authenticated at all
       }
     }
-  }
+  },
+
+  //not sure of this function
+  
 };

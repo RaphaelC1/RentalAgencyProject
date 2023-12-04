@@ -1,5 +1,5 @@
-CREATE DATABASE if not exists RentAgencyDb;
-USE RentAgencyDb;
+CREATE DATABASE if not exists RentalAgencyDb;
+USE RentalAgencyDb;
 
 
 
