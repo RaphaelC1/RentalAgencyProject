@@ -28,13 +28,12 @@ router.get('/:id', async (req, res) => {
             return res.status(404).render('error', { message: 'Property not found' });
         }
 
-        res.render('property_detail', { property });
+        res.render('property_detail', {property : property[0] });
     } catch (error) {
         console.error('Error fetching property details:', error);
         res.status(500).send('Internal Server Error');
     }
 });
-
 
 // http://localhost:9000/property
 router.get('/', (req, res) => {
@@ -42,35 +41,6 @@ router.get('/', (req, res) => {
     res.render('property', { favourites: [] });
 
 });
-
-
-
-module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
