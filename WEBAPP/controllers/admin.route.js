@@ -174,6 +174,7 @@ async function adminPropertyCreateAction(request, response) {
         NumberOfBathrooms: request.body.NumberOfBathrooms || null,
         Rent: request.body.Rent || null,
         id_Landlords: request.body.LandlordId || null,
+        Image: request.body.Image || null,
     };
 
     var propertyId = await propertyRepo.addOneProperty(propertyData);
@@ -212,6 +213,7 @@ async function propertyUpdateAction(request, response) {
         NumberOfBathrooms: request.body.NumberOfBathrooms || null,
         Rent: request.body.Rent || null,
         id_Landlords: request.body.LandlordId || null,
+        Image: request.body.Image || null,
     };
     var numRows = await propertyRepo.editOneProperty(propertyData, propertyId);
     response.redirect("/admin/property");

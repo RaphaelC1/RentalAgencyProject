@@ -1,3 +1,33 @@
-<!-- views/property.ejs -->
 <% const title='Properties' ; %>
     <%- include('header_user.ejs', { title: title}) %>
+
+        <div class="container">
+            <h1>Properties list</h1>
+
+            <div class="row">
+                <% properties.forEach(property=> { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <!-- Ajoutez la balise pour afficher l'image -->
+                            <img src="<%= property.Image %>" class="card-img-top" alt="Property Image">
+
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= property.Rent %> €/month<!-- Formatez le loyer -->
+                                </h5>
+                                <p class="card-text"><strong>City:</strong>
+                                    <%= property.City %>, <%= property.ZipCode %>
+                                </p>
+                                <!-- Ajoutez le code pour afficher uniquement le Rent -->
+                                <p class="card-text"><strong>Address:</strong>
+                                    <%= property.Address %>
+                                </p>
+
+                                <!-- Ajoutez un lien pour voir les détails -->
+                                <a href="/property/<%= property.id %>" class="btn btn-primary">Show details</a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+        </div>
