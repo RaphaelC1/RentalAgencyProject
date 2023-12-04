@@ -49,7 +49,7 @@ router.post('/property/update/:propertyId', propertyUpdateAction);
 
 // FUNCTIONS ADD LANDLORD
 async function adminLandlordAddAction(request, response) {
-    response.render("add_landlord", { /* Additional data if needed */ });
+    response.render("admin/add_landlord", { /* Additional data if needed */ });
 }
 
 async function adminLandlordCreateAction(request, response) {
@@ -66,7 +66,7 @@ async function adminLandlordCreateAction(request, response) {
 // FUNCTIONS LIST ALL LANDLORDS
 async function adminLandlordListAction(request, response) {
     var landlords = await landlordRepo.getAllLandlords();
-    response.render("admin_landlord", { landlords: landlords });
+    response.render("admin/admin_landlord", { landlords: landlords });
 }
 // FUNCTIONS DELETE ONE LANDLORD
 async function adminLandlordDeleteAction(request, response) {
@@ -90,7 +90,7 @@ async function landlordEditAction(request, response) {
     // response.send("EDIT ACTION");
     var landlordId = request.params.landlordId;
     var landlord = await landlordRepo.getOneLandlord(landlordId);
-    response.render("edit_landlord", { landlord: landlord[0] });
+    response.render("admin/edit_landlord", { landlord: landlord[0] });
 }
 
 async function landlordUpdateAction(request, response) {
@@ -109,7 +109,7 @@ async function landlordUpdateAction(request, response) {
 
 // FUNCTIONS ADD TENANT
 async function adminTenantAddAction(request, response) {
-    response.render("add_tenant", { /* Additional data if needed */ });
+    response.render("admin/add_tenant", { /* Additional data if needed */ });
 }
 
 async function adminTenantCreateAction(request, response) {
@@ -129,7 +129,7 @@ async function tenantEditAction(request, response) {
     // response.send("EDIT ACTION");
     var tenantId = request.params.tenantId;
     var tenant = await tenantRepo.getOneTenant(tenantId);
-    response.render("edit_tenant", { tenant: tenant[0] });
+    response.render("admin/edit_tenant", { tenant: tenant[0] });
 }
 
 async function tenantUpdateAction(request, response) {
@@ -148,7 +148,7 @@ async function tenantUpdateAction(request, response) {
 async function adminTenantListAction(request, response) {
     var tenants = await tenantRepo.getAllTenants();
     console.log(tenants);
-    response.render("admin_tenant", { tenants: tenants });
+    response.render("admin/admin_tenant", { tenants: tenants });
 }
 // DELETE ONE TENANT
 async function adminTenantDeleteAction(request, response) {
@@ -162,7 +162,7 @@ async function adminTenantDeleteAction(request, response) {
 
 // FUNCTIONS ADD PROPERTY
 async function adminPropertyAddAction(request, response) {
-    response.render("add_property", { /* Additional data if needed */ });
+    response.render("admin/add_property", { /* Additional data if needed */ });
 }
 
 async function adminPropertyCreateAction(request, response) {
@@ -185,7 +185,7 @@ async function adminPropertyCreateAction(request, response) {
 async function adminPropertyListAction(request, response) {
     var properties = await propertyRepo.getAllProperties();
     console.log(properties);
-    response.render("admin_property", { properties: properties });
+    response.render("admin/admin_property", { properties: properties });
 }
 // FUNCTIONS DELETE ONE PROPERTY
 async function adminPropertyDeleteAction(request, response) {
@@ -200,7 +200,7 @@ async function propertyEditAction(request, response) {
     // response.send("EDIT ACTION");
     var propertyId = request.params.propertyId;
     var property = await propertyRepo.getOneProperty(propertyId);
-    response.render("edit_property", { property: property[0] });
+    response.render("admin/edit_property", { property: property[0] });
 }
 async function propertyUpdateAction(request, response) {
     var propertyId = request.params.propertyId;
@@ -223,23 +223,9 @@ async function propertyUpdateAction(request, response) {
 // http://localhost:9000/admin
 router.get('/', (req, res) => {
     //res.send('Hello, from controller...');
-    res.render('admin_home', { favourites: [] });
+    res.render('admin/admin_home', { favourites: [] });
 
 });
 
-// http://localhost:9000/admin/tenant
-router.get('/tenant', (req, res) => {
-    //res.send('Hello, from controller...');
-    res.render('admin_tenant', { favourites: [] });
-});
-
-
-
-
-// http://localhost:9000/admin/property
-router.get('/property', (req, res) => {
-    //res.send('Hello, from controller...');
-    res.render('admin_property', { favourites: [] });
-});
 
 module.exports = router;
