@@ -37,7 +37,6 @@ router.get('/:id', async (req, res) => {
 
 // http://localhost:9000/property
 router.get('/', (req, res) => {
-    //res.send('Hello, from controller...');
     res.render('property', { user: req.user });
 
 });

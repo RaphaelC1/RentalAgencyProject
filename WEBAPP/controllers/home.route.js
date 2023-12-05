@@ -4,12 +4,13 @@ const router = express.Router();
 
 router.get('/my/:name', mynameAction);
 router.get('/myy', mynameAction);
+router.get("/logout", logoutAction);
+
+
+
 async function mynameAction(request, response) {
     response.send("MYNAME ACTION " + request.params.name);
 }
-
-
-
 
 
 // http://localhost:9000/home
@@ -37,5 +38,11 @@ router.get('/profile', (req, res) => {
     res.render('profile_user', { user: req.user });
 });
 
+function logoutAction(request, response) {
+    request.logout(function (err) {
+        if (err) { return next(err); }
+        response.redirect('/auth/');
+    });
+}
 
 module.exports = router;

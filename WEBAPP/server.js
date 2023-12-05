@@ -8,8 +8,6 @@ const session = require('express-session');
 
 
 
-
-
 app.use(session({
     secret: "SecretRandomStringDskghadslkghdlkghdghaksdghdksh",
     saveUninitialized: true,
