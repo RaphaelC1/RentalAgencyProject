@@ -1,41 +1,4 @@
-nav {
-    background-color: coral;
-    overflow: hidden;
-    align-items: center;
-}
 
-
-nav a {
-    float: left;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-nav ul {
-    list-style-type: none;
-}
-
-
-nav a:hover {
-    background-color: #ef5d27;
-    color: white;
-    transition: 0.5s;
-}
-
-h1 {
-    text-align: center;
-    font-size: 36px;
-}
-
-/* Apply styles to the entire page */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
 
 
 /* Apply styles to the form container */

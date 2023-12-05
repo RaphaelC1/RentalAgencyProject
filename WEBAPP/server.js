@@ -41,6 +41,7 @@ app.use(bodyParser.json());
 
 // app.use(routeBase, callback);
 app.use("/css", express.static(__dirname + '/css'));
+app.use("/img", express.static(__dirname + '/img'));
 app.use("/home", require("./controllers/home.route"));
 app.use("/admin", require("./controllers/admin.route"));
 app.use("/auth", require("./controllers/auth.route"));
