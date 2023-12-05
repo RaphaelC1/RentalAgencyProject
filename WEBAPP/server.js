@@ -18,7 +18,6 @@ app.get('/', (request, response) => { // 'GET' as a HTTP VERB, not as a 'getter'
 
 // MIDDLEWARE REGISTRATIONS
 // app.use(callback1, callback2, callback3)
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -27,3 +26,8 @@ app.use(bodyParser.json());
 app.use("/css", express.static(__dirname + '/css'));
 app.use("/home", require("./controllers/home.route"));
 app.use("/admin", require("./controllers/admin.route"));
+app.use("/auth", require("./controllers/auth.route"));
+app.use("/property", require("./controllers/property.route"));
+app.use("/register", require("./controllers/register.route"));
+
+

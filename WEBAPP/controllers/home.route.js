@@ -18,15 +18,6 @@ router.get('/', (req, res) => {
     res.render('home_view', { favourites: [] });
 });
 
-
-
-
-// http://localhost:9000/home
-router.get('/', (req, res) => {
-    //res.send('Hello, from controller...');
-    res.render('home_view', { favourites: [] });
-});
-
 // http://localhost:9000/home/contact
 router.get('/contact', (req, res) => {
     //res.send('Hello, from controller...');
@@ -39,13 +30,12 @@ router.get('/about', (req, res) => {
     res.render('home_about', { favourites: [] });
 });
 
-// http://localhost:9000/home/Login
-router.get('/login', (req, res) => {
+//not definitive
+// http://localhost:9000/home/profile
+router.get('/profile', (req, res) => {
     //res.send('Hello, from controller...');
-    res.render('home_login', { favourites: [] });
+    res.render('profile_user', { favourites: [] });
 });
-
-
 
 
 module.exports = router;

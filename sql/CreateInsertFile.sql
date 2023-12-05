@@ -79,6 +79,30 @@ CREATE TABLE Rent(
    FOREIGN KEY(id_Tenants) REFERENCES Tenants(id)
 );
 
+CREATE TABLE users ( 
+    user_id int auto_increment primary key,
+    user_created datetime,
+    user_name varchar(100) unique,
+    user_email varchar(100) unique,
+    user_role varchar(100),
+    user_pass varchar(100)
+);
+
+-- Insertion de données fictives dans la table uses
+INSERT INTO users (user_name, user_email, user_role, user_pass)
+VALUES 
+    ('john_doe', 'john@example.com', 'USER', 'password123'),
+    ('jane_smith', 'jane@example.com', 'ADMIN', 'securepass456'),
+    ('alice_wonder', 'alice@example.com', 'USER', 'mypassword789'),
+    ('bob_jenkins', 'bob@example.com', 'USER', 'qwerty123'),
+    ('emily_davis', 'emily@example.com', 'ADMIN', 'password567'),
+    ('mike_jackson', 'mike@example.com', 'USER', 'pass123word'),
+    ('sara_miller', 'sara@example.com', 'USER', 'ilovecoding'),
+    ('chris_evans', 'chris@example.com', 'ADMIN', 'codingisfun'),
+    ('laura_turner', 'laura@example.com', 'USER', 'letmein123'),
+    ('kevin_harris', 'kevin@example.com', 'USER', 'password321');
+    
+
 -- Insertion de données fictives dans la table Tenants
 INSERT INTO Tenants (FirstName, LastName, Email, PhoneNumber)
 VALUES

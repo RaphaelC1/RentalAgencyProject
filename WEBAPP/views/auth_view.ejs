@@ -1,0 +1,71 @@
+<!-- views/auth_view.ejs -->
+<% const title='Login' ; %>
+    <%- include('header_user.ejs', { title: title}) %>
+
+    <h1>Please Log In </h1>
+
+    
+    <div class="login_container">
+        <div class="login_form">
+                <form class="log" method="post" action="/auth/login">
+                    <input name="username" type="username" class="form-control" id="username" placeholder="Username" required>
+                    <input name="userpass" type="password" class="form-control" id="password" placeholder="Password" required>
+                    <button type="submit" class="btn btn-dark btn-block">Login</button>
+                </form>
+        </div>
+    
+    </div>
+    
+    <div class="error_message">
+        <!-- Displaying the extraContent -->
+        <%= extraContent %>
+    </div>
+
+    <div class="link_login">
+        <a href="/auth/logout">LOG OUT</a> <br/>
+        <a href="/auth/user">USERS ONLY</a> <br/>
+        <a href="/auth/admin">ADMINS ONLY</a> <br/>
+        <a href="/auth/protected">USER LEVEL DEPENDENT AUTO REDIRECT</a> <br/>
+    </div>
+    
+    
+
+    </body>
+</html>
+
+<style>
+    .login_container {
+        display: flex;
+        justify-content: space-around; /* Adjust as needed */
+    }
+
+    .login_form {
+        width: 45% ; /* Adjust the width of each form container */
+        margin: 7%;
+    }
+
+    .log input {
+        margin-bottom: 5%;
+
+    }
+
+    .error_message {
+        display: flex
+        
+    }
+
+    .link_login {
+    text-align: center;
+    margin-top: 200 px;
+    }
+
+    .link_login a {
+        display: block;
+        color: black;
+        font-weight: bold;
+        text-decoration: none; /* Optional: Removes underline from links */
+
+    }
+
+
+</style>

@@ -1,0 +1,39 @@
+<% const title='Property detail' ; %>
+    <%- include('header_user.ejs', { title: title }) %>
+
+        <div class="container mt-5">
+            <h2 class="mb-4">Property Details</h2>
+
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-md-6">
+                        <img src="<%= property.Image %>" class="card-img" alt="Property Image">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Address</h5>
+                            <p class="card-text"><strong><i class="fas fa-map-marker-alt"></i>
+                                    <%= property.Address %>
+                                </strong></p>
+
+                            <h5 class="card-title mb-4 mt-4">Details</h5>
+                            <ul class="list-group">
+                                <li class="list-group-item">City: <%= property.City %>
+                                </li>
+                                <li class="list-group-item">Zip Code: <%= property.ZipCode %>
+                                </li>
+                                <li class="list-group-item">Bedrooms: <%= property.NumberOfBedrooms %>
+                                </li>
+                                <li class="list-group-item">Bathrooms: <%= property.NumberOfBathrooms %>
+                                </li>
+                                <li class="list-group-item">Rent: <%= property.Rent %>€</li>
+                            </ul>
+
+                            <div class="mt-4 text-center">
+                                <a href="#" class="btn btn-primary btn-lg">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
