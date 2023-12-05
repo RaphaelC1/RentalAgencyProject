@@ -40,20 +40,26 @@ async function protectedGetAction(request, response) {
 async function loginPostAction(request, response) {
     areValid = await userRepo.areValidCredentials(request.body.username, request.body.userpass);
 
-    if (areValid) {
-        user = await userRepo.getOneUser(request.body.username);
-        request.login(user, function (err) {
-            if (err) { console.log("ERROR"); console.log(err); return next(err); }
 
-            if (request.user.user_role === "ADMIN") {
-                return response.redirect("/admin");
-            } else {
-                return response.redirect("/home");
-            }
-        });
+    if (areValid) {
+     user = await userRepo.getOneUser(request.body.username);
+     console.log("user:",user)
+      request.login(user, function (err) { 
+          if (err) { 
+            console.log("Error during login:", err);
+            return response.send("Error during login");
+            //  return next(err); 
+        } 
+  
+          if (request.user.user_role === "ADMIN") {
+              return response.redirect("/admin");
+          } else {
+              return response.redirect("/home/");
+          }
+      });
     } else {
-        return (req, res) => res.render('auth_view', { extraContent: "Invalid username or password" });
-        // TODO redirect/normal error message
+      response.send("Invalid credentials provided");
+      // TODO redirect/normal error message
     }
 }
 
