@@ -90,7 +90,7 @@ module.exports = {
     async addOneProperty(propertyData) {
         try {
             let conn = await pool.getConnection();
-            let sql = "INSERT INTO Properties (Address, City, ZipCode, NumberOfBedrooms, NumberOfBathrooms, Rent, id_Landlords) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            let sql = "INSERT INTO Properties (Address, City, ZipCode, NumberOfBedrooms, NumberOfBathrooms, Rent, id_Landlords, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             const [okPacket, fields] = await conn.execute(sql, [
                 propertyData.Address,
                 propertyData.City,
@@ -98,7 +98,8 @@ module.exports = {
                 propertyData.NumberOfBedrooms,
                 propertyData.NumberOfBathrooms,
                 propertyData.Rent,
-                propertyData.id_Landlords
+                propertyData.id_Landlords,
+                propertyData.Image
             ]);
             conn.release();
             console.log("INSERT " + JSON.stringify(okPacket));
