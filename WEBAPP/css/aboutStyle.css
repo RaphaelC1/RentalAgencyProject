@@ -1,0 +1,243 @@
+nav {
+    background-color: coral;
+    overflow: hidden;
+    align-items: center;
+}
+
+
+nav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+
+nav a:hover {
+    background-color: #ddd;
+    color: black;
+    transition: 0.5s;
+}
+
+.appartmentForm {
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+/*Section us*/
+
+.us{
+    overflow: hidden;
+    margin-block-end:100px;
+}
+.heading h1{
+    color:#ff6347;
+    font-size: 55px;
+    text-align: center;
+    margin-top: 35px;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 65px auto;
+}
+.us-content{
+    flex:1;
+    width: 600px;
+    margin:0px 50px;
+}
+
+.us-content h2{
+    font-size: 38px;
+    margin-bottom: 20px;
+    color: #333;
+}
+.us-content p{
+    font-size: 24px;
+    margin-block-end: 30px;
+}
+.us-content button{
+    display: inline-block;
+    background-color: #ff4500;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 20px;
+    border:none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.us-content button:hover{
+   background-color: #ff6347; 
+   transform: scale(1.1);
+}
+.us-image{
+    flex:1;
+    width: 600px;
+    margin:auto;
+}
+@media screen and (max-width: 768px){
+    .heading h1{
+        font-size: 45px;
+        margin-top: 30px;
+    }
+    .us{
+        margin: 0px;
+    }
+    .container{
+        width: 100%;
+        flex-direction: column;
+        margin: 0px;
+        padding: 0px 40px;
+    }
+    .us-content{
+        width: 100%;
+        margin: 35px 0px;
+    }
+    .us-content h2{
+        font-size: 30px;
+    }
+    .us-content p{
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+    .us-content button{
+       font-size: 16px;
+       padding: 8px 16px; 
+    }
+    .us-image{
+        width: 100%;
+    }
+}
+
+/*Section "who are we"*/
+.who-we-are {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .who-we-are h2 {
+    font-size: 30px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+  
+  .team-member {
+    display: inline-block;
+    width: 30%; /* Ajustez la largeur selon vos besoins */
+    margin: 10px;
+    vertical-align: top;
+  }
+  
+  .team-member img{
+    width: 80%;
+    width: 240px; 
+    height: 235px;  
+    border-radius: 50%;
+  }
+  
+  .team-member p {
+    font-size: 14px;
+    color: #666;
+  }
+
+@media screen and (max-width: 768px) {
+
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+    }
+
+    nav a {
+        margin-bottom: 10px;
+    }
+
+    .heading h1 {
+        font-size: 45px;
+        margin-top: 30px;
+    }
+
+    .us {
+        margin: 0;
+    }
+
+    .container {
+        width: 100%;
+        flex-direction: column;
+        margin: 0;
+        padding: 0 20px;
+    }
+
+    .us-content h2 {
+        font-size: 30px;
+    }
+
+    .us-content p {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .us-content button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+
+    .us-image {
+        width: 100%;
+    }
+
+    .who-we-are h2 {
+        font-size: 25px;
+        margin-top: 50px;
+        margin-bottom: 30px;
+    }
+
+    .team-member {
+        width: 100%;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .team-member img {
+        width: 70%;
+        height: auto;
+        border-radius: 50%;
+        margin: 0 auto 10px;
+    }
+
+    .team-member p {
+        font-size: 14px;
+        color: #666;
+    }
+}
+
+/*Footer*/
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }

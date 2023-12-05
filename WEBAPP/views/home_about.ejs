@@ -1,7 +1,10 @@
-
-
+<% const title='home_about' ; %>
+    <%- include('header_user.ejs', { title: title}) %>
+    
 <!DOCTYPE html>
 <html lang="en">
+
+
 
 <head>
     <link rel="stylesheet" href="/css/indexStyle.css">
@@ -11,10 +14,50 @@
 
 <body>
 
-    <header>
+
+
+    <section class="us">
+        <div class="heading">
+            <h1>About Us</h1>
+        </div>
+        <div class="container">
+            <div class="us-content">
+            <h2> Welcome on this page</h2>
+            <p>At the intersection of home comfort and fulfilling needs, our agency is dedicated to simplifying the search for ideal residences. With us, every roof finds its story, and every tenant discovers their home.
+                We are much more than a mere apartment rental agency; we are the craftsmen behind the perfect connection between caring property owners and tenants seeking a place to call home. Our mission is to forge lasting bonds, to transform spaces into living environments, and to realize the dream of a home for each individual.
+            </p>
+            <button class="cta-button">Learn More</button>
+            </div>
+            <img class="us-image" src="/img/us.jpeg">
+
+        </div>
+    </section>
+
+    <section class="who-we-are">
+        <h2>Who Are We?</h2>
+        <div class="team-member">
+          <img src="/img/Zoe.png" alt="Team Member 1">
+          <h3>Zoe</h3>
+          <p>Student in EFREI school</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero et sem.</p>
+        </div>
         
     </header>
-<%- include('footer_user.ejs') %>
+        <div class="team-member">
+          <img src="/img/Raphael.png" alt="Team Member 2">
+          <h3>Raphael</h3>
+          <p>Student in EFREI school</p>
+          <p>Etiam quis metus in libero efficitur fermentum eu ut elit.</p>
+        </div>
+        <div class="team-member">
+          <img src="/img/Jade.png" alt="Team Member 3">
+          <h3>Jade</h3>
+          <p>Student in EFREI school</p>
+          <p>Integer nec enim ac dolor consectetur venenatis.</p>
+        </div> 
+      </section>
+    <%- include('footer_user.ejs') %>
+
 </body>
 
 </html>
