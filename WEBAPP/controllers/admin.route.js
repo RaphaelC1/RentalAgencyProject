@@ -4,6 +4,8 @@ const router = express.Router();
 const tenantRepo = require('../utils/tenant.repository');
 const landlordRepo = require('../utils/landlord.repository');
 const propertyRepo = require('../utils/property.repository');
+const checkAuthentication = require('../utils/users.auth');
+
 
 router.get('/my/:name', mynameAction);
 router.get('/myy', mynameAction);
@@ -14,7 +16,7 @@ async function mynameAction(request, response) {
 // ADD TENANT
 router.get('/tenant/add', adminTenantAddAction);
 router.post('/tenant/create', adminTenantCreateAction);
-// List all tenants
+// List all tenants   
 router.get('/tenant', adminTenantListAction);
 
 // Delete one tenant
@@ -46,6 +48,7 @@ router.post('/property/delete', adminPropertyDeleteAction);
 router.get('/property/edit/:propertyId', propertyEditAction);
 router.post('/property/update/:propertyId', propertyUpdateAction);
 
+// Admins route required
 
 // FUNCTIONS ADD LANDLORD
 async function adminLandlordAddAction(request, response) {
