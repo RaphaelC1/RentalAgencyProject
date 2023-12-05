@@ -1,4 +1,7 @@
 <!-- views/auth_view.ejs -->
+
+<html>
+    
 <% const title='Login' ; %>
     <%- include('header_user.ejs', { title: title}) %>
 
@@ -22,14 +25,14 @@
     </div>
 
     <div class="link_login">
-        <a href="/auth/logout">LOG OUT</a> <br/>
+        <a href="/register/">REGISTER</a> <br/>
         <a href="/auth/user">USERS ONLY</a> <br/>
         <a href="/auth/admin">ADMINS ONLY</a> <br/>
         <a href="/auth/protected">USER LEVEL DEPENDENT AUTO REDIRECT</a> <br/>
     </div>
     
     
-
+<%- include('footer_user.ejs') %>
     </body>
 </html>
 

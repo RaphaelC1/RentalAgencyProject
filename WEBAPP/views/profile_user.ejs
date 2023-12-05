@@ -13,9 +13,49 @@
     User profile
   </h1>
 
-  
+  <div class="user_infos">
+    <li> Username : 
+      <a> <%= user.user_name %></a></li>
+    <li> Email :
+      <a><%= user.user_email %></a>
+    </li>
+    <li> Role : 
+      <a><%= user.user_role %></a>
+    </li>
+  </div>
 
+  <div class="link_login">
+    <a href="/home/logout">LOG OUT</a> <br/>
 
+<%- include('footer_user.ejs') %>
 </body>
 
 </html>
+
+<style>
+  .user_infos {
+    text-align: center;
+    margin-top: 20%;
+  }
+  .user_infos li{
+        margin-left: 10%;
+        display:flex;
+        color: black;
+        text-decoration: none; /* Optional: Removes underline from links */
+       
+    }
+  
+  .link_login {
+    text-align: center;
+    margin-top: 200 px;
+    }
+
+    .link_login a {
+        display: block;
+        color: black;
+        font-weight: bold;
+        text-decoration: none; /* Optional: Removes underline from links */
+        margin-top: 20%;
+    }
+
+</style>
