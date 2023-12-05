@@ -10,7 +10,7 @@ router.get("/user", auth.checkAuthentication("USER"), userAction);
 router.get("/admin", auth.checkAuthentication("ADMIN"), adminAction);
 router.get("/protected", protectedGetAction);
 router.post("/login", loginPostAction);
-router.get("/logout", logoutAction);
+//router.get("/logout", logoutAction);
 
 // Retrieves user data and renders a view with the user's JSON data.
 async function userAction(request, response) {
@@ -37,6 +37,7 @@ async function protectedGetAction(request, response) {
     }
 }
 
+
 async function loginPostAction(request, response) {
     areValid = await userRepo.areValidCredentials(request.body.username, request.body.userpass);
 
@@ -47,7 +48,7 @@ async function loginPostAction(request, response) {
       request.login(user, function (err) { 
           if (err) { 
             console.log("Error during login:", err);
-            return response.send("Error during login");
+            return response.send("Error during login", response.redirect("/auth/"));
             //  return next(err); 
         } 
   

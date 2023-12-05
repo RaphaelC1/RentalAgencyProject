@@ -38,8 +38,8 @@ module.exports = {
           return next();
         }
       } else {
-        return response.end("401 Unautorized (not authenticated)");
-        // response.redirect("/auth"); // not authenticated at all
+        return response.end("401 Unautorized (not authenticated)", response.redirect("/auth"));
+         ; // not authenticated at all
       }
     }
         
