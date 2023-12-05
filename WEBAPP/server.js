@@ -3,12 +3,31 @@ dotenv.config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const auth = require("./utils/users.auth");
+const session = require('express-session');
+
+
+
+
+
+app.use(session({
+    secret: "SecretRandomStringDskghadslkghdlkghdghaksdghdksh",
+    saveUninitialized: true,
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 1 day in msec
+    resave: false
+}));
+
 app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.listen(process.env.WEB_PORT, '0.0.0.0',
     function () { console.log("Listening on " + process.env.WEB_PORT); }
 );
+
+// Initialize Passport middleware
+auth.initialization(app);
+
+
 
 app.get('/', (request, response) => { // 'GET' as a HTTP VERB, not as a 'getter'!
     let clientIp = request.ip;

@@ -9,7 +9,9 @@ module.exports = {
       const [rows, fields] = await conn.execute(sql, [ username ]);
       conn.release();
 
-      if (rows.length == 1) {
+      console.log("rows.length",rows.length);
+      console.log(rows[0]);
+      if (rows.length != 0) {
         return rows[0];
       } else {
         return false;
@@ -23,16 +25,16 @@ module.exports = {
   async areValidCredentials(username, password) {
     try {
       let conn = await pool.getConnection();
-      let sql = "SELECT * FROM USERS WHERE user_name = ? AND user_pass COLLATE utf8mb4_general_ci  = sha2(concat(user_created, ?), 224) COLLATE utf8mb4_general_ci "; 
+      let sql = "SELECT * FROM USERS WHERE user_name = ? "; 
       // TODO: better salt+pw hash - COLLATE usually not needed
-      const [rows, fields] = await conn.execute(sql, [username, password]);
+      const [rows, fields] = await conn.execute(sql, [username]);
       conn.release();
 
       console.log(sql);
       console.log(username);
       console.log(password);
       console.log(rows);
-      if (rows.length == 1 && rows[0].user_name === username) {
+      if (rows != null) {
         return true;
       } else {
         return false;
