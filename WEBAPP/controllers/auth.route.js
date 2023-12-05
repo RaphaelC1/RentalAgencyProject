@@ -52,7 +52,7 @@ async function loginPostAction(request, response) {
             }
         });
     } else {
-        response.send("Invalid credentials provided");
+        return (req, res) => res.render('auth_view', { extraContent: "Invalid username or password" });
         // TODO redirect/normal error message
     }
 }
@@ -60,7 +60,7 @@ async function loginPostAction(request, response) {
 function logoutAction(request, response) {
     request.logout(function (err) {
         if (err) { return next(err); }
-        response.redirect('/auth');
+        response.redirect('/auth/');
     });
 }
 

@@ -16,6 +16,10 @@
     
     </div>
     
+    <div class="error_message">
+        <!-- Displaying the extraContent -->
+        <%= extraContent %>
+    </div>
 
     <div class="link_login">
         <a href="/auth/logout">LOG OUT</a> <br/>
@@ -43,6 +47,11 @@
     .log input {
         margin-bottom: 5%;
 
+    }
+
+    .error_message {
+        display: flex
+        
     }
 
     .link_login {

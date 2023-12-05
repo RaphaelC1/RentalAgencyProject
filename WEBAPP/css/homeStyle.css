@@ -1,59 +1,61 @@
-
-h1 {
-    text-align: center;
-    font-size: 36px;
-}
-
-/* Apply styles to the entire page */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+body, html {
+    height: 100%;
     margin: 0;
-    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-
-/* Style the form container */
 .container {
-    max-width: 600px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
 }
 
-/* Style labels */
-label {
+.first-div {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.appartment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border:  0px;
+    background-color: #ddb8b8;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.appartment-form form {
+    width: 100%;
+}
+
+.appartment-form label {
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
-/* Style text input fields and textarea */
-input[type="text"],
-input[type="email"],
-textarea {
-    width: 96%;
-    padding: 10px;
+.appartment-form select,
+.appartment-form input[type="date"],
+.appartment-form input[type="number"],
+.appartment-form button {
+    margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 8px;
+    border-radius: 15px;
+    border: 0px;
+    width: 100%;
 }
 
-/* Style the textarea specifically */
-textarea {
-    height: 150px;
-}
-
-/* Style the search button */
-button[type="submit"] {
-    background-color: coral;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+.appartment-form button {
+    background-color: #AA7767;
+    color: #faf2f2;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-/* Add some hover effect to the button */
-button[type="submit"]:hover {
-    background-color: #ef5d27;
+.appartment-form button:hover {
+    background-color: #bd7a66;
 }
