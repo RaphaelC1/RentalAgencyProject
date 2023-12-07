@@ -67,21 +67,7 @@ h1 {
     font-size: 24px;
     margin-block-end: 30px;
 }
-.us-content button{
-    display: inline-block;
-    background-color: #ff4500;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 5px;
-    font-size: 20px;
-    border:none;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-.us-content button:hover{
-   background-color: #ff6347; 
-   transform: scale(1.1);
-}
+
 .us-image{
     flex:1;
     width: 600px;
@@ -111,10 +97,6 @@ h1 {
     .us-content p{
         font-size: 18px;
         margin-bottom: 20px;
-    }
-    .us-content button{
-       font-size: 16px;
-       padding: 8px 16px; 
     }
     .us-image{
         width: 100%;
