@@ -8,6 +8,8 @@ async function mynameAction(request, response) {
     response.send("MYNAME ACTION " + request.params.name);
 }
 
+
+
 // Fetch all properties
 router.get('/', async (req, res) => {
     try {
@@ -34,6 +36,9 @@ router.get('/:id', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+
+
 
 // http://localhost:9000/property
 router.get('/', (req, res) => {
