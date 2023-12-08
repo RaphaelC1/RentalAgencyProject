@@ -9,7 +9,7 @@
 * The goal of our Website is to allow landords to rent their appartment to tenant in the simplest way possible.
 * You will find the project rapport with this link : [https://docs.google.com/document/d/1w7wrPF_A08wpmyp7rWGqZaN-Kdm2G7Mvo3D6X_lsi6s/edit?usp=sharing]
 
-* Here you will find 3 of our activity diagrams and 4 of our Wireframes : https://docs.google.com/document/d/1fSpCD1oPoSRzAxQxMmmBZ95CWda_4PK4sQYvG4VFNMM/edit?usp=sharing
+* Here you will find 3 of our activity diagrams and 4 of our Wireframes and on sequence diagram : https://docs.google.com/document/d/1fSpCD1oPoSRzAxQxMmmBZ95CWda_4PK4sQYvG4VFNMM/edit?usp=sharing
 
 
 ### Features
