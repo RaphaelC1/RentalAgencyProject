@@ -133,5 +133,11 @@ module.exports = {
             console.log(err);
             throw err;
         }
+    },
+    async checkPropertyAvailability(conn, propertyId, bookingStart, bookingEnd) {
+        let sql = "SELECT COUNT(*) AS count FROM Leases WHERE id_Properties = ? AND ((LeaseStart BETWEEN ? AND ?) OR (LeaseEnd BETWEEN ? AND ?))";
+        const [rows, fields] = await conn.execute(sql, [propertyId, bookingStart, bookingEnd, bookingStart, bookingEnd]);
+
+        return rows[0].count === 0;
     }
 };
