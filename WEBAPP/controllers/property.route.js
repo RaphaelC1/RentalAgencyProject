@@ -60,6 +60,10 @@ router.get('/', (req, res) => {
 
 });
 
+//http://localhost:9000/property/id/booking
+router.get('/:id/booking', ensureAuthenticated, ensureTenant, (req, res) => {
+    res.render('booking_page', { user: req.user });
+});
 
 
 module.exports = router;
