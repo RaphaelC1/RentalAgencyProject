@@ -1,0 +1,41 @@
+<% const title='Add lease' ; %>
+    <%- include('header_admin.ejs', { title: title}) %>
+
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h1 class="mb-4">Lease Information</h1>
+                    <form action="/admin/lease/create" method="post">
+                        <div class="mb-3">
+                            <input type="date" id="leaseStart" name="leaseStart" class="form-control"
+                                placeholder="Lease Start" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="date" id="leaseEnd" name="leaseEnd" class="form-control"
+                                placeholder="Lease End" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="Rent" name="Rent" class="form-control" placeholder=" Monthly Rent"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="deposit" name="deposit" class="form-control"
+                                placeholder="Security Deposit" required>
+                        <div class="mb-3">
+                            <input type="number" id="propertyId" name="propertyId" class="form-control"
+                                placeholder="Property ID" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="tenantId" name="tenantId" class="form-control"
+                                placeholder="Tenant ID" required>
+                        
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-success btn-lg">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </body>
+
+        </html>
