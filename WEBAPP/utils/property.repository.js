@@ -134,10 +134,24 @@ module.exports = {
             throw err;
         }
     },
-    async checkPropertyAvailability(conn, propertyId, bookingStart, bookingEnd) {
-        let sql = "SELECT COUNT(*) AS count FROM Leases WHERE id_Properties = ? AND ((LeaseStart BETWEEN ? AND ?) OR (LeaseEnd BETWEEN ? AND ?))";
-        const [rows, fields] = await conn.execute(sql, [propertyId, bookingStart, bookingEnd, bookingStart, bookingEnd]);
-
-        return rows[0].count === 0;
+    async searchPropertiesByDates(startDate, endDate) {
+        try {
+            let conn = await pool.getConnection();
+            let sql = `
+            SELECT *
+            FROM Properties
+            WHERE id NOT IN (
+                SELECT id_Properties
+                FROM Leases
+                WHERE (LeaseStart BETWEEN ? AND ?) OR (LeaseEnd BETWEEN ? AND ?)
+            )
+        `;
+            const [rows, fields] = await conn.execute(sql, [startDate, endDate, startDate, endDate]);
+            conn.release();
+            return rows;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
 };

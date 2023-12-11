@@ -12,9 +12,10 @@
         <div class="first-div">Welcome to the home page</div>
 
         <div class="appartment-form">
-            <form action="home/index" method="GET">
+            <form action="/property/search" method="GET">
                 <label for="city">City:</label>
                 <select>
+                    <option value="city">*</option>
                     <option value="city">Paris</option>
                     <option value="city">Grigny</option>
                 </select>
@@ -26,7 +27,7 @@
                 <input type="date" id="end-date" name="end-date" required>
 
                 <label for="rent">Rent:</label>
-                <input type="number" id="rent" name="rent" required>
+                <input type="number" id="rent" name="rent" >
 
                 <button type="submit">Search</button>
             </form>
