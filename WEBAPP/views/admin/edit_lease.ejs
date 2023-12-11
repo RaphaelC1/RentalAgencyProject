@@ -8,25 +8,26 @@
                     <form action="/admin/lease/update/<%= lease.id %>" method="post">
                         <div class="mb-3">
                             <input type="date" id="leaseStart" name="leaseStart" class="form-control"
-                                value='<%= lease.LeaseStart %>' required/>
+                                value='<%= lease.LeaseStart %>' required />
                         </div>
                         <div class="mb-3">
                             <input type="date" id="leaseEnd" name="leaseEnd" class="form-control"
-                                value='<%= lease.LeaseEnd %>' required/>
+                                value='<%= lease.LeaseEnd %>' required />
                         </div>
                         <div class="mb-3">
-                            <input type="number" id="Rent" name="Rent" class="form-control" value='<%= lease.MonthlyRent %>' required/>
+                            <input type="number" id="Rent" name="Rent" class="form-control"
+                                value='<%= lease.MonthlyRent %>' required />
                         </div>
                         <div class="mb-3">
                             <input type="number" id="deposit" name="deposit" class="form-control"
-                                value='<%= lease.SecurityDeposit %>' required/>
+                                value='<%= lease.SecurityDeposit %>' required />
                             <div class="mb-3">
                                 <input type="number" id="propertyId" name="propertyId" class="form-control"
-                                    value='<%= lease.id_Properties %>' required/>
+                                    value='<%= lease.id_Properties %>' required />
                             </div>
                             <div class="mb-3">
                                 <input type="number" id="tenantId" name="tenantId" class="form-control"
-                                    value='<%= lease.id_Tenants %>' required/>
+                                    value='<%= lease.id_Tenants %>' required />
                             </div>
 
                             <div class="mb-3 text-center">

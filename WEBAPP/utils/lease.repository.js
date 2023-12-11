@@ -8,6 +8,12 @@ module.exports = {
             let conn = await pool.getConnection();
             let sql = "SELECT * FROM Leases";
             const [rows, fields] = await conn.execute(sql);
+            // Format LeaseStart and LeaseEnd for each row
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].LeaseStart = await this.formatDate(rows[i].LeaseStart);
+                rows[i].LeaseEnd = await this.formatDate(rows[i].LeaseEnd);
+            }
+
             conn.release();
             return rows;
         }
@@ -27,7 +33,9 @@ module.exports = {
             // escape input (not very good) OR prepared statements (good) OR use orm (GOOD!)
             let sql = "SELECT * FROM Leases WHERE id = ?";
             const [rows, fields] = await conn.execute(sql, [leaseId]);
-            console.log(leaseId);
+            rows[0].LeaseStart = await this.formatDate(rows[0].LeaseStart);
+            rows[0].LeaseEnd = await this.formatDate(rows[0].LeaseEnd);
+        
             conn.release();
             console.log(rows);
             if (rows != null) {
@@ -41,6 +49,13 @@ module.exports = {
             throw err;
         }
     },
+    async formatDate(dateString) {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    let month = (date.getMonth() + 1).toString().padStart(2, '0');
+    let day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+},
     async delOneLease(id) {
         try {
             let conn = await pool.getConnection();
