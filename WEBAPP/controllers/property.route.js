@@ -37,6 +37,23 @@ router.get('/:id', ensureAuthenticated, ensureTenant, async (req, res) => {
     }
 });
 
+// Show booking page with property details
+router.get('/:id/booking', ensureAuthenticated, ensureTenant, async (req, res) => {
+    try {
+        const propertyId = req.params.id;
+        const property = await propertyRepo.getOneProperty(propertyId);
+
+        if (!property) {
+            return res.status(404).render('error', { message: 'Property not found' });
+        }
+
+        res.render('booking_page', { user: req.user, property: property[0] });
+    } catch (error) {
+        console.error('Error fetching property details:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
@@ -60,10 +77,7 @@ router.get('/', (req, res) => {
 
 });
 
-//http://localhost:9000/property/id/booking
-router.get('/:id/booking', ensureAuthenticated, ensureTenant, (req, res) => {
-    res.render('booking_page', { user: req.user });
-});
+
 
 
 module.exports = router;
