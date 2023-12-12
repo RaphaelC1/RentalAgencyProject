@@ -20,6 +20,29 @@ router.get('/', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+// Search properties by dates
+router.get('/search', async (req, res) => {
+    try {
+        console.log("test");
+        const startDate = req.query['start-date'];
+        const endDate = req.query['end-date'];
+
+        // verify if both dates are provided
+        if (!startDate || !endDate) {
+            return res.status(400).send('Start Date and End Date are required');
+        }
+
+        const properties = await propertyRepo.searchPropertiesByDates(startDate, endDate);
+        res.render('property_search', { user: req.user, properties: properties });
+    } catch (error) {
+        console.error('Error searching properties:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+
+
 // Show one property
 router.get('/:id', ensureAuthenticated, ensureTenant, async (req, res) => {
     try {
@@ -79,24 +102,6 @@ function ensureTenant(req, res, next) {
 }
 
 
-router.get('/search', async (req, res) => {
-    try {
-        console.log(test);
-        const startDate = req.query['start-date'];
-        const endDate = req.query['end-date'];
-
-        // verify if both dates are provided
-        if (!startDate || !endDate) {
-            return res.status(400).send('Start Date and End Date are required');
-        }
-
-        const properties = await propertyRepo.searchPropertiesByDates(startDate, endDate);
-        res.render('property_search', { user: req.user, properties: properties });
-    } catch (error) {
-        console.error('Error searching properties:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
 
 
 

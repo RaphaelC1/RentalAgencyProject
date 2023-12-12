@@ -4,28 +4,5 @@
         <div class="container">
             <h1>Search Results</h1>
 
-            <div class="row">
-                <% properties.forEach(property=> { %>
-                    <div class="row">
-                                    <!-- Ajoutez la balise pour afficher l'image -->
-                                    <img src="<%= property.Image %>" class="card-img-top" alt="Property Image">
-                    
-                                    <div class="card-body">
-                                        <h5 class="card-title">
-                                            <%= property.Rent %> €/month<!-- Formatez le loyer -->
-                                        </h5>
-                                        <p class="card-text"><strong>City:</strong>
-                                            <%= property.City %>, <%= property.ZipCode %>
-                                        </p>
-                                        <!-- Ajoutez le code pour afficher uniquement le Rent -->
-                                        <p class="card-text"><strong>Address:</strong>
-                                            <%= property.Address %>
-                                        </p>
-                                    </div>
-                                </div>
-            
-                            <% }); %>
-            </div>
-        </div>
 
         <%- include('footer_user.ejs') %>
