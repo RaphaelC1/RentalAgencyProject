@@ -1,18 +1,23 @@
-pool = require("../utils/db.js");
+pool = require("./db.js");
 
 module.exports = {
 
 
-  async getAllUsers() {
+
+  async getAllUsers() { // TODO? move to brands.repository.js
     try {
-      const connection = await pool.getConnection();
-      const [rows, fields] = await connection.execute('SELECT * FROM Users');
-      connection.release();
-      return rows;
-    } catch (err) {
-      throw err;
+        let conn = await pool.getConnection();
+        let sql = "SELECT * FROM Users";
+        const [rows, fields] = await conn.execute(sql);
+        conn.release();
+        return rows;
     }
-  },
+    catch (err) {
+        // TODO: log/send error ... 
+        console.log(err);
+        throw err; // return false ???
+    }
+},
   
   async getOneUser(user_id) {
     try {
