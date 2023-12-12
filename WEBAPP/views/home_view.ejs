@@ -1,42 +1,40 @@
-
-
-
 <html>
-    <head>
-        <% const title='Home_user' ; %>
+
+<head>
+    <% const title='Home_user' ; %>
         <%- include('header_user.ejs', { title: title}) %>
-        <link rel="stylesheet" href="/css/homeStyle.css">       
-    </head>
-    
-    <div class="container">
-        <div class="first-div">Welcome to the home page</div>
+            <link rel="stylesheet" href="/css/homeStyle.css">
+</head>
 
-        <div class="appartment-form">
-            <form action="/property/search" method="GET">
-                <label for="city">City:</label>
-                <select>
-                    <option value="city">*</option>
-                    <option value="city">Paris</option>
-                    <option value="city">Grigny</option>
-                </select>
+<div class="container">
+    <div class="first-div">Welcome to the home page</div>
 
-                <label for="start-date">Start Date:</label>
-                <input type="date" id="start-date" name="start-date" required>
+    <div class="appartment-form">
+        <form action="/property/search" method="GET">
+            <label for="city">City:</label>
+            <select name="city">
+                <option value="">*</option>
+                <option value="Paris">Paris</option>
+                <option value="Bordeaux">Bordeaux</option>
+            </select>
 
-                <label for="end-date">End Date:</label>
-                <input type="date" id="end-date" name="end-date" required>
+            <label for="start-date">Start Date:</label>
+            <input type="date" id="start-date" name="start-date" required>
 
-                <label for="rent">Rent:</label>
-                <input type="number" id="rent" name="rent" >
+            <label for="end-date">End Date:</label>
+            <input type="date" id="end-date" name="end-date" required>
 
-                <button type="submit">Search</button>
-            </form>
-        </div>
+            <label for="rent">Rent:</label>
+            <input type="number" id="rent" name="rent">
+
+            <button type="submit">Search</button>
+        </form>
+
     </div>
+</div>
 <%- include('footer_user.ejs') %>
     </body>
 
 
 
 </html>
-

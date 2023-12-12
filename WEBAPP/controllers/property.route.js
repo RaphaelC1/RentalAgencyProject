@@ -24,22 +24,25 @@ router.get('/', async (req, res) => {
 // Search properties by form data
 router.get('/search', async (req, res) => {
     try {
-        console.log("test");
         const startDate = req.query['start-date'];
         const endDate = req.query['end-date'];
+        const city = req.query.city;
+        const rent = req.query.rent;
 
-        // verify if both dates are provided
+        // vérifie si les dates sont fournies
         if (!startDate || !endDate) {
             return res.status(400).send('Start Date and End Date are required');
         }
 
-        const properties = await propertyRepo.searchPropertiesByDates(startDate, endDate);
+        const properties = await propertyRepo.searchPropertiesByForm(startDate, endDate, city, rent);
         res.render('property_search', { user: req.user, properties: properties });
     } catch (error) {
         console.error('Error searching properties:', error);
         res.status(500).send('Internal Server Error');
     }
 });
+
+
 
 
 
