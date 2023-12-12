@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const landlordRepo = require('../utils/landlord.repository');
 const propertyRepo = require('../utils/property.repository');
+const userAuth = require('../utils/users.auth')
 
 
 router.get('/my/:name', mynameAction);
@@ -10,6 +11,8 @@ async function mynameAction(request, response) {
     response.send("MYNAME ACTION " + request.params.name);
 }
 
+router.use('/admin', userAuth.checkAuthentication('ADMIN'));
+router.use('/landlord', userAuth.checkAuthentication('ADMIN'));
 
 
 // ADD LANDLORD
