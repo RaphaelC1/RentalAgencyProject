@@ -13,6 +13,7 @@ router.use('/', userAuth.checkAuthentication('ADMIN'));
 router.use('/landlord', userAuth.checkAuthentication('ADMIN'));
 router.use('/property', userAuth.checkAuthentication('ADMIN'));
 router.use('/tenant', userAuth.checkAuthentication('ADMIN'));
+router.use('/user', userAuth.checkAuthentication('ADMIN'));
 
 
 // http://localhost:9000/admin

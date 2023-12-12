@@ -1,24 +1,25 @@
 pool = require("../utils/db.js");
 
 module.exports = {
-  async getOneUser(username) {
+  
+  async getOneUser(user_id) {
     try {
-      let conn = await pool.getConnection();
-      let sql = "SELECT user_id,user_name,user_email,user_role FROM users WHERE user_name = ? "; 
-      // must leave out the password+hash
-      const [rows, fields] = await conn.execute(sql, [ username ]);
-      conn.release();
+        let conn = await pool.getConnection();
+        let sql = "SELECT user_id,user_name,user_email,user_role FROM users WHERE user_name = ? ";
+        const [rows, fields] = await conn.execute(sql, [user_id !== undefined ? user_id : null]);
+        conn.release();
 
-      console.log("rows.length",rows.length);
-      console.log(rows[0]);
-      if (rows.length != 0) {
-        return rows[0];
-      } else {
-        return false;
-      }
+        console.log("rows.length", rows.length);
+        console.log(rows[0]);
+
+        if (rows.length !== 0) {
+            return rows[0];
+        } else {
+            return false;
+        }
     } catch (err) {
-      console.log(err);
-      throw err;
+        console.log(err);
+        throw err;
     }
   },
   
@@ -82,19 +83,18 @@ async addOneUser(UserData) {
 async editOneUser(UserData, UserId) {
     try {
         let conn = await pool.getConnection();
-        // Construct the SQL query with named placeholders for animeData
+        // Construct the SQL query with named placeholders for UserData
         const placeholders = Object.keys(UserData).map(key => `${key} = ?`).join(', ');
         const sql = `UPDATE Users SET ${placeholders} WHERE id = ?`;
 
+        // Replace undefined values with null in UserData
+        const sanitizedUserData = Object.values(UserData).map(value => value !== undefined ? value : null);
 
-        // Combine values from animeData and animeId
-        const values = [...Object.values(UserData), UserId];
+        // Combine values from sanitized UserData and UserId
+        const values = [...sanitizedUserData, UserId];
 
         // Execute the query
         const result = await conn.execute(sql, values);
-
-
-        conn.release();
 
         return result;
     }

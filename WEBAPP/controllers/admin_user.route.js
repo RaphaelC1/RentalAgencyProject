@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const tenantRepo = require('../utils/tenant.repository');
+const userRepo = require('../utils/users.repository');
 const userAuth = require('../utils/users.auth')
 
 
@@ -10,24 +10,22 @@ async function mynameAction(request, response) {
     response.send("MYNAME ACTION " + request.params.name);
 }
 
-router.use('/admin', userAuth.checkAuthentication('ADMIN'));
-router.use('/tenant', userAuth.checkAuthentication('ADMIN'));
 
 
 
-// ADD TENANT
-router.get('/tenant/add', adminUserAddAction);
-router.post('/tenant/create', adminUserCreateAction);
-// List all tenants
-router.get('/tenant', adminUserListAction);
+// ADD USER
+router.get('/user/add', adminUserAddAction);
+router.post('/user/create', adminUserCreateAction);
+// List all users
+router.get('/user', adminUserListAction);
 
-// Delete one tenant
-router.post('/tenant/delete', adminUserDeleteAction);
-// Edit one tenant
-router.get('/tenant/edit/:userId', userEditAction);
-router.post('/tenant/update/:userId', userUpdateAction);
+// Delete one user
+router.post('/user/delete', adminUserDeleteAction);
+// Edit one user
+router.get('/user/edit/:userId', userEditAction);
+router.post('/user/update/:userId', userUpdateAction);
 
-// FUNCTIONS ADD TENANT
+// FUNCTIONS ADD USERS
 async function adminUserAddAction(request, response) {
     response.render("admin/add_user", { /* Additional data if needed */ });
 }
@@ -40,11 +38,11 @@ async function adminUserCreateAction(request, response) {
         PhoneNumber: request.body.user_pass || null,
     };
 
-    var userId = await tenantRepo.addOneUser(userData);
+    var userId = await userRepo.addOneUser(userData);
     response.redirect("/admin/user");
 }
 
-//EDIT A TENANT
+//EDIT A USER
 async function userEditAction(request, response) {
     // response.send("EDIT ACTION");
     var userId = request.params.userId;
@@ -60,21 +58,21 @@ async function userUpdateAction(request, response) {
         Email: request.body.user_role || null,
         PhoneNumber: request.body.user_pass || null,
     };
-    var numRows = await tenantRepo.editOneUser(userData, userId);
+    var numRows = await userRepo.editOneUser(userData, userId);
     response.redirect("/admin/user");
 }
 
 //FUNCTIONS LIST ALL USERS
 async function adminUserListAction(request, response) {
-    var tenants = await tenantRepo.getAllTenants();
-    console.log(tenants);
-    response.render("admin/admin_user", { tenants: tenants });
+    var users = await userRepo.getOneUser();
+    console.log(users);
+    response.render("admin/admin_user", { users: users });
 }
 // DELETE ONE USER
 async function adminUserDeleteAction(request, response) {
-    var tenantId = request.body.id;
-    console.log("DELETE " + tenantId);
-    var numRows = await tenantRepo.delOneTenant(tenantId);
+    var userId = request.body.id;
+    console.log("DELETE " + userId);
+    var numRows = await userRepo.delOneUser(userId);
 
     response.redirect("/admin/user");
 }
