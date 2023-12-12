@@ -24,7 +24,7 @@ router.get('/landlord', adminLandlordListAction);
 router.post('/landlord/delete', adminLandlordDeleteAction);
 // Edit one landlord
 router.get('/landlord/edit/:landlordId', landlordEditAction);
-router.post('/landlord/update/:landlordId', landlordUpdateAction);// http://localhost:9000/admin
+router.post('/landlord/update/:landlordId', landlordUpdateAction);
 
 
 

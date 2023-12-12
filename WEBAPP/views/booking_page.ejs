@@ -1,9 +1,53 @@
-<% const title='Login' ; %>
-    <%- include('header_user.ejs', { title: title}) %>
+<% const title='Booking Form' %>
+    <%- include('header_user.ejs', { title: title }) %>
 
         <body>
+            <div class="container mt-5">
+                <h2 class="mb-4">Booking Form</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form action="/submit_booking" method="post" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="dob" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" id="dob" name="dob" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="idFile" class="form-label">ID Proof</label>
+                                <input type="file" class="form-control" id="idFile" name="idFile"
+                                    accept=".pdf, .jpg, .png" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message to landlord</label>
+                                <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Booking</button>
+                        </form>
+                    </div>
 
-
+                    <div class="col-md-6">
+                        <div class="card">
+                            <img src="<%= property.Image %>" class="card-img-top" alt="Property Image">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Tenant Summary</h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item"> Monthly rent: <%= property.Rent %>€</li>
+                                    <li class="list-group-item">Security Deposit : <%= property.Rent - 100 %>€</li>
+                                    <li class="list-group-item">Agency charges : 50€</li>
+                                    <li class="list-group-item">Total: <%= (property.Rent)*2 - 50 %>€</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <%- include('footer_user.ejs') %>
         </body>
