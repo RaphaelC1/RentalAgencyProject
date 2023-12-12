@@ -52,3 +52,58 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #ef5d27;
 }
+
+
+/*Us section*/
+.us{
+    overflow: hidden;
+    margin-block-end:100px;
+}
+.heading h1{
+    color:#ff6347;
+    font-size: 55px;
+    text-align: center;
+    margin-top: 35px;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 65px auto;
+}
+.us-content{
+    flex:1;
+    width: 600px;
+    margin:0px 50px;
+}
+
+.us-content h2{
+    font-size: 38px;
+    margin-bottom: 20px;
+    color: #333;
+}
+.us-content p{
+    font-size: 24px;
+    margin-block-end: 30px;
+}
+.us-content button{
+    display: inline-block;
+    background-color: #ff4500;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 5px;
+    font-size: 20px;
+    border:none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+.us-content button:hover{
+   background-color: #ff6347; 
+   transform: scale(1.1);
+}
+.us-image{
+    flex:1;
+    width: 600px;
+    margin:auto;
+}

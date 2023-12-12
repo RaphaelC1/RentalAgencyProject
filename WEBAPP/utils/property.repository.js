@@ -133,5 +133,33 @@ module.exports = {
             console.log(err);
             throw err;
         }
+    },
+    async searchPropertiesByForm(startDate, endDate, city, rent) {
+        try {
+            let conn = await pool.getConnection();
+            let sql = `
+            SELECT *
+            FROM Properties
+            WHERE id NOT IN (
+                SELECT id_Properties
+                FROM Leases
+                WHERE (LeaseStart BETWEEN ? AND ?) OR (LeaseEnd BETWEEN ? AND ?)
+            )
+            ${city ? 'AND City = ?' : ''}
+            ${rent ? 'AND Rent <= ?' : ''}
+        `;
+            const params = [startDate, endDate, startDate, endDate];
+            if (city) params.push(city);
+            if (rent) params.push(rent);
+
+            const [rows, fields] = await conn.execute(sql, params);
+            conn.release();
+            return rows;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
+
+
 };

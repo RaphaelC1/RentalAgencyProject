@@ -5,12 +5,15 @@ const auth = require("../utils/users.auth");
 const userRepo = require("../utils/users.repository");
 
 // http://localhost:9000/auth
-router.get('/', (req, res) => res.render('auth_view', { extraContent: "" , user: req.user}));
+router.get('/', (req, res) => {
+    const message = req.query.message || "";
+    res.render('auth_view', { extraContent: message, user: req.user });
+});
+
 router.get("/user", auth.checkAuthentication("USER"), userAction);
 router.get("/admin", auth.checkAuthentication("ADMIN"), adminAction);
 router.get("/protected", protectedGetAction);
 router.post("/login", loginPostAction);
-//router.get("/logout", logoutAction);
 
 // Retrieves user data and renders a view with the user's JSON data.
 async function userAction(request, response) {
@@ -49,7 +52,7 @@ async function loginPostAction(request, response) {
           if (err) { 
             console.log("Error during login:", err);
             return response.send("Error during login", response.redirect("/auth/"));
-            //  return next(err); 
+            
         } 
   
           if (request.user.user_role === "ADMIN") {
@@ -60,7 +63,6 @@ async function loginPostAction(request, response) {
       });
     } else {
       response.send("Invalid credentials provided");
-      // TODO redirect/normal error message
     }
 }
 
@@ -70,5 +72,7 @@ function logoutAction(request, response) {
         response.redirect('/auth/');
     });
 }
+
+
 
 module.exports = router;
