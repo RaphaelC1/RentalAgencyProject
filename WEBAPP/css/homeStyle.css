@@ -1,55 +1,41 @@
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+
 .container {
     display: flex;
     flex-direction: column;
-    
     align-items: center;
     height: 100%;
 }
 
-.Contact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.first-div {
     font-size: 30px;
-    margin-bottom: 0px;
-   
+    margin-bottom: 20px;
 }
 
-
-
-
-.contact-form {
+.appartment-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     padding: 20px;
-    border: 0px;
+    border:  0px;
     background-color: #ddb8b8;
     border-radius: 5px;
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
 }
 
-.contact-form form {
+.appartment-form form {
     width: 100%;
-    
 }
 
-.contact-form label {
+.appartment-form label {
     margin-bottom: 5px;
     font-weight: bold;
 }
 
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea,
-.contact-form button {
+.appartment-form select,
+.appartment-form input[type="date"],
+.appartment-form input[type="number"],
+.appartment-form button {
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 8px;
@@ -58,17 +44,13 @@ body, html {
     width: 100%;
 }
 
-.contact-form textarea {
-    height: 100px;
-}
-
-.contact-form button {
+.appartment-form button {
     background-color: #AA7767;
     color: #faf2f2;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.contact-form button:hover {
+.appartment-form button:hover {
     background-color: #bd7a66;
 }
