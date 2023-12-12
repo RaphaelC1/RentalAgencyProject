@@ -11,7 +11,6 @@ async function mynameAction(request, response) {
 
 // http://localhost:9000/admin
 router.get('/', (req, res) => {
-    //res.send('Hello, from controller...');
     res.render('admin/admin_home', { favourites: [] });
 
 });
