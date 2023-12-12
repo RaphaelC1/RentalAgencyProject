@@ -77,7 +77,7 @@ CREATE TABLE Reviews(
    FOREIGN KEY(id_Properties) REFERENCES Properties(id)
 );
 
-CREATE TABLE users ( 
+CREATE TABLE Users ( 
     user_id int auto_increment primary key,
     user_created datetime,
     user_name varchar(100) unique,
