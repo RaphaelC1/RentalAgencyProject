@@ -1,6 +1,18 @@
 pool = require("../utils/db.js");
 
 module.exports = {
+
+
+  async getAllUsers() {
+    try {
+      const connection = await pool.getConnection();
+      const [rows, fields] = await connection.execute('SELECT * FROM Users');
+      connection.release();
+      return rows;
+    } catch (err) {
+      throw err;
+    }
+  },
   
   async getOneUser(user_id) {
     try {
@@ -62,22 +74,27 @@ module.exports = {
 },
 
 async addOneUser(UserData) {
-    try {
-        let conn = await pool.getConnection();
-        let sql = "INSERT INTO Users (user_name, user_email, user_role, user_pass) VALUES (?, ?, ?, ?)";
-        const [okPacket, fields] = await conn.execute(sql, [
-            UserData.user_name,
-            UserData.user_email,
-            UserData.user_role,
-            UserData.user_pass
-        ]);
-        conn.release();
-        console.log("INSERT " + JSON.stringify(okPacket));
-        return okPacket.insertId;
-    } catch (err) {
-        console.log(err);
-        throw err;
-    }
+  try {
+      let conn = await pool.getConnection();
+      let sql = "INSERT INTO Users (user_name, user_email, user_role, user_pass) VALUES (?, ?, ?, ?)";
+      
+      // Replace undefined values with null in the parameter array
+      const params = [
+          UserData.user_name !== undefined ? UserData.user_name : null,
+          UserData.user_email !== undefined ? UserData.user_email : null,
+          UserData.user_role !== undefined ? UserData.user_role : null,
+          UserData.user_pass !== undefined ? UserData.user_pass : null
+      ];
+
+      const [okPacket, fields] = await conn.execute(sql, params);
+      conn.release();
+
+      console.log("INSERT " + JSON.stringify(okPacket));
+      return okPacket.insertId;
+  } catch (err) {
+      console.log(err);
+      throw err;
+  }
 },
 
 async editOneUser(UserData, UserId) {

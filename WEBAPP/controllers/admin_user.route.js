@@ -68,6 +68,9 @@ async function adminUserListAction(request, response) {
     console.log(users);
     response.render("admin/admin_user", { users: users });
 }
+
+
+
 // DELETE ONE USER
 async function adminUserDeleteAction(request, response) {
     var userId = request.body.id;

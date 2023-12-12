@@ -39,11 +39,11 @@
                             </td>
                             <td>
                                 <form method="post" action="/admin/user/delete"
-                                    onsubmit="return confirmDelete('<%= users[i].id %>');">
+                                    onsubmit="return confirmDelete('<%= users[i].user_id %>');">
                                     <button type="button"
-                                        onclick="location.href='/admin/user/edit/<%= users[i].id %>'"
+                                        onclick="location.href='/admin/user/edit/<%= users[i].user_id %>'"
                                         class="btn btn-primary">Edit</button>
-                                    <input type="hidden" name="id" value="<%= users[i].id %>">
+                                    <input type="hidden" name="id" value="<%= users[i].user_id %>">
                                     <button type="submit" class="btn btn-danger">Delete</button>
 
                                 </form>
