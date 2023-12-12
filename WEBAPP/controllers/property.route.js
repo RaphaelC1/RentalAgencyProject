@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Search properties by dates
+// Search properties by form data
 router.get('/search', async (req, res) => {
     try {
         console.log("test");
