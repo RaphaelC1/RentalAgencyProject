@@ -35,6 +35,10 @@ router.get('/search', async (req, res) => {
         }
 
         const properties = await propertyRepo.searchPropertiesByForm(startDate, endDate, city, rent);
+        if (properties.length === 0) {
+            // Aucune propriété disponible
+            return res.render('property_search', { user: req.user, properties: properties, message: 'No properties available ' });
+        }
         res.render('property_search', { user: req.user, properties: properties });
     } catch (error) {
         console.error('Error searching properties:', error);
