@@ -15,38 +15,31 @@
                         <th>ID</th>
                         <th>Username</th>
                         <th>Email</th>
-                        <th>User rôle</th>
-                        <th>Password</th> <!-- New column for the delete button -->
+                        <th>User Role</th>
+                        <th>Password</th> 
+                        <th>Actions</th>
+                        
+
                     </tr>
                 </thead>
                 <tbody>
                     <% for (let i=0; i < users.length; i++) { %>
                         <tr>
-                            <td>
-                                <%= users[i].user_id %>
-                            </td>
-                            <td>
-                                <%= users[i].user_name %>
-                            </td>
-                            <td>
-                                <%= users[i].user_email %>
-                            </td>
-                            <td>
-                                <%= users[i].user_role %>
-                            </td>
-                            <td>
-                                <%= users[i].user_pass %>
-                            </td>
+                            <td><%= users[i].user_id %></td>
+                            <td><%= users[i].user_name %></td>
+                            <td><%= users[i].user_email %></td>
+                            <td><%= users[i].user_role %></td>
+                            <td><%= users[i].user_pass %></td>
                             <td>
                                 <form method="post" action="/admin/user/delete"
                                     onsubmit="return confirmDelete('<%= users[i].user_id %>');">
                                     <button type="button"
-                                        onclick="location.href='/admin/user/edit/<%= users[i].user_id %>'"
+                                        onclick="location.href= '/admin/user/edit/<%= users[i].user_id %>'"
                                         class="btn btn-primary">Edit</button>
                                     <input type="hidden" name="id" value="<%= users[i].user_id %>">
                                     <button type="submit" class="btn btn-danger">Delete</button>
-
                                 </form>
+                                
                             </td>
                         </tr>
                         <% } %>
@@ -56,8 +49,7 @@
 
         <script>
             function confirmDelete(UserId) {
-                var confirmResult = confirm("Are you sure you want to delete this Uer ?");
-
+                var confirmResult = confirm("Are you sure you want to delete this User ?");
                 // If user clicks "OK", continue with form submission
                 return confirmResult;
             }

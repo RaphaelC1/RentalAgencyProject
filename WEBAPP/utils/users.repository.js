@@ -4,7 +4,7 @@ module.exports = {
 
 
 
-  async getAllUsers() { // TODO? move to brands.repository.js
+  async getAllUsers() { 
     try {
         let conn = await pool.getConnection();
         let sql = "SELECT * FROM Users";
@@ -13,9 +13,8 @@ module.exports = {
         return rows;
     }
     catch (err) {
-        // TODO: log/send error ... 
         console.log(err);
-        throw err; // return false ???
+        throw err; 
     }
 },
   
@@ -40,38 +39,35 @@ module.exports = {
     }
   },
   
-  async areValidCredentials(username, password) {
+  async areValidCredentials(user_name, user_pass) {
     try {
       let conn = await pool.getConnection();
       let sql = "SELECT * FROM USERS WHERE user_name = ? "; 
       // TODO: better salt+pw hash - COLLATE usually not needed
-      const [rows, fields] = await conn.execute(sql, [username]);
+      const [rows, fields] = await conn.execute(sql, [user_name]);
       conn.release();
 
       console.log(sql);
-      console.log(username);
-      console.log(password);
+      console.log(user_name);
+      console.log(user_pass);
       console.log(rows);
-      if (rows != null) {
-        return true;
-      } else {
-        return false;
-      }
+      return rows != null;
     } catch (err) {
       console.log(err);
       throw err;
     }
   },
 
-  async delOneUser(id) {
+  async delOneUser(user_id) {
     try {
         let conn = await pool.getConnection();
-        console.log(id);
-        let sql = "DELETE FROM Users WHERE id = ?";
-        const [okPacket, fields] = await conn.execute(sql, [id]);
+        let sql = "DELETE FROM Users WHERE user_id = ?";
+        const [result] = await conn.execute(sql, [user_id]);
         conn.release();
-        console.log("DELETE " + JSON.stringify(okPacket));
+        console.log("DELETE result: ", result);
 
+        // Return a boolean indicating whether a row was affected (deleted)
+        return result.affectedRows > 0;
     } catch (err) {
         console.log(err);
         throw err;
@@ -102,7 +98,7 @@ async addOneUser(UserData) {
   }
 },
 
-async editOneUser(UserData, UserId) {
+async editOneUser(UserData, user_id) {
     try {
         let conn = await pool.getConnection();
         // Construct the SQL query with named placeholders for UserData
@@ -113,7 +109,7 @@ async editOneUser(UserData, UserId) {
         const sanitizedUserData = Object.values(UserData).map(value => value !== undefined ? value : null);
 
         // Combine values from sanitized UserData and UserId
-        const values = [...sanitizedUserData, UserId];
+        const values = [...sanitizedUserData, user_id];
 
         // Execute the query
         const result = await conn.execute(sql, values);
