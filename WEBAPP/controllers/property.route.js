@@ -47,9 +47,6 @@ router.get('/search', async (req, res) => {
 });
 
 
-
-
-
 // Show one property
 router.get('/:id', ensureAuthenticated, ensureTenant, async (req, res) => {
     try {
@@ -78,7 +75,10 @@ router.get('/:id/booking', ensureAuthenticated, ensureTenant, async (req, res) =
             return res.status(404).render('error', { message: 'Property not found' });
         }
 
-        res.render('booking_page', { user: req.user, property: property[0] });
+        // Fetch the booked dates for the property
+        const bookedDates = await propertyRepo.getBookedDates(propertyId);
+
+        res.render('booking_page', { user: req.user, property: property[0], bookedDates });
     } catch (error) {
         console.error('Error fetching property details:', error);
         res.status(500).send('Internal Server Error');

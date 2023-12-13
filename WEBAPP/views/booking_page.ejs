@@ -35,6 +35,16 @@
                     <div class="col-md-6">
                         <div class="card">
                             <img src="<%= property.Image %>" class="card-img-top" alt="Property Image">
+                            <div class="mt-4">
+                                <h5 class=>  Occupied Dates:</h5>
+                                <ul>
+                                    <% for (const dateRange of bookedDates) { %>
+                                        <li>
+                                            <%= dateRange.start %> to <%= dateRange.end %>
+                                        </li>
+                                        <% } %>
+                                </ul>
+                            </div>
                             <div class="card-body">
                                 <h5 class="card-title mb-4">Tenant Summary</h5>
                                 <ul class="list-group">
@@ -43,11 +53,11 @@
                                     <li class="list-group-item">Agency charges : 50€</li>
                                     <li class="list-group-item">Total: <%= (property.Rent)*2 - 50 %>€</li>
                                 </ul>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <%- include('footer_user.ejs') %>
+                <%- include('footer_user.ejs') %>
         </body>

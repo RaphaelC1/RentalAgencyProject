@@ -159,7 +159,24 @@ module.exports = {
             console.log(err);
             throw err;
         }
+    },
+    async getBookedDates(propertyId) {
+    try {
+        let conn = await pool.getConnection();
+        const [leases] = await conn.execute(`
+            SELECT DATE_FORMAT(LeaseStart, '%d/%m/%Y') as LeaseStart, DATE_FORMAT(LeaseEnd, '%d/%m/%Y') as LeaseEnd 
+            FROM Leases 
+            WHERE id_Properties = ?`,
+            [propertyId]
+        );
+        conn.release();
+        const bookedDates = leases.map(lease => ({ start: lease.LeaseStart, end: lease.LeaseEnd }));
+        return bookedDates;
+    } catch (error) {
+        console.error('Error fetching booked dates:', error);
+        throw error;
     }
+}
 
 
 };
