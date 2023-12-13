@@ -1,5 +1,5 @@
-CREATE DATABASE if not exists RentAgencyDb;
-USE RentAgencyDb;
+CREATE DATABASE if not exists RentalAgencyDb;
+USE RentalAgencyDb;
 
 
 
@@ -75,4 +75,13 @@ CREATE TABLE Reviews(
    PRIMARY KEY(id),
    FOREIGN KEY(id_Tenants) REFERENCES Tenants(id),
    FOREIGN KEY(id_Properties) REFERENCES Properties(id)
+);
+
+CREATE TABLE users ( 
+    user_id int auto_increment primary key,
+    user_created datetime,
+    user_name varchar(100) unique,
+    user_email varchar(100) unique,
+    user_role varchar(100),
+    user_pass varchar(100)
 );

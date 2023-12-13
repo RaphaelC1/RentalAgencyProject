@@ -1,0 +1,66 @@
+<!-- views/admin_property.ejs -->
+<% const title='Leases' ; %>
+    <%- include('header_admin.ejs', { title: title}) %>
+
+        <div id="panel">
+            <h1 class="text-center mb-4">Leases</h1>
+            <div id="tenant-buttons" class="text-center mt-5 mb-3"> <!-- Ajoutez la classe mb-3 pour la marge en bas -->
+                <button class="btn btn-primary" onclick="location.href='../admin/lease/add'">Add</button>
+            </div>
+        </div>
+
+        <div class="container mb-4">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Lease Start</th>
+                        <th>Lease End</th>
+                        <th>Monthly Rent</th>
+                        <th>Security Deposit</th>
+                        <th>Property ID</th>
+                        <th>Tenant ID</th>
+                        <th>Action</th> <!-- New column for the delete button -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let i=0; i < leases.length; i++) { %>
+                        <tr>
+                            <td>
+                                <%= leases[i].id %>
+                            </td>
+                            <td>
+                                <%= leases[i].LeaseStart %>
+                            </td>
+                            <td>
+                                <%= leases[i].LeaseEnd %>
+                            </td>
+                            <td>
+                                <%= leases[i].MonthlyRent %>
+                            </td>
+                            <td>
+                                <%= leases[i].SecurityDeposit %>
+                            </td>
+                            <td>
+                                <%= leases[i].id_Properties %>
+                            </td>
+                            <td>
+                                <%= leases[i].id_Tenants %>
+                            </td>
+                            <td>
+                                <form method="post" action="/admin/lease/delete"
+                                    onsubmit="return confirmDelete('<%= leases[i].id %>');">
+                                    <button type="button"
+                                        onclick="location.href='/admin/lease/edit/<%= leases[i].id %>'"
+                                        class="btn btn-primary">Edit</button>
+
+                                    <input type="hidden" name="id" value="<%= leases[i].id %>">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+
+                                </form>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+        </div>
