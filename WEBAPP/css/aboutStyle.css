@@ -1,4 +1,5 @@
-nav {
+body > *:not(header) {
+    nav {
     background-color: coral;
     overflow: hidden;
     align-items: center;
@@ -103,6 +104,9 @@ h1 {
     }
 }
 
+
+
+  }
 /*Section "who are we"*/
 .who-we-are {
     text-align: center;
