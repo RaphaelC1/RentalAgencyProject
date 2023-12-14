@@ -114,7 +114,20 @@ module.exports = {
             console.log(err);
             throw err;
         }
-    }
+    },
+    async getLeaseByTenantId(tenantId) {
+        try {
+            let conn = await pool.getConnection();
+            let sql = "SELECT * FROM Leases WHERE id_Tenants = ?";
+            const [rows, fields] = await conn.query(sql, [tenantId]);
+            conn.release();
+            return rows;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
 
 
 }

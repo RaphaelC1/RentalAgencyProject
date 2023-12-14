@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const tenantRepo = require('../utils/tenant.repository');
 const userAuth = require('../utils/users.auth')
+const leaseRepo = require('../utils/lease.repository');
 
 
 router.get('/my/:name', mynameAction);
@@ -75,6 +76,15 @@ async function adminTenantListAction(request, response) {
 // DELETE ONE TENANT
 async function adminTenantDeleteAction(request, response) {
     var tenantId = request.body.id;
+    // Get all leases associated with the tenant
+    var leases = await leaseRepo.getLeaseByTenantId(tenantId);
+
+    // Delete each lease
+    for (let i = 0; i < leases.length; i++) {
+        await leaseRepo.delOneLease(leases[i].id);
+    }
+
+
     console.log("DELETE " + tenantId);
     var numRows = await tenantRepo.delOneTenant(tenantId);
 
