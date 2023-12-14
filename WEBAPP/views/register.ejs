@@ -18,9 +18,17 @@
                             placeholder="Email" required>
                     </div>
                     <div class="mb-3">
+                        <label for="role" class="form-label">Role:</label>
+                        <select id="role" name="role" class="form-select" required>
+                            <option value="TENANT">Tenant</option>
+                            <option value="LANDLORD">Landlord</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password"
                             required>
                     </div>
+
                 
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-success btn-lg">Sign in</button>
