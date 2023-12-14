@@ -1,8 +1,25 @@
+const bcrypt = require('bcrypt');
 pool = require("./db.js");
 
 module.exports = {
 
+    async checkPassword(username, providedPassword) {
+        try {
+            const user = await this.getOneUser(username); // Retrieve user data from the database based on the username
 
+            if (!user) {
+                return false; // User not found
+            }
+
+            // Compare the provided password with the hashed password stored in the database
+            const isPasswordValid = await bcrypt.compare(providedPassword, user.user_pass);
+
+            return isPasswordValid; // Return true if passwords match, otherwise false
+        } catch (error) {
+            console.error("Error checking password:", error);
+            throw error;
+        }
+    },
 
   async getAllUsers() { 
     try {
@@ -76,6 +93,10 @@ module.exports = {
 
 async addOneUser(UserData) {
   try {
+      const saltRounds = 10; // Salt rounds for bcrypt hashing
+
+    // Hash the password before storing it
+      const hashedPassword = await bcrypt.hash(userData.user_pass, saltRounds);
       let conn = await pool.getConnection();
       let sql = "INSERT INTO Users (user_name, user_email, user_role, user_pass) VALUES (?, ?, ?, ?)";
       
