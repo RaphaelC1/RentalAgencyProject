@@ -27,9 +27,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/home/about">About</a>
                         </li>
-                        <% if (user && (user.user_role==='ADMIN' || user.user_role==='USER' )) { %>
+                        <% if (user && (user.user_role==='ADMIN' || user.user_role==='TENANT' )) { %>
                             <li class="nav-item">
                                 <a class="nav-link" href="/home/profile">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/dashboard">Dashboard</a>
                             </li>
                             <% } else { %>
                                 <li class="nav-item">

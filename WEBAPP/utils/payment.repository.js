@@ -3,11 +3,13 @@ pool = require("./db.js");
 // JS include = relative to CONTROLLERS 
 // VIEW include = relative to VIEWS
 module.exports = {
-    async getAllTenants() { // TODO? move to brands.repository.js
+    async getAllPayments() { // TODO? move to brands.repository.js
         try {
             let conn = await pool.getConnection();
-            let sql = "SELECT * FROM Tenants";
+            let sql = "SELECT * FROM Payments";
             const [rows, fields] = await conn.execute(sql);
+           
+
             conn.release();
             return rows;
         }
@@ -17,32 +19,19 @@ module.exports = {
             throw err; // return false ???
         }
     },
-
-    async getApartmentbyCity(name) {
+    async getOneLease(leaseId) {
         try {
             let conn = await pool.getConnection();
-            let sql = "SELECT * FROM cars INNER JOIN brands ON car_brand=brand_id WHERE upper(name) like upper(?)";
-            const [rows, fields] = await conn.execute(sql, [`%${name}%`]);
-            conn.release();
-            console.log("CARS FETCHED: " + rows.length);
-            return rows;
-        }
-        catch (err) {
-            console.log(err);
-            throw err;
-        }
-    },
-    async getOneTenant(tenantId) {
-        try {
-            let conn = await pool.getConnection();
-            console.log(tenantId);
+            console.log(leaseId);
 
             // sql = "SELECT * FROM cars INNER JOIN brands ON car_brand=brand_id WHERE car_id = "+carId; 
             // SQL INJECTION => !!!!ALWAYS!!!! sanitize user input!
             // escape input (not very good) OR prepared statements (good) OR use orm (GOOD!)
-            let sql = "SELECT * FROM Tenants WHERE id = ?";
-            const [rows, fields] = await conn.execute(sql, [tenantId]);
-            console.log(tenantId);
+            let sql = "SELECT * FROM Leases WHERE id = ?";
+            const [rows, fields] = await conn.execute(sql, [leaseId]);
+            rows[0].LeaseStart = await this.formatDate(rows[0].LeaseStart);
+            rows[0].LeaseEnd = await this.formatDate(rows[0].LeaseEnd);
+
             conn.release();
             console.log(rows);
             if (rows != null) {
@@ -56,11 +45,18 @@ module.exports = {
             throw err;
         }
     },
-    async delOneTenant(id) {
+    async formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        let month = (date.getMonth() + 1).toString().padStart(2, '0');
+        let day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    },
+    async delOneLease(id) {
         try {
             let conn = await pool.getConnection();
             console.log(id);
-            let sql = "DELETE FROM Tenants WHERE id = ?";
+            let sql = "DELETE FROM Leases WHERE id = ?";
             const [okPacket, fields] = await conn.execute(sql, [id]);
             conn.release();
             console.log("DELETE " + JSON.stringify(okPacket));
@@ -70,16 +66,17 @@ module.exports = {
             throw err;
         }
     },
-    async addOneTenant(tenantData) {
+    async addOneLease(leaseData) {
         try {
             let conn = await pool.getConnection();
-            let sql = "INSERT INTO Tenants (FirstName, LastName, Email, PhoneNumber, user_id) VALUES (?, ?, ?, ?, ?)";
+            let sql = "INSERT INTO Leases (LeaseStart, LeaseEnd, MonthlyRent, SecurityDeposit, id_Properties, id_Tenants) VALUES (?, ?, ?, ?, ?, ?)";
             const [okPacket, fields] = await conn.execute(sql, [
-                tenantData.FirstName,
-                tenantData.LastName,
-                tenantData.Email,
-                tenantData.PhoneNumber,
-                tenantData.user_id
+                leaseData.LeaseStart,
+                leaseData.LeaseEnd,
+                leaseData.MonthlyRent,
+                leaseData.SecurityDeposit,
+                leaseData.id_Properties,
+                leaseData.id_Tenants,
             ]);
             conn.release();
             console.log("INSERT " + JSON.stringify(okPacket));
@@ -90,16 +87,16 @@ module.exports = {
         }
     },
 
-    async editOneTenant(tenantData, tenantId) {
+    async editOneLease(leaseData, leaseId) {
         try {
             let conn = await pool.getConnection();
             // Construct the SQL query with named placeholders for animeData
-            const placeholders = Object.keys(tenantData).map(key => `${key} = ?`).join(', ');
-            const sql = `UPDATE Tenants SET ${placeholders} WHERE id = ?`;
+            const placeholders = Object.keys(leaseData).map(key => `${key} = ?`).join(', ');
+            const sql = `UPDATE Leases SET ${placeholders} WHERE id = ?`;
 
 
             // Combine values from animeData and animeId
-            const values = [...Object.values(tenantData), tenantId];
+            const values = [...Object.values(leaseData), leaseId];
 
             // Execute the query
             const result = await conn.execute(sql, values);
@@ -114,18 +111,8 @@ module.exports = {
             throw err;
         }
     },
+    
 
-    async getOneTenantByUserId(userId) {
-        try {
-            let conn = await pool.getConnection();
-            let sql = "SELECT * FROM Tenants WHERE user_id = ?";
-            const [rows, fields] = await conn.execute(sql, [userId]);
-            conn.release();
-            return rows.length > 0 ? rows[0] : null;
-        }
-        catch (err) {
-            console.log(err);
-            throw err;
-        }
-    }
-};
+
+
+}

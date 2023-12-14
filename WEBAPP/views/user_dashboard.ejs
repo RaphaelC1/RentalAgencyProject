@@ -1,0 +1,61 @@
+<% const title='User Dashboard' %>
+    <%- include('header_user.ejs', { title: title }) %>
+
+        <body>
+            <div class="container mt-4">
+                <!-- Section de gestion des réservations -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                Reservations management
+                            </div>
+                            <div class="card-body">
+                                <% if (leases && leases.length> 0) { %>
+                                    <% leases.forEach(lease=> { %>
+                                        <div class="card mb-3">
+                                            <div class="card-header">
+                                                Reservations #<%= lease.id %>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Lease Details</h5>
+                                                <p class="card-text">Lease start: <%= lease.LeaseStart %>
+                                                </p>
+                                                <p class="card-text">Lease end: <%= lease.LeaseEnd %>
+                                                </p>
+                                                <p class="card-text">Monthly Rent: <%= lease.MonthlyRent %>€</p>
+                                                <p class="card-text">Security Deposit: <%= lease.SecurityDeposit %>€
+                                                </p>
+                                                <!-- Ajouter plus de détails si nécessaire -->
+                                            </div>
+                                        </div>
+                                        <% }); %>
+                                            <% } else { %>
+                                                <p>No reservations found.</p>
+                                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                            Pay rent : Includes every monthly rent, security deposit and agency charges
+                            </div>
+                            <div class="card-body">
+                                <p>Total amount due: <%= totalPayment %>€</p>
+                                <form action="#" method="post">
+                                    <input type="hidden" name="amount" value="<%= totalPayment %>">
+                                    <button type="submit" class="btn btn-primary">Pay Now</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include('footer_user.ejs') %>
+        </body>

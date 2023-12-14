@@ -29,7 +29,7 @@ module.exports = {
       if (request.isAuthenticated()) {
 
         if (role) {
-          if (user && request.user.user_role === "ADMIN") { 
+          if (user && request.user.user_role === role) { 
             return next();
           } else {
             return response.end("401 Unautorized (bad user level)"); // TODO: Hierarchy
