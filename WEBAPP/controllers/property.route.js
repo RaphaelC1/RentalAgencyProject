@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const propertyRepo = require('../utils/property.repository');
-
+const tenantRepo = require('../utils/tenant.repository');
+const leaseRepo = require('../utils/lease.repository');
+const e = require('express');
 router.get('/my/:name', mynameAction);
 router.get('/myy', mynameAction);
 async function mynameAction(request, response) {
@@ -84,6 +86,12 @@ router.get('/:id/booking', ensureAuthenticated, ensureTenant, async (req, res) =
         res.status(500).send('Internal Server Error');
     }
 });
+router.post('/test', (req, res) => {
+    console.log("test post works");
+    res.send("Test post works");
+});
+
+
 
 function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
@@ -110,13 +118,6 @@ function ensureTenant(req, res, next) {
 
 
 
-
-
-// http://localhost:9000/property
-router.get('/', (req, res) => {
-    res.render('property', { user: req.user });
-
-});
 
 
 

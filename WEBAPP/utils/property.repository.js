@@ -161,22 +161,43 @@ module.exports = {
         }
     },
     async getBookedDates(propertyId) {
-    try {
-        let conn = await pool.getConnection();
-        const [leases] = await conn.execute(`
+        try {
+            let conn = await pool.getConnection();
+            const [leases] = await conn.execute(`
             SELECT DATE_FORMAT(LeaseStart, '%d/%m/%Y') as LeaseStart, DATE_FORMAT(LeaseEnd, '%d/%m/%Y') as LeaseEnd 
             FROM Leases 
             WHERE id_Properties = ?`,
-            [propertyId]
-        );
+                [propertyId]
+            );
+            conn.release();
+            const bookedDates = leases.map(lease => ({ start: lease.LeaseStart, end: lease.LeaseEnd }));
+            return bookedDates;
+        } catch (error) {
+            console.error('Error fetching booked dates:', error);
+            throw error;
+        }
+    },
+
+async isPropertyAvailable(propertyId, startDate, endDate) {
+    try {
+        let conn = await pool.getConnection();
+        const [result] = await conn.execute(`
+            SELECT id
+            FROM Leases
+            WHERE id_Properties = ? AND
+                  ((LeaseStart <= ? AND LeaseEnd >= ?) OR
+                   (LeaseStart <= ? AND LeaseEnd >= ?) OR
+                   (LeaseStart >= ? AND LeaseEnd <= ?))
+        `, [propertyId, startDate, startDate, endDate, endDate, startDate, endDate]);
+
         conn.release();
-        const bookedDates = leases.map(lease => ({ start: lease.LeaseStart, end: lease.LeaseEnd }));
-        return bookedDates;
+        return result.length === 0; // property is available if 0
     } catch (error) {
-        console.error('Error fetching booked dates:', error);
+        console.error('Error checking property availability:', error);
         throw error;
     }
-}
+},
+
 
 
 };
