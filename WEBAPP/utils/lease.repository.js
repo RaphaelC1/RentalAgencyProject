@@ -149,7 +149,7 @@ module.exports = {
     async calculateTotalLeasePayment(leaseStart, leaseEnd, monthlyRent) {
         try {
             const leaseDurationMonths = await this.calculateLeaseDurationInMonths(leaseStart, leaseEnd);
-            const totalPayment = leaseDurationMonths * monthlyRent + monthlyRent-100;
+            const totalPayment = leaseDurationMonths * monthlyRent + monthlyRent-50;
             return totalPayment;
         } catch (error) {
             console.error("Error in calculating total lease payment:", error.message);
