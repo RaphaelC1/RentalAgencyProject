@@ -3,23 +3,6 @@ pool = require("./db.js");
 
 module.exports = {
 
-    async checkPassword(username, providedPassword) {
-        try {
-            const user = await this.getOneUser(username); // Retrieve user data from the database based on the username
-
-            if (!user) {
-                return false; // User not found
-            }
-
-            // Compare the provided password with the hashed password stored in the database
-            const isPasswordValid = await bcrypt.compare(providedPassword, user.user_pass);
-
-            return isPasswordValid; // Return true if passwords match, otherwise false
-        } catch (error) {
-            console.error("Error checking password:", error);
-            throw error;
-        }
-    },
 
   async getAllUsers() { 
     try {
@@ -93,10 +76,6 @@ module.exports = {
 
 async addOneUser(UserData) {
   try {
-      const saltRounds = 10; // Salt rounds for bcrypt hashing
-
-    // Hash the password before storing it
-      const hashedPassword = await bcrypt.hash(userData.user_pass, saltRounds);
       let conn = await pool.getConnection();
       let sql = "INSERT INTO Users (user_name, user_email, user_role, user_pass) VALUES (?, ?, ?, ?)";
       
@@ -124,7 +103,7 @@ async editOneUser(UserData, user_id) {
         let conn = await pool.getConnection();
         // Construct the SQL query with named placeholders for UserData
         const placeholders = Object.keys(UserData).map(key => `${key} = ?`).join(', ');
-        const sql = `UPDATE Users SET ${placeholders} WHERE id = ?`;
+        const sql = `UPDATE Users SET ${placeholders} WHERE user_id = ?`;
 
         // Replace undefined values with null in UserData
         const sanitizedUserData = Object.values(UserData).map(value => value !== undefined ? value : null);
