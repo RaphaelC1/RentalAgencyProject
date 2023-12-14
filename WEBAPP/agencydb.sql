@@ -20,7 +20,9 @@ CREATE TABLE Landlords(
    LastName VARCHAR(50),
    Email VARCHAR(50),
    PhoneNumber INT,
+   user_id INT,
    PRIMARY KEY(id)
+   FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE Properties(

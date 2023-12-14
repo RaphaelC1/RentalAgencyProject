@@ -36,7 +36,7 @@ router.get('/', async (req, res) => {
         const totalPayment = await leaseRepo.calculateTotalLeasePayment(leaseStart, leaseEnd, monthlyRent);
         console.log("oeoeoe:", totalPayment);
         // Rendre la vue avec les données de l'utilisateur et ses leases
-        res.render('user_dashboard', { user: req.user, leases: leases, totalPayment: totalPayment });
+        res.render('user_booking', { user: req.user, leases: leases, totalPayment: totalPayment });
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
