@@ -18,7 +18,8 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
-                        <th>Action</th> <!-- New column for the delete button -->
+                        <th>User ID</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,6 +39,9 @@
                             </td>
                             <td>
                                 <%= tenants[i].PhoneNumber %>
+                            </td>
+                            <td>
+                                <%= tenants[i].user_id %>
                             </td>
                             <td>
                                 <form method="post" action="/admin/tenant/delete"

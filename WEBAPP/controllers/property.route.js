@@ -3,6 +3,8 @@ const router = express.Router();
 const propertyRepo = require('../utils/property.repository');
 const tenantRepo = require('../utils/tenant.repository');
 const leaseRepo = require('../utils/lease.repository');
+const authRepo = require('../utils/users.auth');
+const userRepo = require('../utils/users.repository');
 const e = require('express');
 router.get('/my/:name', mynameAction);
 router.get('/myy', mynameAction);
@@ -98,12 +100,14 @@ router.post('/:id/submit_booking', async (req, res) => {
     }
     console.log('Property ID:', propertyId);
 
+
     //create a new tenant
     var tenantData = {
         FirstName: req.body.firstName,
         LastName: req.body.lastName || null,
-        Email: req.body.email || null,
+        Email: req.user_user_email || null,
         PhoneNumber: req.body.phoneNumber || null,
+        user_id: req.user.user_id || null,
     };
     console.log("tenant data", tenantData);
     var tenantId = await tenantRepo.addOneTenant(tenantData);
@@ -123,7 +127,7 @@ router.post('/:id/submit_booking', async (req, res) => {
 
     // Redirect to home page with success message
     res.redirect('/home?message=Successful+booking!');
-    
+
 });
 
 

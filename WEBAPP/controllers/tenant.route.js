@@ -38,6 +38,7 @@ async function adminTenantCreateAction(request, response) {
         LastName: request.body.lastName || null,
         Email: request.body.email || null,
         PhoneNumber: request.body.phoneNumber || null,
+        user_id: request.body.userId || null,
     };
 
     var tenantId = await tenantRepo.addOneTenant(tenantData);
@@ -59,6 +60,7 @@ async function tenantUpdateAction(request, response) {
         LastName: request.body.lastName || null,
         Email: request.body.email || null,
         PhoneNumber: request.body.phoneNumber || null,
+        user_id: request.body.userId || null,
     };
     var numRows = await tenantRepo.editOneTenant(tenantData, tenantId);
     response.redirect("/admin/tenant");
