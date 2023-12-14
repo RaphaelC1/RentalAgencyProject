@@ -4,30 +4,40 @@
 
 <link rel="stylesheet" href="/css/registerStyle.css">
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6 login_form">
-            <h1 class="mb-4">Please register</h1>
-            <form action="/register/user/create" method="post">
-                <div class="mb-3">
-                    <input type="text" id="user_name" name="username" class="form-control" placeholder="Username"
-                        required>
-                </div>
-                <div class="mb-3">
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
-                </div>
-                <div class="mb-3">
-                    <input type="password" id="password" name="password" class="form-control"
-                        placeholder="Password" required>
-                </div>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 login_form">
+                <h1 class="mb-4">Please register</h1>
+                <form action="/register/user/create" method="post">
+                    <div class="mb-3">
+                        <input type="text" id="user_name" name="username" class="form-control"
+                            placeholder="Username" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" id="email" name="email" class="form-control"
+                            placeholder="Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label">Role:</label>
+                        <select id="role" name="role" class="form-select" required>
+                            <option value="TENANT">Tenant</option>
+                            <option value="LANDLORD">Landlord</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                            required>
+                    </div>
 
-                <div class="mb-3 text-center">
-                    <button type="submit" class="btn btn-success btn-lg">Sign in</button>
-                </div>
-            </form>
+                
+                    <div class="mb-3 text-center">
+                        <button type="submit" class="btn btn-success btn-lg">Sign in</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+    
 
 <div class="link_login">
     <a href="/auth/">LOG IN</a> <br/>
