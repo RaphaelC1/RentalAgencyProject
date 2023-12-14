@@ -9,7 +9,9 @@ CREATE TABLE Tenants(
    LastName VARCHAR(50),
    Email VARCHAR(50),
    PhoneNumber INT,
+   user_id INT,
    PRIMARY KEY(id)
+   FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE Landlords(
@@ -84,4 +86,5 @@ CREATE TABLE Users (
     user_email varchar(100) unique,
     user_role varchar(100),
     user_pass varchar(100)
+    
 );

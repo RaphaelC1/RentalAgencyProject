@@ -73,12 +73,13 @@ module.exports = {
     async addOneTenant(tenantData) {
         try {
             let conn = await pool.getConnection();
-            let sql = "INSERT INTO Tenants (FirstName, LastName, Email, PhoneNumber) VALUES (?, ?, ?, ?)";
+            let sql = "INSERT INTO Tenants (FirstName, LastName, Email, PhoneNumber, user_id) VALUES (?, ?, ?, ?, ?)";
             const [okPacket, fields] = await conn.execute(sql, [
                 tenantData.FirstName,
                 tenantData.LastName,
                 tenantData.Email,
-                tenantData.PhoneNumber
+                tenantData.PhoneNumber,
+                tenantData.user_id
             ]);
             conn.release();
             console.log("INSERT " + JSON.stringify(okPacket));

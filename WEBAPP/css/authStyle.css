@@ -1,0 +1,41 @@
+.login_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.login_form {
+    width: 45%;
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.log input {
+    margin-bottom: 15px;
+}
+
+.error_message {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.link_login {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.link_login a {
+    display: block;
+    color: #333;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.link_login a:hover {
+    color: #28a745;
+}
