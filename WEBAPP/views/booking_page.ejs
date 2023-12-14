@@ -8,31 +8,32 @@
                     <div class="col-md-6">
                         <form action="/property/<%= property.id %>/submit_booking" method="post">
                             <div class="mb-3">
+                                <div class="mb-3">
+                                    <label for="startDate" class="form-label">Start Date</label>
+                                    <input type="date" class="form-control" id="startDate" name="startDate">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="endDate" class="form-label">End Date</label>
+                                    <input type="date" class="form-control" id="endDate" name="endDate">
+                                </div>
                                 <label for="firstName" class="form-label">First Name</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" >
+                                <input type="text" class="form-control" id="firstName" name="firstName">
                             </div>
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" >
+                                <input type="text" class="form-control" id="lastName" name="lastName">
                             </div>
                             <div class="mb-3">
                                 <label for="dob" class="form-label">Phone Number</label>
                                 <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control"
-                                    pattern="[0-9]{10}" placeholder="e.g. 0689274315" >
+                                    pattern="[0-9]{10}" placeholder="e.g. 0689274315">
                             </div>
                             <div class="mb-3">
                                 <label for="idFile" class="form-label">ID Proof</label>
                                 <input type="file" class="form-control" id="idFile" name="idFile"
                                     accept=".pdf, .jpg, .png">
                             </div>
-                            <div class="mb-3">
-                                <label for="startDate" class="form-label">Start Date</label>
-                                <input type="date" class="form-control" id="startDate" name="startDate" >
-                            </div>
-                            <div class="mb-3">
-                                <label for="endDate" class="form-label">End Date</label>
-                                <input type="date" class="form-control" id="endDate" name="endDate" >
-                            </div>
+
                             <input type="hidden" id="Rent" name="Rent" value="<%= property.Rent %>">
                             <input type="hidden" id="Deposit" name="Deposit" value="<%= property.Rent - 100 %>">
                             <input type="hidden" id="propertyId" name="propertyId" value="<%= property.id %>">
@@ -56,8 +57,10 @@
                             <div class="card-body">
                                 <h5 class="card-title mb-4">Tenant Summary</h5>
                                 <ul class="list-group">
-                                    <li class="list-group-item" id="Rent" name="Rent"> Monthly rent: <%= property.Rent %>€</li>
-                                    <li class="list-group-item" id="Deposit" name="Deposit">Security Deposit : <%= property.Rent - 100 %>€</li>
+                                    <li class="list-group-item" id="Rent" name="Rent"> Monthly rent: <%= property.Rent
+                                            %>€</li>
+                                    <li class="list-group-item" id="Deposit" name="Deposit">Security Deposit : <%=
+                                            property.Rent - 100 %>€</li>
                                     <li class="list-group-item">Agency charges : 50€</li>
                                     <li class="list-group-item">Total: <%= (property.Rent)*2 - 50 %>€</li>
                                 </ul>
@@ -68,4 +71,5 @@
                 </div>
 
                 <%- include('footer_user.ejs') %>
+                
         </body>

@@ -100,6 +100,14 @@ router.post('/:id/submit_booking', async (req, res) => {
     }
     console.log('Property ID:', propertyId);
 
+    // Check if the property is available for the requested dates
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate || startDate;
+    const isAvailable = await propertyRepo.isPropertyAvailable(propertyId, startDate, endDate);
+    if (!isAvailable) {
+        return res.status(400).send('Property is not available for the requested dates');
+        
+    }
 
     //create a new tenant
     var tenantData = {
