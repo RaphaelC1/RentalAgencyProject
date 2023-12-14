@@ -86,9 +86,44 @@ router.get('/:id/booking', ensureAuthenticated, ensureTenant, async (req, res) =
         res.status(500).send('Internal Server Error');
     }
 });
-router.post('/test', (req, res) => {
-    console.log("test post works");
-    res.send("Test post works");
+router.post('/:id/submit_booking', async (req, res) => {
+    const propertyId = req.params.id;
+    if (!propertyId) {
+        return res.status(400).send('Property ID is required');
+    }
+    const property = await propertyRepo.getOneProperty(propertyId);
+
+    if (!property) {
+        return res.status(404).send('Property not found');
+    }
+    console.log('Property ID:', propertyId);
+
+    //create a new tenant
+    var tenantData = {
+        FirstName: req.body.firstName,
+        LastName: req.body.lastName || null,
+        Email: req.body.email || null,
+        PhoneNumber: req.body.phoneNumber || null,
+    };
+    console.log("tenant data", tenantData);
+    var tenantId = await tenantRepo.addOneTenant(tenantData);
+
+    //create a new lease
+    var leaseData = {
+        LeaseStart: req.body.startDate,
+        LeaseEnd: req.body.endDate || null,
+        MonthlyRent: req.body.Rent || null,
+        SecurityDeposit: req.body.Deposit || null,
+        id_Properties: req.body.propertyId || null,
+        id_Tenants: tenantId || null,
+    
+    };
+    console.log("lease data", leaseData);
+    var leaseId = await leaseRepo.addOneLease(leaseData);
+
+    // Redirect to home page with success message
+    res.redirect('/home?message=Successful+booking!');
+    
 });
 
 
