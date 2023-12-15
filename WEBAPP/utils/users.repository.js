@@ -1,7 +1,7 @@
-const bcrypt = require('bcrypt');
 pool = require("./db.js");
+const bcrypt = require('bcrypt');
 
-const saltRounds = 10; // Define saltRounds here
+const saltRounds = 10; 
 
 module.exports = {
 
@@ -20,11 +20,11 @@ module.exports = {
     }
 },
   
-  async getOneUser(user_id) {
+  async getOneUser(user_name) {
     try {
         let conn = await pool.getConnection();
-        let sql = "SELECT user_id,user_name,user_email,user_role FROM users WHERE user_name = ? ";
-        const [rows, fields] = await conn.execute(sql, [user_id !== undefined ? user_id : null]);
+        let sql = "SELECT user_id,user_name,user_email,user_role,user_pass FROM users WHERE user_name = ? ";
+        const [rows, fields] = await conn.execute(sql, [user_name !== undefined ? user_name : null]);
         conn.release();
 
         console.log("rows.length", rows.length);
@@ -33,13 +33,14 @@ module.exports = {
         if (rows.length !== 0) {
             return rows[0];
         } else {
-            return false;
+            return null;
         }
     } catch (err) {
         console.log(err);
         throw err;
     }
   },
+
   async getOneUserById(user_id) {
     try {
         let conn = await pool.getConnection();
@@ -66,6 +67,7 @@ module.exports = {
       let conn = await pool.getConnection();
       let sql = "SELECT * FROM USERS WHERE user_name = ? "; 
       // TODO: better salt+pw hash - COLLATE usually not needed
+      // Use the promisified bcrypt.compare function
       const [rows, fields] = await conn.execute(sql, [user_name]);
       conn.release();
 
