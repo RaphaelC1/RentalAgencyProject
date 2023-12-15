@@ -20,6 +20,7 @@ async function userAction(request, response) {
     let userData = await userRepo.getOneUser(request.user.user_name);
     let userJson = JSON.stringify(userData); // if  userData.user_role ...
     response.render("profile_user", { "extraContent": userJson });
+    
 }
 
 async function adminAction(request, response) {

@@ -113,5 +113,19 @@ module.exports = {
             console.log(err);
             throw err;
         }
+    },
+
+    async getOneTenantByUserId(userId) {
+        try {
+            let conn = await pool.getConnection();
+            let sql = "SELECT * FROM Tenants WHERE user_id = ?";
+            const [rows, fields] = await conn.execute(sql, [userId]);
+            conn.release();
+            return rows.length > 0 ? rows[0] : null;
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
     }
 };
