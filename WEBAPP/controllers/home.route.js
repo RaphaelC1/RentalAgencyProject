@@ -1,17 +1,14 @@
 // controllers/home.route.js
 const express = require('express');
 const router = express.Router();
-
+const userRepo = require('../utils/users.repository');
 router.get('/my/:name', mynameAction);
 router.get('/myy', mynameAction);
-router.get("/logout", logoutAction);
-
 
 
 async function mynameAction(request, response) {
     response.send("MYNAME ACTION " + request.params.name);
 }
-
 
 // http://localhost:9000/home
 router.get('/', (req, res) => {
@@ -31,18 +28,7 @@ router.get('/about', (req, res) => {
     res.render('home_about', { user: req.user });
 });
 
-//not definitive
-// http://localhost:9000/home/profile
-router.get('/profile', (req, res) => {
-    //res.send('Hello, from controller...');
-    res.render('profile_user', { user: req.user });
-});
 
-function logoutAction(request, response) {
-    request.logout(function (err) {
-        if (err) { return next(err); }
-        response.redirect('/auth/');
-    });
-}
+
 
 module.exports = router;

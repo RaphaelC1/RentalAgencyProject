@@ -1,11 +1,12 @@
 <!-- views/register.ejs -->
-<% const title='register' ; %>
-    <%- include('header_user.ejs', { title: title}) %>
+<% const title = 'register'; %>
+<%- include('header_user.ejs', { title: title }) %>
 
-    
+<link rel="stylesheet" href="/css/registerStyle.css">
+
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-6 login_form">
                 <h1 class="mb-4">Please register</h1>
                 <form action="/register/user/create" method="post">
                     <div class="mb-3">
@@ -17,9 +18,17 @@
                             placeholder="Email" required>
                     </div>
                     <div class="mb-3">
+                        <label for="role" class="form-label">Role:</label>
+                        <select id="role" name="role" class="form-select" required>
+                            <option value="TENANT">Tenant</option>
+                            <option value="LANDLORD">Landlord</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <input type="password" id="password" name="password" class="form-control" placeholder="Password"
                             required>
                     </div>
+
                 
                     <div class="mb-3 text-center">
                         <button type="submit" class="btn btn-success btn-lg">Sign in</button>
@@ -30,47 +39,11 @@
     </div>
     
 
-    <div class="link_login">
-        <a href="/auth/">LOG IN</a> <br/>
-        <a href="/auth/user">USERS ONLY</a> <br/>
-        <a href="/auth/admin">ADMINS ONLY</a> <br/>
-        <a href="/auth/protected">USER LEVEL DEPENDENT AUTO REDIRECT</a> <br/>
-    </div>
-    
-    <%- include('footer_user.ejs') %>
+<div class="link_login">
+    <a href="/auth/">LOG IN</a> <br/>
+    <a href="/auth/user">USERS ONLY</a> <br/>
+    <a href="/auth/admin">ADMINS ONLY</a> <br/>
+    <a href="/auth/protected">USER LEVEL DEPENDENT AUTO REDIRECT</a> <br/>
+</div>
 
-    </body>
-</html>
-
-<style>
-    .login_container {
-        display: flex;
-        justify-content: space-around; /* Adjust as needed */
-    }
-
-    .login_form {
-        width: 45% ; /* Adjust the width of each form container */
-        margin: 7%;
-        align-items: center;
-    }
-
-    .log input {
-        margin-bottom: 5%;
-
-    }
-
-    .link_login {
-    text-align: center;
-    margin-top: 200 px;
-    }
-
-    .link_login a {
-        display: block;
-        color: black;
-        font-weight: bold;
-        text-decoration: none; /* Optional: Removes underline from links */
-
-    }
-
-
-</style>
+<%- include('footer_user.ejs') %>

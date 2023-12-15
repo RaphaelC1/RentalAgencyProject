@@ -73,12 +73,13 @@ module.exports = {
     async addOneTenant(tenantData) {
         try {
             let conn = await pool.getConnection();
-            let sql = "INSERT INTO Tenants (FirstName, LastName, Email, PhoneNumber) VALUES (?, ?, ?, ?)";
+            let sql = "INSERT INTO Tenants (FirstName, LastName, Email, PhoneNumber, user_id) VALUES (?, ?, ?, ?, ?)";
             const [okPacket, fields] = await conn.execute(sql, [
                 tenantData.FirstName,
                 tenantData.LastName,
                 tenantData.Email,
-                tenantData.PhoneNumber
+                tenantData.PhoneNumber,
+                tenantData.user_id
             ]);
             conn.release();
             console.log("INSERT " + JSON.stringify(okPacket));
@@ -107,6 +108,20 @@ module.exports = {
             conn.release();
 
             return result;
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+
+    async getOneTenantByUserId(userId) {
+        try {
+            let conn = await pool.getConnection();
+            let sql = "SELECT * FROM Tenants WHERE user_id = ?";
+            const [rows, fields] = await conn.execute(sql, [userId]);
+            conn.release();
+            return rows.length > 0 ? rows[0] : null;
         }
         catch (err) {
             console.log(err);

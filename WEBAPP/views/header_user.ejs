@@ -27,9 +27,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/home/about">About</a>
                         </li>
-                        <% if (user && (user.user_role==='ADMIN' || user.user_role==='USER' )) { %>
+                        <% if (user && (user.user_role==='ADMIN' || user.user_role==='TENANT' || user.user_role==='LANDLORD')) { %>
                             <li class="nav-item">
-                                <a class="nav-link" href="/home/profile">Profile</a>
+                                <a class="nav-link" href="/profile">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/my_booking">My booking</a>
                             </li>
                             <% } else { %>
                                 <li class="nav-item">

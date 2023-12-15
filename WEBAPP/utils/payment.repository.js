@@ -3,16 +3,12 @@ pool = require("./db.js");
 // JS include = relative to CONTROLLERS 
 // VIEW include = relative to VIEWS
 module.exports = {
-    async getAllLeases() { // TODO? move to brands.repository.js
+    async getAllPayments() { // TODO? move to brands.repository.js
         try {
             let conn = await pool.getConnection();
-            let sql = "SELECT * FROM Leases";
+            let sql = "SELECT * FROM Payments";
             const [rows, fields] = await conn.execute(sql);
-            // Format LeaseStart and LeaseEnd for each row
-            for (let i = 0; i < rows.length; i++) {
-                rows[i].LeaseStart = await this.formatDate(rows[i].LeaseStart);
-                rows[i].LeaseEnd = await this.formatDate(rows[i].LeaseEnd);
-            }
+           
 
             conn.release();
             return rows;
@@ -115,47 +111,8 @@ module.exports = {
             throw err;
         }
     },
-    async getLeaseByTenantId(tenantId) {
-        try {
-            let conn = await pool.getConnection();
-            let sql = "SELECT * FROM Leases WHERE id_Tenants = ?";
-            const [rows, fields] = await conn.query(sql, [tenantId]);
-            for (let i = 0; i < rows.length; i++) {
-                rows[i].LeaseStart = await this.formatDate(rows[i].LeaseStart);
-                rows[i].LeaseEnd = await this.formatDate(rows[i].LeaseEnd);
-            }
+    
 
-            conn.release();
-            return rows;
-        } catch (err) {
-            console.log(err);
-            throw err;
-        }
-    },
-    async calculateLeaseDurationInMonths(leaseStart, leaseEnd) {
-        const startDate = new Date(leaseStart);
-        const endDate = new Date(leaseEnd);
-        const yearsDiff = endDate.getFullYear() - startDate.getFullYear();
-        const monthsDiff = endDate.getMonth() - startDate.getMonth();
-        const totalMonths = yearsDiff * 12 + monthsDiff;
-
-        // Check if the end date is before the start date
-        if (totalMonths < 0) {
-            throw new Error("End date must be after the start date.");
-        }
-        return totalMonths;
-    },
-
-    async calculateTotalLeasePayment(leaseStart, leaseEnd, monthlyRent) {
-        try {
-            const leaseDurationMonths = await this.calculateLeaseDurationInMonths(leaseStart, leaseEnd);
-            const totalPayment = leaseDurationMonths * monthlyRent + monthlyRent-50;
-            return totalPayment;
-        } catch (error) {
-            console.error("Error in calculating total lease payment:", error.message);
-            throw error;
-        }
-    },
 
 
 }

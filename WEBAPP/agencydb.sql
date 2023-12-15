@@ -9,7 +9,9 @@ CREATE TABLE Tenants(
    LastName VARCHAR(50),
    Email VARCHAR(50),
    PhoneNumber INT,
+   user_id INT,
    PRIMARY KEY(id)
+   FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE Landlords(
@@ -18,7 +20,9 @@ CREATE TABLE Landlords(
    LastName VARCHAR(50),
    Email VARCHAR(50),
    PhoneNumber INT,
+   user_id INT,
    PRIMARY KEY(id)
+   FOREIGN KEY(user_id) REFERENCES users(user_id)
 );
 
 CREATE TABLE Properties(
@@ -77,11 +81,12 @@ CREATE TABLE Reviews(
    FOREIGN KEY(id_Properties) REFERENCES Properties(id)
 );
 
-CREATE TABLE users ( 
+CREATE TABLE Users ( 
     user_id int auto_increment primary key,
     user_created datetime,
     user_name varchar(100) unique,
     user_email varchar(100) unique,
     user_role varchar(100),
     user_pass varchar(100)
+    
 );

@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-// app.use(routeBase, callback);
+// app.use(routeBase,callback);
 app.use("/css", express.static(__dirname + '/css'));
 app.use("/img", express.static(__dirname + '/img'));
 app.use("/home", require("./controllers/home.route"));
@@ -41,8 +41,11 @@ app.use("/admin", require("./controllers/adminproperty.route"));
 app.use("/admin", require("./controllers/tenant.route"));
 app.use("/admin", require("./controllers/landlord.route"));
 app.use("/admin", require("./controllers/lease.route"));
+app.use("/admin", require("./controllers/admin_user.route"));
 app.use("/auth", require("./controllers/auth.route"));
+app.use("/my_booking", require("./controllers/user.booking.route"));
 app.use("/property", require("./controllers/property.route"));
 app.use("/register", require("./controllers/register.route"));
+app.use("/profile", require("./controllers/profile.route"));
 
 
