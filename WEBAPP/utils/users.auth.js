@@ -1,4 +1,6 @@
 const passport = require("passport");
+const session = require("express-session");
+
 const usersRepo = require("../utils/users.repository.js");
 
 //hierarchy const
@@ -27,22 +29,20 @@ module.exports = {
   checkAuthentication(role) {
     return function (request, response, next) {
       if (request.isAuthenticated()) {
-
         if (role) {
-          if (user && request.user.user_role === role) { 
+          if (request.user && request.user.user_role === role) { 
             return next();
           } else {
-            return response.end("401 Unautorized (bad user level)"); // TODO: Hierarchy
+            return response.status(401).end("Unauthorized (bad user level)");
           }
         } else { // No special role needed for page -> next middleware
           return next();
         }
       } else {
-        return response.end("401 Unautorized (not authenticated)", response.redirect("/auth"));
-         ; // not authenticated at all
+        return response.status(401).end("Unauthorized (not authenticated)");
+        // Redirect to authentication page if not authenticated
       }
     }
-        
   },
 
 };

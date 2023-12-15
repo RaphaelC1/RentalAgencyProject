@@ -1,7 +1,6 @@
 // controllers/auth.route.js
 const express = require('express');
 const session = require("express-session");
-module.exports = session;
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const auth = require("../utils/users.auth");
@@ -53,18 +52,18 @@ async function loginPostAction(request, response) {
         const username = request.body.username;
         const userpass = request.body.userpass;
         // Fetch user data based on the provided username
-        const storedUser = await userRepo.getOneUser(username);
+        const user = await userRepo.getOneUser(username);
         
-        console.log("user role :  ", storedUser.user_name);
+        console.log("user role :  ", user.user_name);
 
         console.log("User Input Password:", userpass);
         console.log("Type of User Input Password:", typeof userpass);
-        console.log("stored Input Password:", storedUser);
-        console.log("Type of stored Input Password:", typeof storedUser.user_pass);
+        console.log("stored Input Password:", user);
+        console.log("Type of stored Input Password:", typeof user.user_pass);
         
 
-        if (storedUser) {
-            const storedHashedPassword = storedUser.user_pass; // user_pass is the hashed password in your database
+        if (user) {
+            const storedHashedPassword = user.user_pass; // user_pass is the hashed password in your database
             // Compare the provided password with the hashed password stored in the database
             const passwordMatch = await bcrypt.compare(userpass, storedHashedPassword);
 
@@ -72,14 +71,14 @@ async function loginPostAction(request, response) {
 
             if (passwordMatch) {
                 // Redirect based on user role
-                request.login(storedUser, function (err) { 
+                request.login(user, function (err) { 
                     if (err) { 
                       console.log("Error during login:", err);
                       return response.send("Error during login", response.redirect("/auth/"));
                       
                   } 
             
-                    if (request.storedUser === "ADMIN") {
+                    if (request.user.user_role === "ADMIN") {
                         return response.redirect("/admin");
                     } else {
                         return response.redirect("/home/");

@@ -9,7 +9,7 @@ async function mynameAction(request, response) {
 
 
 // Only admin can access the admin side
-router.use('/', userAuth.checkAuthentication('ADMIN'));
+router.use('/',userAuth.checkAuthentication('ADMIN'));
 router.use('/landlord', userAuth.checkAuthentication('ADMIN'));
 router.use('/property', userAuth.checkAuthentication('ADMIN'));
 router.use('/tenant', userAuth.checkAuthentication('ADMIN'));
