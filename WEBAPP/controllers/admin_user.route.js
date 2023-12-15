@@ -46,10 +46,10 @@ async function adminUserCreateAction(request, response) {
 async function userEditAction(request, response) {
     // response.send("EDIT ACTION");
     var user_id = request.params.user_id;
-    var user = await userRepo.getOneUser(user_id);
-    console.log("hey userData in function userUpdateAction:", user_id);
+    var user = await userRepo.getOneUserById(user_id);
+    console.log("hey userData in function userUpdateAction:", user);
 
-    response.render("admin/edit_user", { user: user[0] }); // Pass the user data to the view
+    response.render("admin/edit_user", { user: user[0] });
 }
 
 async function userUpdateAction(request, response) {
