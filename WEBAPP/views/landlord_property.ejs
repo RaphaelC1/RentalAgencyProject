@@ -1,6 +1,57 @@
-<% const title='My properties' %>
+<% const title='My Properties' %>
     <%- include('header_user.ejs', { title: title }) %>
 
-    <body>
-        
-    </body>
+        <body>
+            <div class="container mt-5">
+                <!-- Bouton Add -->
+                <div class="mb-4 text-right">
+                    <a href="/my_properties/add" class="btn btn-success">Add Property</a>
+                </div>
+                <div class="container mt-5">
+                    <div class="row">
+                        <% properties.forEach(property=> { %>
+                            <div class="col-md-4 mb-4">
+                                <div class="card h-100 shadow-sm">
+                                    <img class="card-img-top img-fluid" src="<%= property.Image %>"
+                                        alt="Property Image">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Property #<%= property.id %>
+                                        </h5>
+                                        <p class="card-text"><strong>Address:</strong>
+                                            <%= property.Address %>
+                                        </p>
+                                        <p class="card-text"><strong>City:</strong>
+                                            <%= property.City %>
+                                        </p>
+                                        <p class="card-text"><strong>Zip Code:</strong>
+                                            <%= property.ZipCode %>
+                                        </p>
+                                        <p class="card-text"><strong>Bedrooms:</strong>
+                                            <%= property.NumberOfBedrooms %>
+                                        </p>
+                                        <p class="card-text"><strong>Bathrooms:</strong>
+                                            <%= property.NumberOfBathrooms %>
+                                        </p>
+                                        <p class="card-text"><strong>Rent:</strong> $<%= property.Rent %>
+                                        </p>
+
+                                        <div class="d-flex justify-content-between mt-3">
+                                            <form method="post" action="/my_properties/delete">
+
+                                                <input type="hidden" name="id" value="<%= property.id %>">
+
+                                                <button type="button"
+                                                    onclick="location.href='/my_properties/edit/<%= property.id %>'"
+                                                    class="btn btn-primary">Edit</button>
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                    </div>
+                </div>
+
+                <%- include('footer_user.ejs') %>
+        </body>

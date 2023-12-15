@@ -1,5 +1,6 @@
-<% const title='Edit property' %>
-    <%- include('header_admin.ejs', { title: title }) %>
+<!-- views/admin_property.ejs -->
+<% const title='Property edit' ; %>
+    <%- include('header_user.ejs', { title: title}) %>
 
 
         <div class="container mt-5">
@@ -41,13 +42,14 @@
                             <input type="text" id="Image" name="Image" class="form-control" placeholder="Image link"
                                 value="<%= property.Image %>" />
 
-                        <div class="mb-3 text-center">
-                            <button type="submit" class="btn btn-success btn-lg">Modify</button>
-                        </div>
+                            <div class="mb-3 text-center">
+                                <button type="submit" class="btn btn-success btn-lg">Modify</button>
+                            </div>
                     </form>
                 </div>
             </div>
         </div>
-        </body>
+        <%- include('footer_user.ejs') %>
+            </body>
 
-        </html>
+            </html>

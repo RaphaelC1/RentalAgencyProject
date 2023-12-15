@@ -1,11 +1,17 @@
-
 .container_8 {
+    background-image: url('../img/background.jpg');
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
 }
 
+h1 {
+    font-size: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
 
 .first-div {
     font-size: 30px;
@@ -17,7 +23,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    border:  0px;
+    border: 0px;
     background-color: #ddb8b8;
     border-radius: 5px;
     width: 100%;

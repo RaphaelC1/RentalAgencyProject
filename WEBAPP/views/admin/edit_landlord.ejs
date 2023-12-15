@@ -8,19 +8,23 @@
                     <form action="/admin/landlord/update/<%= landlord.id %>" method="post">
                         <div class="mb-3">
                             <input type="text" id="firstName" name="firstName" class="form-control"
-                                 value="<%= landlord.FirstName %>" />
+                                value="<%= landlord.FirstName %>" />
                         </div>
                         <div class="mb-3">
                             <input type="text" id="lastName" name="lastName" class="form-control"
-                                 value='<%= landlord.LastName %>' />
+                                value='<%= landlord.LastName %>' />
                         </div>
                         <div class="mb-3">
-                            <input type="email" id="email" name="email" class="form-control"  
-                            value='<%= landlord.Email %>' />
+                            <input type="email" id="email" name="email" class="form-control"
+                                value='<%= landlord.Email %>' />
                         </div>
                         <div class="mb-3">
                             <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control"
                                 pattern="[0-9]{9}" value='<%= landlord.PhoneNumber %>' />
+                        </div>
+                        <div class="mb-3">
+                            <input type="number" id="userId" name="userId" class="form-control" placeholder="user Id"
+                                min="0" value="<%= landlord.user_id %>" />
                         </div>
                         <div class="mb-3 text-center">
                             <button type="submit" class="btn btn-success btn-lg">Modify</button>

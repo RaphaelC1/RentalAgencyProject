@@ -39,6 +39,7 @@ async function adminLandlordCreateAction(request, response) {
         LastName: request.body.lastName || null,
         Email: request.body.email || null,
         PhoneNumber: request.body.phoneNumber || null,
+        user_id: request.body.userId || null,
     };
 
     var landlordId = await landlordRepo.addOneLandlord(landlordData);
@@ -81,6 +82,7 @@ async function landlordUpdateAction(request, response) {
         LastName: request.body.lastName || null,
         Email: request.body.email || null,
         PhoneNumber: request.body.phoneNumber || null,
+        user_id: request.body.userId || null,
     };
     console.log("hey landlordData in function landlordUpdateAction:", landlordData);
     console.log("hey landlordId in function landlordUpdateAction:", landlordId);

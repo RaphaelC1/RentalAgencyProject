@@ -44,6 +44,7 @@ app.use("/admin", require("./controllers/lease.route"));
 app.use("/admin", require("./controllers/admin_user.route"));
 app.use("/auth", require("./controllers/auth.route"));
 app.use("/my_booking", require("./controllers/user.booking.route"));
+app.use("/my_properties", require("./controllers/landlord.property.route"));
 app.use("/property", require("./controllers/property.route"));
 app.use("/register", require("./controllers/register.route"));
 app.use("/profile", require("./controllers/profile.route"));

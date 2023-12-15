@@ -18,7 +18,8 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
-                        <th>Action</th> <!-- New column for the delete button -->
+                        <th>User ID</th>
+                        <th>Action</th> 
                     </tr>
                 </thead>
                 <tbody>
@@ -40,9 +41,13 @@
                                 <%= landlords[i].PhoneNumber %>
                             </td>
                             <td>
+                                <%= landlords[i].user_id %>
+                            </td>
+                            <td>
                                 <form method="post" action="/admin/landlord/delete"
                                     onsubmit="return confirmDelete('<%= landlords[i].id %>');">
-                                    <button type="button" onclick="location.href='/admin/landlord/edit/<%= landlords[i].id %>'"
+                                    <button type="button"
+                                        onclick="location.href='/admin/landlord/edit/<%= landlords[i].id %>'"
                                         class="btn btn-primary">Edit</button>
 
                                     <input type="hidden" name="id" value="<%= landlords[i].id %>">
