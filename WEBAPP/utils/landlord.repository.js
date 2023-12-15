@@ -73,12 +73,13 @@ module.exports = {
     async addOneLandlord(landlordData) {
         try {
             let conn = await pool.getConnection();
-            let sql = "INSERT INTO Landlords (FirstName, LastName, Email, PhoneNumber) VALUES (?, ?, ?, ?)";
+            let sql = "INSERT INTO Landlords (FirstName, LastName, Email, PhoneNumber, user_id) VALUES (?, ?, ?, ?, ?)";
             const [okPacket, fields] = await conn.execute(sql, [
                 landlordData.FirstName,
                 landlordData.LastName,
                 landlordData.Email,
-                landlordData.PhoneNumber
+                landlordData.PhoneNumber,
+                landlordData.user_id
             ]);
             conn.release();
             console.log("INSERT " + JSON.stringify(okPacket));
@@ -93,8 +94,8 @@ module.exports = {
         try {
             let conn = await pool.getConnection();
             // Construct the SQL query with named placeholders for animeData
-            const placeholders = Object.keys(landlordData).map(key => `${ key } = ?`).join(', ');
-            const sql = `UPDATE Landlords SET ${ placeholders } WHERE id = ?`;
+            const placeholders = Object.keys(landlordData).map(key => `${key} = ?`).join(', ');
+            const sql = `UPDATE Landlords SET ${placeholders} WHERE id = ?`;
 
 
             // Combine values from animeData and animeId
@@ -107,6 +108,19 @@ module.exports = {
             conn.release();
 
             return result;
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        }
+    },
+    async getOneLandlordByUserId(userId) {
+        try {
+            let conn = await pool.getConnection();
+            let sql = "SELECT * FROM Landlords WHERE user_id = ?";
+            const [rows, fields] = await conn.execute(sql, [userId]);
+            conn.release();
+            return rows.length > 0 ? rows[0] : null;
         }
         catch (err) {
             console.log(err);
