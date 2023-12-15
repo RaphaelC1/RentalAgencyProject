@@ -4,73 +4,50 @@
 <html lang="en">
 
 <head>
-  <% const title='Login_profile' ; %>
-    <%- include('header_user.ejs', { title: title}) %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <% const title = 'Login_profile'; %>
+    <%- include('header_user.ejs', { title: title }) %>
 </head>
 
 <body>
-  <h1>
-    User profile
-  </h1>
+    <div class="container">
+        <h1>User Profile</h1>
 
-  <div class="user_infos">
-    <li> Username : 
-      <a> <%= user.user_name %></a></li>
-    <li> Email :
-      <a><%= user.user_email %></a>
-    </li>
-    <li> Role : 
-      <a><%= user.user_role %></a>
-    </li>
-  </div>
+        <div class="card">
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <strong>Username:</strong>
+                        <%= user.user_name %>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Email:</strong>
+                        <%= user.user_email %>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Role:</strong>
+                        <%= user.user_role %>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-  <div class="link_edit">
-    <a href="/profile/edit">EDIT</a>
-  </div>
-  <div class="link_login">
-    <a href="/home/logout">LOG OUT</a> <br/>
+        <div class="mt-3">
+            <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
+            <a href="/home/logout" class="btn btn-danger ml-2">Log Out</a>
+        </div>
+    </div>
 
-<%- include('footer_user.ejs') %>
+    <!-- Bootstrap JS and jQuery (Optional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <%- include('footer_user.ejs') %>
 </body>
 
 </html>
-
-<style>
-  .user_infos {
-    text-align: center;
-    margin-top: 20%;
-  }
-  .user_infos li{
-        margin-left: 10%;
-        display:flex;
-        color: black;
-        text-decoration: none; /* Optional: Removes underline from links */
-       
-    }
-  
-  .link_login {
-    text-align: center;
-    margin-top: 200 px;
-    }
-
-    .link_login a {
-        display: block;
-        color: black;
-        font-weight: bold;
-        text-decoration: none; /* Optional: Removes underline from links */
-        margin-top: 0%;
-    }
-    .link_edit {
-    text-align: center;
-    margin-top: 200 px;
-    }
-
-    .link_edit a {
-        display: block;
-        color: black;
-        font-weight: bold;
-        text-decoration: none; /* Optional: Removes underline from links */
-        margin-top: 20%;
-    }
-
-</style>
