@@ -1,9 +1,12 @@
 // controllers/auth.route.js
 const express = require('express');
+const session = require("express-session");
+module.exports = session;
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const auth = require("../utils/users.auth");
 const userRepo = require("../utils/users.repository");
+
 
 const saltRounds = 10; 
 
@@ -49,9 +52,10 @@ async function loginPostAction(request, response) {
     try {
         const username = request.body.username;
         const userpass = request.body.userpass;
-
         // Fetch user data based on the provided username
         const storedUser = await userRepo.getOneUser(username);
+        
+        console.log("user role :  ", storedUser.user_name);
 
         console.log("User Input Password:", userpass);
         console.log("Type of User Input Password:", typeof userpass);
@@ -67,15 +71,20 @@ async function loginPostAction(request, response) {
             console.log("Password Match:", passwordMatch); // Check if the password matches
 
             if (passwordMatch) {
-                // Passwords match - user is authenticated
-                request.session.user = storedUser; // Set session to maintain login state
-
                 // Redirect based on user role
-                if (storedUser.user_role === "ADMIN") {
-                    return response.redirect("/admin");
-                } else {
-                    return response.redirect("/home/");
-                }
+                request.login(storedUser, function (err) { 
+                    if (err) { 
+                      console.log("Error during login:", err);
+                      return response.send("Error during login", response.redirect("/auth/"));
+                      
+                  } 
+            
+                    if (request.storedUser === "ADMIN") {
+                        return response.redirect("/admin");
+                    } else {
+                        return response.redirect("/home/");
+                    }
+                });
             } else {
                 // Passwords do not match - invalid credentials
                 return response.send("Invalid credentials provided");
