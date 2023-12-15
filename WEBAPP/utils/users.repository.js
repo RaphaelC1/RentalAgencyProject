@@ -1,5 +1,6 @@
 pool = require("./db.js");
 
+
 module.exports = {
 
 
@@ -101,15 +102,20 @@ async addOneUser(UserData) {
 async editOneUser(UserData, user_id) {
     try {
         let conn = await pool.getConnection();
+
+        // Replace undefined values with null in UserData
+        Object.keys(UserData).forEach(key => {
+            if (UserData[key] === undefined) {
+                UserData[key] = null;
+            }
+        });
+
         // Construct the SQL query with named placeholders for UserData
         const placeholders = Object.keys(UserData).map(key => `${key} = ?`).join(', ');
         const sql = `UPDATE Users SET ${placeholders} WHERE id = ?`;
 
-        // Replace undefined values with null in UserData
-        const sanitizedUserData = Object.values(UserData).map(value => value !== undefined ? value : null);
-
         // Combine values from sanitized UserData and UserId
-        const values = [...sanitizedUserData, user_id];
+        const values = [...Object.values(UserData), user_id];
 
         // Execute the query
         const result = await conn.execute(sql, values);
@@ -120,5 +126,29 @@ async editOneUser(UserData, user_id) {
         console.log(err);
         throw err;
     }
-}
+},
+
+
+    // Function to update user in the database
+    async updateUser(userId, userData) {
+        try {
+            let conn = await pool.getConnection();
+    
+            // Construct the SQL query to update the user
+            const placeholders = Object.keys(userData).map(key => `${key} = ?`).join(', ');
+            const values = Object.values(userData);
+            values.push(userId); // Append userId for the WHERE clause
+    
+            const sql = `UPDATE Users SET ${placeholders} WHERE user_id = ?`;
+    
+            // Execute the update query
+            const result = await conn.execute(sql, values);
+    
+            conn.release(); // Release the connection
+    
+            return result[0].affectedRows; // Return the number of affected rows
+        } catch (error) {
+            throw error;
+        }
+    }
 }; 

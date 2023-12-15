@@ -46,5 +46,6 @@ app.use("/auth", require("./controllers/auth.route"));
 app.use("/my_booking", require("./controllers/user.booking.route"));
 app.use("/property", require("./controllers/property.route"));
 app.use("/register", require("./controllers/register.route"));
+app.use("/profile", require("./controllers/profile.route"));
 
 
