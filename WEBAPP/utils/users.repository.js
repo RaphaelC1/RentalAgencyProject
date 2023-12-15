@@ -77,6 +77,7 @@ module.exports = {
 async addOneUser(UserData) {
   try {
       let conn = await pool.getConnection();
+<<<<<<< Updated upstream
       let sql = "INSERT INTO Users (user_name, user_email, user_role, user_pass) VALUES (?, ?, ?, ?)";
       
       // Replace undefined values with null in the parameter array
@@ -93,9 +94,27 @@ async addOneUser(UserData) {
       console.log("INSERT " + JSON.stringify(okPacket));
       return okPacket.insertId;
   } catch (err) {
+=======
+      let sql = "SELECT * FROM USERS WHERE user_name = ? AND user_pass = sha2(concat(user_created, ?), 224) COLLATE utf8mb4_general_ci";
+      const [rows, fields] = await conn.execute(sql, [username, password]);
+      conn.release();
+
+      console.log(sql);
+      console.log(username);
+      console.log(password);
+      console.log(rows);
+
+      if (rows.length == 1 && rows[0].user_name === username) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+>>>>>>> Stashed changes
       console.log(err);
       throw err;
   }
+<<<<<<< Updated upstream
 },
 
 async editOneUser(UserData, user_id) {
@@ -121,4 +140,7 @@ async editOneUser(UserData, user_id) {
         throw err;
     }
 }
+=======
+
+>>>>>>> Stashed changes
 }; 

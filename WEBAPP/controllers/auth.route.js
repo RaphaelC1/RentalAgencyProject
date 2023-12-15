@@ -43,7 +43,15 @@ async function protectedGetAction(request, response) {
 
 async function loginPostAction(request, response) {
     areValid = await userRepo.areValidCredentials(request.body.username, request.body.userpass);
+<<<<<<< Updated upstream
 
+=======
+    console.log(areValid);
+    if (areValid) {
+        user = await userRepo.getOneUser(request.body.username);
+        request.login(user, function (err) {
+            if (err) { console.log("ERROR"); console.log(err); return next(err); }
+>>>>>>> Stashed changes
 
     if (areValid) {
      user = await userRepo.getOneUser(request.body.username);
