@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 pool = require("./db.js");
 
+const saltRounds = 10; // Define saltRounds here
 
 module.exports = {
 
@@ -96,27 +97,30 @@ module.exports = {
 },
 
 async addOneUser(UserData) {
-  try {
-      let conn = await pool.getConnection();
-      let sql = "INSERT INTO Users (user_name, user_email, user_role, user_pass) VALUES (?, ?, ?, ?)";
-      
-      // Replace undefined values with null in the parameter array
-      const params = [
-          UserData.user_name !== undefined ? UserData.user_name : null,
-          UserData.user_email !== undefined ? UserData.user_email : null,
-          UserData.user_role !== undefined ? UserData.user_role : null,
-          UserData.user_pass !== undefined ? UserData.user_pass : null
-      ];
+    try {
+        let conn = await pool.getConnection();
+        let sql = "INSERT INTO Users (user_name, user_email, user_role, user_pass) VALUES (?, ?, ?, ?)";
 
-      const [okPacket, fields] = await conn.execute(sql, params);
-      conn.release();
+        // Hash the password before storing it
+        const hashedPassword = await bcrypt.hash(UserData.user_pass, saltRounds);
 
-      console.log("INSERT " + JSON.stringify(okPacket));
-      return okPacket.insertId;
-  } catch (err) {
-      console.log(err);
-      throw err;
-  }
+        // Replace undefined values with null in the parameter array
+        const params = [
+            UserData.user_name !== undefined ? UserData.user_name : null,
+            UserData.user_email !== undefined ? UserData.user_email : null,
+            UserData.user_role !== undefined ? UserData.user_role : null,
+            hashedPassword // Store the hashed password in the database
+        ];
+
+        const [okPacket, fields] = await conn.execute(sql, params);
+        conn.release();
+
+        console.log("INSERT " + JSON.stringify(okPacket));
+        return okPacket.insertId;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
 },
 
 async editOneUser(UserData, user_id) {

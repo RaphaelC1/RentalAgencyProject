@@ -1,6 +1,8 @@
 // controllers/auth.route.js
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcrypt');
+
 const auth = require("../utils/users.auth");
 const userRepo = require("../utils/users.repository");
 
@@ -43,26 +45,43 @@ async function protectedGetAction(request, response) {
 
 
 async function loginPostAction(request, response) {
-    areValid = await userRepo.areValidCredentials(request.body.username, request.body.userpass);
+    try {
+        const { username, userpass } = request.body;
 
-    if (areValid) {
-     user = await userRepo.getOneUser(request.body.username);
-     console.log("user:",user)
-      request.login(user, function (err) { 
-          if (err) { 
-            console.log("Error during login:", err);
-            return response.send("Error during login", response.redirect("/auth/"));
-            
-        } 
-  
-          if (request.user.user_role === "ADMIN") {
-              return response.redirect("/admin");
-          } else {
-              return response.redirect("/home/");
-          }
-      });
-    } else {
-      response.send("Invalid credentials provided");
+        // Fetch user data based on the provided username
+        const storedUser = await userRepo.getOneUser(username);
+
+        if (storedUser) {
+            const storedHashedPassword = storedUser.user_pass; // Assuming user_pass is the hashed password in your database
+
+            // Compare the provided password with the hashed password stored in the database
+            const passwordMatch = await bcrypt.compare(userpass, storedHashedPassword);
+
+            if (passwordMatch) {
+                // Passwords match - user is authenticated
+                request.login(storedUser, function (err) { // Pass the retrieved user to request.login
+                    if (err) {
+                        console.log("Error during login:", err);
+                        return response.send("Error during login");
+                    }
+
+                    if (storedUser.user_role === "ADMIN") {
+                        return response.redirect("/admin");
+                    } else {
+                        return response.redirect("/home/");
+                    }
+                });
+            } else {
+                // Passwords do not match - invalid credentials
+                response.send("Invalid credentials provided");
+            }
+        } else {
+            // User does not exist
+            response.send("User does not exist");
+        }
+    } catch (error) {
+        console.error(error);
+        response.send("An error occurred during login");
     }
 }
 
