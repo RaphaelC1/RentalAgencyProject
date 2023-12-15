@@ -47,6 +47,14 @@
                 <!-- Ensure user is defined before accessing its properties -->
                 <input type="email" class="form-control" id="email" name="email" value="<%= user ? user.user_email : '' %>" required>
             </div>
+            <div class="mb-3">
+                <input type="text" id="role" name="role" class="form-control"
+                     value='<%= user.user_role %>' />
+            </div>
+            <div class="mb-3">
+                <input type="password" id="password" name="password" class="form-control"  
+                value='<%= user.user_pass %>' />
+            </div>
             <!-- Other input fields for editing user details -->
             <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>

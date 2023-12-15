@@ -6,6 +6,9 @@ router.get("/logout", logoutAction);
 router.get('/my/:name', mynameAction);
 router.get('/myy', mynameAction);
 
+// Logout route to log out the user and redirect to the login page
+router.get('/logout', logoutAction);
+
 async function mynameAction(request, response) {
     response.send("MYNAME ACTION " + request.params.name);
 }
@@ -61,10 +64,24 @@ router.post('/edit', async (req, res) => {
 });
 
 
+
+
 function logoutAction(request, response) {
-    request.logout(function (err) {
-        if (err) { return next(err); }
-        response.redirect('/auth/');
+    // Log out the user
+    request.logout(function(err) {
+        if (err) {
+            console.error("Error during logout:", err);
+            // Handle the error, if any
+        }
+        // Destroy the session to log the user out completely
+        request.session.destroy(function (err) {
+            if (err) {
+                console.error("Error destroying session:", err);
+                // Handle the error, if any
+            }
+            // Redirect the user to the login page after logging out
+            response.redirect('/auth');
+        });
     });
 }
 
