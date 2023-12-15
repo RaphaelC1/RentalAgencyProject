@@ -22,8 +22,8 @@ router.get('/user', adminUserListAction);
 // Delete one user
 router.post('/user/delete', adminUserDeleteAction);
 // Edit one user
-router.get('/user/edit/:user_id', userEditAction);
-router.post('/user/update/:user_id', userUpdateAction);
+router.get('/user/edit/:userId', userEditAction);
+router.post('/user/update/:userId', userUpdateAction);
 
 // FUNCTIONS ADD USERS
 async function adminUserAddAction(request, response) {
@@ -45,15 +45,15 @@ async function adminUserCreateAction(request, response) {
 //EDIT A USER
 async function userEditAction(request, response) {
     // response.send("EDIT ACTION");
-    var user_id = request.params.user_id;
-    var user = await userRepo.getOneUserById(user_id);
+    var userId = request.params.userId;
+    var user = await userRepo.getOneUserById(userId);
     console.log("hey userData in function userUpdateAction:", user);
 
     response.render("admin/edit_user", { user: user[0] });
 }
 
 async function userUpdateAction(request, response) {
-    var user_id = request.params.user_id;
+    var userId = request.params.userId;
     var userData = {
         user_name: request.body.username,
         user_email: request.body.email || null,
@@ -61,8 +61,8 @@ async function userUpdateAction(request, response) {
         user_pass: request.body.password || null,
     };
     console.log("hey userData in function userUpdateAction:", userData);
-    console.log("hey userData in function userUpdateAction:", user_id);
-    var numRows = await userRepo.editOneUser(userData, user_id);
+    console.log("hey userData in function userUpdateAction:", userId);
+    var numRows = await userRepo.editOneUser(userData, userId);
     response.redirect("/admin/user");
 }
 
