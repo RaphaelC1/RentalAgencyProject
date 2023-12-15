@@ -1,8 +1,9 @@
 pool = require("./db.js");
+const bcrypt = require('bcrypt');
 
+const saltRounds = 10; 
 
 module.exports = {
-
 
 
   async getAllUsers() { 
@@ -19,10 +20,31 @@ module.exports = {
     }
 },
   
-  async getOneUser(user_id) {
+  async getOneUser(user_name) {
     try {
         let conn = await pool.getConnection();
-        let sql = "SELECT user_id,user_name,user_email,user_role FROM users WHERE user_name = ? ";
+        let sql = "SELECT user_id,user_name,user_email,user_role,user_pass FROM users WHERE user_name = ? ";
+        const [rows, fields] = await conn.execute(sql, [user_name !== undefined ? user_name : null]);
+        conn.release();
+
+        console.log("rows.length", rows.length);
+        console.log(rows[0]);
+
+        if (rows.length !== 0) {
+            return rows[0];
+        } else {
+            return null;
+        }
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
+  },
+
+  async getOneUserById(user_id) {
+    try {
+        let conn = await pool.getConnection();
+        let sql = "SELECT * from Users WHERE user_id = ?";
         const [rows, fields] = await conn.execute(sql, [user_id !== undefined ? user_id : null]);
         conn.release();
 
@@ -45,6 +67,7 @@ module.exports = {
       let conn = await pool.getConnection();
       let sql = "SELECT * FROM USERS WHERE user_name = ? "; 
       // TODO: better salt+pw hash - COLLATE usually not needed
+      // Use the promisified bcrypt.compare function
       const [rows, fields] = await conn.execute(sql, [user_name]);
       conn.release();
 
@@ -76,27 +99,30 @@ module.exports = {
 },
 
 async addOneUser(UserData) {
-  try {
-      let conn = await pool.getConnection();
-      let sql = "INSERT INTO Users (user_name, user_email, user_role, user_pass) VALUES (?, ?, ?, ?)";
-      
-      // Replace undefined values with null in the parameter array
-      const params = [
-          UserData.user_name !== undefined ? UserData.user_name : null,
-          UserData.user_email !== undefined ? UserData.user_email : null,
-          UserData.user_role !== undefined ? UserData.user_role : null,
-          UserData.user_pass !== undefined ? UserData.user_pass : null
-      ];
+    try {
+        let conn = await pool.getConnection();
+        let sql = "INSERT INTO Users (user_name, user_email, user_role, user_pass) VALUES (?, ?, ?, ?)";
 
-      const [okPacket, fields] = await conn.execute(sql, params);
-      conn.release();
+        // Hash the password before storing it
+        const hashedPassword = await bcrypt.hash(UserData.user_pass, saltRounds);
 
-      console.log("INSERT " + JSON.stringify(okPacket));
-      return okPacket.insertId;
-  } catch (err) {
-      console.log(err);
-      throw err;
-  }
+        // Replace undefined values with null in the parameter array
+        const params = [
+            UserData.user_name !== undefined ? UserData.user_name : null,
+            UserData.user_email !== undefined ? UserData.user_email : null,
+            UserData.user_role !== undefined ? UserData.user_role : null,
+            hashedPassword // Store the hashed password in the database
+        ];
+
+        const [okPacket, fields] = await conn.execute(sql, params);
+        conn.release();
+
+        console.log("INSERT " + JSON.stringify(okPacket));
+        return okPacket.insertId;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
 },
 
 async editOneUser(UserData, user_id) {
@@ -112,7 +138,7 @@ async editOneUser(UserData, user_id) {
 
         // Construct the SQL query with named placeholders for UserData
         const placeholders = Object.keys(UserData).map(key => `${key} = ?`).join(', ');
-        const sql = `UPDATE Users SET ${placeholders} WHERE id = ?`;
+        const sql = `UPDATE Users SET ${placeholders} WHERE user_id = ?`;
 
         // Combine values from sanitized UserData and UserId
         const values = [...Object.values(UserData), user_id];
